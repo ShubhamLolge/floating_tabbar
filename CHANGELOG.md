@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+Added floating and normal bottom tabbar pageview and top bar pageview

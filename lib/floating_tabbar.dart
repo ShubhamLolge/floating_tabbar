@@ -138,6 +138,7 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
 
   Scaffold buildScafoldForFloatingTabBar() {
     return Scaffold(
+      appBar: widget.parentAppbar,
       body: SafeArea(
         child: Column(
           children: [
@@ -179,6 +180,7 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
 
   Scaffold buildScaffoldForWeb() {
     return Scaffold(
+      appBar: widget.parentAppbar,
       body: SafeArea(
         child: Row(
           children: <Widget>[
