@@ -10,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  adaptive_breakpoints: ^0.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
-  adaptive_breakpoints: ^0.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
