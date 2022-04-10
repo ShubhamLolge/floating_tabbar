@@ -17,11 +17,13 @@ class FloatingTabBarPageView extends StatefulWidget {
   final Color activeColor;
   final Color inactiveColor;
   final Color backgroundColor;
+  final Widget titleTapNavigationRouteWidget;
 
   const FloatingTabBarPageView({
     Key? key,
     required this.tabItemList,
     required this.title,
+    required this.titleTapNavigationRouteWidget,
     this.parentAppbar,
     this.indicatorColor = Colors.black12,
     this.activeColor = Colors.blue,
@@ -212,7 +214,8 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
                       ),
                       isExtended
                           ? GestureDetector(
-                              // onTap: () => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const /* your App/Web-App Home Widget */), (route) => false),
+                              onTap: () => Navigator.of(context)
+                                  .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => widget.titleTapNavigationRouteWidget), (route) => false),
                               child: Text(widget.title, style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 20)),
                             )
                           : Container(),
