@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
           icon: const Icon(Icons.dashboard_outlined, size: 30),
           selectedIcon: const Icon(Icons.dashboard, size: 30),
           label: "Dashboard",
-          tabWidget: TabbarTop(
+          tabWidget: TopTabbar(
             tabList: topTabbarTabItemlist,
           ),
         ),

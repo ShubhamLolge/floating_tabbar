@@ -14,6 +14,9 @@ class FloatingTabBarPageView extends StatefulWidget {
   final bool? showTabNameForNonFloating;
   final bool? showTabNameForFloating;
   final Color indicatorColor;
+  final Color activeColor;
+  final Color inactiveColor;
+  final Color backgroundColor;
 
   const FloatingTabBarPageView({
     Key? key,
@@ -21,6 +24,9 @@ class FloatingTabBarPageView extends StatefulWidget {
     required this.title,
     this.parentAppbar,
     this.indicatorColor = Colors.black12,
+    this.activeColor = Colors.blue,
+    this.inactiveColor = Colors.blue,
+    this.backgroundColor = Colors.transparent,
     this.isFloating = true,
     this.showTabNameForNonFloating = false,
     this.showTabNameForFloating = false,
@@ -130,9 +136,9 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
       onTap: (index) {
         _onItemTapped(index);
       },
-      activeColor: Colors.white,
-      inactiveColor: Colors.white,
-      backgroundColor: Theme.of(context).primaryColor,
+      activeColor: widget.activeColor,
+      inactiveColor: widget.inactiveColor,
+      backgroundColor: widget.backgroundColor,
     );
   }
 
