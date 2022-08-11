@@ -13,3 +13,7 @@ Added example to the project.
 ## 0.0.4
 
 Color Scheme improvement, title tap navigation route widget on tap on navigation rail title and Added badges.
+
+## 0.0.5
+
+Color Scheme improvement, title tap navigation route widget on tap on navigation rail title and Added badges.
