@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
       );
     }
 
-    return FloatingTabBarPageView(
+    return FloatingTabBar(
       activeColor: Colors.green,
       inactiveColor: Colors.yellow,
       tabItemList: tabList(),

@@ -7,7 +7,7 @@ import 'package:floating_tabbar/Widgets/floater.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FloatingTabBarPageView extends StatefulWidget {
+class FloatingTabBar extends StatefulWidget {
   /// List of "TabItem" which will be shown on naigation bar
   final List<TabItem> tabItemList;
 
@@ -42,7 +42,7 @@ class FloatingTabBarPageView extends StatefulWidget {
   /// Tapping on title this Widget that will be "pushAndRemoveUntil" with current route.
   final Widget titleTapNavigationRouteWidget;
 
-  const FloatingTabBarPageView({
+  const FloatingTabBar({
     Key? key,
     required this.tabItemList,
     required this.title,
@@ -57,10 +57,10 @@ class FloatingTabBarPageView extends StatefulWidget {
     this.showTabLabelsForFloating = false,
   }) : super(key: key);
   @override
-  _FloatingTabBarPageViewState createState() => _FloatingTabBarPageViewState();
+  _FloatingTabBarState createState() => _FloatingTabBarState();
 }
 
-class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
+class _FloatingTabBarState extends State<FloatingTabBar> {
   PageController floatingTabBarPageViewController = PageController(initialPage: 0);
   final ValueNotifier<double> playerExpandProgress = ValueNotifier(76);
   bool isExtended = false;
