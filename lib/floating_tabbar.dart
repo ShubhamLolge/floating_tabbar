@@ -2,21 +2,44 @@ library floating_tabbar;
 
 import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:floating_tabbar/Services/platform_check.dart';
+import 'package:floating_tabbar/Widgets/badge_wraper.dart';
 import 'package:floating_tabbar/Widgets/floater.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FloatingTabBarPageView extends StatefulWidget {
+  /// List of "TabItem" which will be shown on naigation bar
   final List<TabItem> tabItemList;
+
+  /// Title of page or website wich will be tappable and will take user to home page of website
   final String title;
+
+  /// A "AppBar?" widget that will be shown to all the platforms which has true boolean value as top appbar.
+  /// For "showParentAppbarForPlatform_Name" to show, "parentAppbar" must be provided.
   final AppBar? parentAppbar;
+
+  /// The default value "true" will show floating TabBar, "false" value will show normal bottom navigation bar
   final bool? isFloating;
-  final bool? showTabNameForNonFloating;
-  final bool? showTabNameForFloating;
+
+  /// Shows Labels for Non-Floating type
+  final bool? showTabLabelsForNonFloating;
+
+  /// Shows Labels for Floating type
+  final bool? showTabLabelsForFloating;
+
+  /// Widget indicator color, default : Colors.black12
   final Color indicatorColor;
-  final Color activeColor;
-  final Color inactiveColor;
+
+  /// Widget activeColor color, default : primary color
+  final Color? activeColor;
+
+  /// Widget inactiveColor color, default : primary color
+  final Color? inactiveColor;
+
+  /// Widget backgroundColor color, default : Colors.transparent
   final Color backgroundColor;
+
+  /// Tapping on title this Widget that will be "pushAndRemoveUntil" with current route.
   final Widget titleTapNavigationRouteWidget;
 
   const FloatingTabBarPageView({
@@ -26,12 +49,12 @@ class FloatingTabBarPageView extends StatefulWidget {
     required this.titleTapNavigationRouteWidget,
     this.parentAppbar,
     this.indicatorColor = Colors.black12,
-    this.activeColor = Colors.blue,
-    this.inactiveColor = Colors.blue,
+    this.activeColor,
+    this.inactiveColor,
     this.backgroundColor = Colors.transparent,
     this.isFloating = true,
-    this.showTabNameForNonFloating = false,
-    this.showTabNameForFloating = false,
+    this.showTabLabelsForNonFloating = false,
+    this.showTabLabelsForFloating = false,
   }) : super(key: key);
   @override
   _FloatingTabBarPageViewState createState() => _FloatingTabBarPageViewState();
@@ -44,26 +67,26 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
   bool isFloatingBarHidden = false;
   int _selectedIndex = 0;
 
-  List<BottomNavigationBarItem> getBottomNavigationBarItemIcon({required bool showTabName}) {
+  List<BottomNavigationBarItem> getBottomNavigationBarItemIconWithBadge({required bool showTabLabels}) {
     List<BottomNavigationBarItem> _bottomNavigationBarItemiconList = [];
     for (var element in widget.tabItemList) {
       _bottomNavigationBarItemiconList.add(
         BottomNavigationBarItem(
-          icon: element.icon,
-          activeIcon: element.selectedIcon,
-          label: showTabName ? element.label : null,
+          icon: BadgeWraper(child: element.icon, showBadge: element.showBadge, badgeCount: element.badgeCount),
+          activeIcon: BadgeWraper(child: element.selectedIcon, showBadge: element.showBadge, badgeCount: element.badgeCount),
+          label: showTabLabels ? element.label : null,
         ),
       );
     }
     return _bottomNavigationBarItemiconList;
   }
 
-  List<NavigationRailDestination> getNavigationRailDestinationList() {
+  List<NavigationRailDestination> getNavigationRailDestinationListWithBadge() {
     List<NavigationRailDestination> _list = [];
     for (var element in widget.tabItemList) {
       _list.add(NavigationRailDestination(
-        icon: element.icon,
-        selectedIcon: element.selectedIcon,
+        icon: BadgeWraper(child: element.icon, showBadge: element.showBadge, badgeCount: element.badgeCount),
+        selectedIcon: BadgeWraper(child: element.selectedIcon, showBadge: element.showBadge, badgeCount: element.badgeCount),
         label: Text(element.label),
       ));
     }
@@ -105,7 +128,7 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
                 ),
                 currentIndex: _selectedIndex,
                 iconSize: 35,
-                items: getBottomNavigationBarItemIcon(showTabName: widget.showTabNameForFloating!),
+                items: getBottomNavigationBarItemIconWithBadge(showTabLabels: widget.showTabLabelsForFloating!),
                 onTap: (index) {
                   _onItemTapped(index);
                 },
@@ -134,17 +157,17 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
         top: BorderSide.none,
       ),
       currentIndex: _selectedIndex,
-      items: getBottomNavigationBarItemIcon(showTabName: widget.showTabNameForNonFloating!),
+      items: getBottomNavigationBarItemIconWithBadge(showTabLabels: widget.showTabLabelsForNonFloating!),
       onTap: (index) {
         _onItemTapped(index);
       },
-      activeColor: widget.activeColor,
-      inactiveColor: widget.inactiveColor,
+      activeColor: widget.activeColor ?? Theme.of(context).primaryColor,
+      inactiveColor: widget.inactiveColor ?? Theme.of(context).primaryColor,
       backgroundColor: widget.backgroundColor,
     );
   }
 
-  Scaffold buildScafoldForFloatingTabBar() {
+  Scaffold buildScafoldForFloatingTabBar({required String platform}) {
     return Scaffold(
       appBar: widget.parentAppbar,
       body: SafeArea(
@@ -165,7 +188,7 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
     );
   }
 
-  Scaffold buildScafoldForBottomBar() {
+  Scaffold buildScafoldForBottomBar({required String platform}) {
     return Scaffold(
       appBar: widget.parentAppbar,
       body: SafeArea(
@@ -186,14 +209,14 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
     );
   }
 
-  Scaffold buildScaffoldForWeb() {
+  Scaffold buildScaffoldForWeb({required String platform}) {
     return Scaffold(
       appBar: widget.parentAppbar,
       body: SafeArea(
         child: Row(
           children: <Widget>[
             Floater(
-              widget: Container(
+              child: Container(
                 color: Colors.white,
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                 height: MediaQuery.of(context).size.height * 0.99,
@@ -214,8 +237,7 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
                       ),
                       isExtended
                           ? GestureDetector(
-                              onTap: () => Navigator.of(context)
-                                  .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => widget.titleTapNavigationRouteWidget), (route) => false),
+                              onTap: () => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => widget.titleTapNavigationRouteWidget), (route) => false),
                               child: Text(widget.title, style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 20)),
                             )
                           : Container(),
@@ -226,7 +248,7 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
                   indicatorColor: widget.indicatorColor,
                   minExtendedWidth: MediaQuery.of(context).size.width * 0.15,
                   labelType: NavigationRailLabelType.none,
-                  destinations: getNavigationRailDestinationList(),
+                  destinations: getNavigationRailDestinationListWithBadge(),
                 ),
               ),
             ),
@@ -252,7 +274,7 @@ class _FloatingTabBarPageViewState extends State<FloatingTabBarPageView> {
     debugPrint("Platform: $platform");
 
     return platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows"
-        ? buildScaffoldForWeb()
-        : (widget.isFloating! ? buildScafoldForFloatingTabBar() : buildScafoldForBottomBar());
+        ? buildScaffoldForWeb(platform: platform)
+        : (widget.isFloating! ? buildScafoldForFloatingTabBar(platform: platform) : buildScafoldForBottomBar(platform: platform));
   }
 }

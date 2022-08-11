@@ -19,6 +19,7 @@ import 'package:floating_tabbar/floating_tabbar.dart';
 
 ```dart
 // HOW TO USE THIS WIDGET
+
 void main() {
   runApp(const MyApp());
 }
@@ -66,18 +67,20 @@ class _HomeState extends State<Home> {
           tabWidget: TopTabbar(
             tabList: topTabbarTabItemlist,
           ),
+          showBadge: true,
+          badgeCount: 10,
         ),
         const TabItem(
           icon: Icon(Icons.library_books_outlined, size: 30),
           selectedIcon: Icon(Icons.library_books, size: 30),
           label: "Report",
-          tabWidget: Floater(widget: Center(child: Text("Report", style: TextStyle(fontSize: 30)))),
+          tabWidget: Floater(child: Center(child: Text("Report", style: TextStyle(fontSize: 30)))),
         ),
         const TabItem(
           icon: Icon(Icons.settings_outlined, size: 30),
           selectedIcon: Icon(Icons.settings, size: 30),
           label: "Settings",
-          tabWidget: Floater(widget: Center(child: Text("Settings", style: TextStyle(fontSize: 30)))),
+          tabWidget: Floater(child: Center(child: Text("Settings", style: TextStyle(fontSize: 30)))),
         ),
       ];
       return _list;
@@ -93,10 +96,13 @@ class _HomeState extends State<Home> {
     }
 
     return FloatingTabBarPageView(
+      activeColor: Colors.green,
+      inactiveColor: Colors.yellow,
       tabItemList: tabList(),
       title: "FLOAT",
       isFloating: true,
       parentAppbar: getAppBar(),
+      titleTapNavigationRouteWidget: const Scaffold(body: Center(child: Text("App Home"))), /* Put your app home widget here other than landing page. */
     );
   }
 
@@ -105,23 +111,19 @@ class _HomeState extends State<Home> {
     return floatingTabBarPageView();
   }
 }
+
 ```
 
 ## Additional information
 
-### floating_tabbar-Floating-topbar-appbar-mobile
-![floating_tabbar-Floating-topbar-appbar-mobile](https://user-images.githubusercontent.com/75387392/161085632-d96c1d8c-a9bc-4472-afbe-01c1f673b47e.PNG)
+![1](https://user-images.githubusercontent.com/75387392/184212839-57872c36-eeb9-40aa-ac3f-3b41b718c7a4.png)
 
-### floating_tabbar-Floating-topbar-mobile
-![floating_tabbar-Floating-topbar-mobile](https://user-images.githubusercontent.com/75387392/161085640-5a1d1e94-0862-476b-88a6-c52617e64367.PNG)
+![2](https://user-images.githubusercontent.com/75387392/184212823-3f10015d-727a-4e6a-9adc-feeb4b3e76e3.png)
 
-### floating_tabbar-topbar-mobile
-![floating_tabbar-topbar-mobile](https://user-images.githubusercontent.com/75387392/161085643-7860a652-c523-4ce2-bc4e-4aade595b449.PNG)
+![3](https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png)
 
-### floating_tabbar-topbar-web
-![floating_tabbar-topbar-web](https://user-images.githubusercontent.com/75387392/161085646-266d7983-4011-4633-92a0-0b72b1d2cc16.PNG)
+![4](https://user-images.githubusercontent.com/75387392/184212834-d9576bf9-3872-4f23-8988-105603cc5d39.png)
 
-### floating_tabbar-Floating-topbar-appbar-web
-![floating_tabbar-Floating-topbar-appbar-web](https://user-images.githubusercontent.com/75387392/161085639-c716d683-4531-409a-a773-6677bfab2688.PNG)
+![5](https://user-images.githubusercontent.com/75387392/184212837-a9c9ce8e-bc60-4435-9319-6491351277ad.png)
 
 and much more.

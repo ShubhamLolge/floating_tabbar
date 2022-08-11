@@ -2,7 +2,10 @@ import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:flutter/material.dart';
 
 class TopTabbar extends StatefulWidget {
+  /// List of Tab Items
   final List<TabItem> tabList;
+
+  /// index of first page
   final int initialIndex;
   const TopTabbar({
     Key? key,

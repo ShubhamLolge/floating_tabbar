@@ -9,3 +9,7 @@ Updated Color scheme within the Widget.
 ## 0.0.3
 
 Added example to the project.
+
+## 0.0.4
+
+Color Scheme improvement, title tap navigation route widget on tap on navigation rail title and Added badges.

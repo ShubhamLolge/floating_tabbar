@@ -51,18 +51,20 @@ class _HomeState extends State<Home> {
           tabWidget: TopTabbar(
             tabList: topTabbarTabItemlist,
           ),
+          showBadge: true,
+          badgeCount: 10,
         ),
         const TabItem(
           icon: Icon(Icons.library_books_outlined, size: 30),
           selectedIcon: Icon(Icons.library_books, size: 30),
           label: "Report",
-          tabWidget: Floater(widget: Center(child: Text("Report", style: TextStyle(fontSize: 30)))),
+          tabWidget: Floater(child: Center(child: Text("Report", style: TextStyle(fontSize: 30)))),
         ),
         const TabItem(
           icon: Icon(Icons.settings_outlined, size: 30),
           selectedIcon: Icon(Icons.settings, size: 30),
           label: "Settings",
-          tabWidget: Floater(widget: Center(child: Text("Settings", style: TextStyle(fontSize: 30)))),
+          tabWidget: Floater(child: Center(child: Text("Settings", style: TextStyle(fontSize: 30)))),
         ),
       ];
       return _list;
@@ -78,6 +80,8 @@ class _HomeState extends State<Home> {
     }
 
     return FloatingTabBarPageView(
+      activeColor: Colors.green,
+      inactiveColor: Colors.yellow,
       tabItemList: tabList(),
       title: "FLOAT",
       isFloating: true,
