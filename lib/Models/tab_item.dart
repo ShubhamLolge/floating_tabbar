@@ -1,29 +1,47 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TabItem {
-  /// Will show for unselected icon
-  final Widget icon;
+  /// Title for the tabItem
+  final Widget title;
 
-  /// Will show for selected icon
-  final Widget selectedIcon;
+  /// SubTitle for the tabItem
+  final Widget? subTitle;
 
-  /// Will show label under the icon
-  final String label;
+  /// onTap on tabItem will only work when tabItemChildren list is empty, as itemChild will have their own onTap to work
+  final void Function()? onTap;
+
+  /// selectedIcon and leading selected icon in tile.
+  final Widget? selectedIcon;
+
+  /// unSelectedIcon and leading unselected icon in tile.
+  final Widget? unSelectedIcon;
+
+  /// Trailing widget for the tabItem for tile.
+  final Widget? trailing;
 
   /// The widget corresponding to the tab item
-  final Widget tabWidget;
+  final Widget? tabWidget;
 
-  /// Will show a badge count on top of tabbar item, default: false
+  /// Will show a badge on top of tabbar item, default: false.
+  final bool? showBadge;
+
+  /// Will show a badge count on top of tabbar item, to enable make showBadge true.
   final int? badgeCount;
 
-  /// Will show a badge on top of tabbar item, default: false
-  final bool showBadge;
+  /// Sub children which will be seen when expanded
+  final List<TabItem>? tabItemChildren;
+
   const TabItem({
-    this.icon = const Icon(Icons.icecream_outlined),
-    this.selectedIcon = const Icon(Icons.icecream),
-    required this.label,
-    required this.tabWidget,
-    this.badgeCount,
+    required this.title,
+    required this.onTap,
+    this.subTitle,
+    this.selectedIcon = const Icon(CupertinoIcons.circle_fill, size: 10),
+    this.unSelectedIcon = const Icon(Icons.circle_outlined, size: 10),
+    this.trailing,
+    this.tabWidget = const Center(child: Text("Tab-Widget")),
     this.showBadge = false,
+    this.badgeCount,
+    this.tabItemChildren = const [],
   });
 }

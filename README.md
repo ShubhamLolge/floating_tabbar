@@ -4,7 +4,7 @@ The floating_tabbar package for Flutter allows you to use the responsive design 
 
 ## Getting started
 
-1. Import the package and use it in your Flutter App.
+Import the package and use it in your Flutter App.
 ```dart
 import 'package:floating_tabbar/floating_tabbar.dart';
 ```
@@ -15,102 +15,91 @@ import 'package:floating_tabbar/floating_tabbar.dart';
  * And with [isFloating = false] you'll get normal TabBar PageView
  * Support for all device sizes.
 
-## Usage
+## Add themes
+```dart
+// floating_tabbar is now light and dark theme compatible.
+// Add basic themes to your app, so that floating_tabbar could glow in both light and dark themes.
+MaterialApp(
+  themeMode: ThemeMode.system,
+  theme: ThemeData(
+    primaryColor: Colors.blue,
+    brightness: Brightness.light,
+    canvasColor: Colors.grey[50],
+  ),
+  darkTheme: ThemeData(
+    primaryColor: Colors.blue,
+    brightness: Brightness.dark,
+    canvasColor: const Color.fromARGB(255, 37, 37, 37),
+  ),
+),
+```
 
+## Usage
 ```dart
 // HOW TO USE THIS WIDGET
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'floating_tabbar',
-      theme: ThemeData(primarySwatch: Colors.red),
-      home: const Home(),
-    );
+  List<TabItem> topTabbarTabItemlist({required Brightness brightness}) {
+    List<TabItem> topTabbarTabItemlist = [
+      TabItem(
+        onTap: () {},
+        title: const Text("Nautics SideBar"),
+        tabWidget: const Center(child: Text("Nautics SideBar", style: TextStyle(fontSize: 30))),
+      ),
+      TabItem(
+        onTap: () {},
+        title: const Text("Public Events"),
+        tabWidget: const Center(child: Text("Public Events", style: TextStyle(fontSize: 30))),
+      ),
+    ];
+    return topTabbarTabItemlist;
   }
-}
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  List<TabItem> topTabbarTabItemlist = const [
-    TabItem(
-      label: "Reminders",
-      tabWidget: Center(child: Text("Reminders", style: TextStyle(fontSize: 30))),
-    ),
-    TabItem(
-      icon: Icon(Icons.settings_outlined, size: 30),
-      selectedIcon: Icon(Icons.settings, size: 30),
-      label: "Public Events",
-      tabWidget: Center(child: Text("Public Events", style: TextStyle(fontSize: 30))),
-    ),
-  ];
-
-  Widget floatingTabBarPageView() {
+  Widget floatingTabBarPageView({required Brightness brightness}) {
     List<TabItem> tabList() {
       List<TabItem> _list = [
         TabItem(
-          icon: const Icon(Icons.dashboard_outlined, size: 30),
-          selectedIcon: const Icon(Icons.dashboard, size: 30),
-          label: "Dashboard",
-          tabWidget: TopTabbar(
-            tabList: topTabbarTabItemlist,
-          ),
+          onTap: () {},
+          selectedIcon: const Icon(Icons.dashboard),
+          title: const Text("Dashboard"),
+          tabWidget: TopTabbar(tabList: topTabbarTabItemlist(brightness: brightness)),
           showBadge: true,
           badgeCount: 10,
         ),
-        const TabItem(
-          icon: Icon(Icons.library_books_outlined, size: 30),
-          selectedIcon: Icon(Icons.library_books, size: 30),
-          label: "Report",
-          tabWidget: Floater(child: Center(child: Text("Report", style: TextStyle(fontSize: 30)))),
+        TabItem(
+          onTap: () {},
+          selectedIcon: const Icon(Icons.library_books),
+          title: const Text("Report"),
+          tabWidget: const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
         ),
-        const TabItem(
-          icon: Icon(Icons.settings_outlined, size: 30),
-          selectedIcon: Icon(Icons.settings, size: 30),
-          label: "Settings",
-          tabWidget: Floater(child: Center(child: Text("Settings", style: TextStyle(fontSize: 30)))),
+        TabItem(
+          onTap: () {},
+          selectedIcon: const Icon(Icons.settings),
+          title: const Text("Settings"),
+          tabWidget: const Center(child: Text("Settings", style: TextStyle(fontSize: 30))),
+        ),
+        TabItem(
+          title: const Text("Work"),
+          onTap: () {},
+          selectedIcon: const Icon(Icons.maps_home_work_sharp),
+          tabWidget: const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
+        ),
+        TabItem(
+          title: const Text("ShowCase"),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ShowCase()));
+          },
+          selectedIcon: const Icon(Icons.flight_rounded),
+          tabWidget: const Center(child: Text("ShowCase", style: TextStyle(fontSize: 30))),
         ),
       ];
       return _list;
     }
 
-    AppBar getAppBar() {
-      return AppBar(
-        title: Text("Floating Tabbar Pageview", style: TextStyle(color: Theme.of(context).primaryColor)),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      );
-    }
 
-    return FloatingTabBar(
-      activeColor: Colors.green,
-      inactiveColor: Colors.yellow,
+    FloatingTabBar(
       tabItemList: tabList(),
-      title: "FLOAT",
-      isFloating: true,
-      parentAppbar: getAppBar(),
-      titleTapNavigationRouteWidget: const Scaffold(body: Center(child: Text("App Home"))), /* Put your app home widget here other than landing page. */
+      useNautics: true,
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return floatingTabBarPageView();
-  }
-}
 
 ```
 
@@ -122,8 +111,10 @@ class _HomeState extends State<Home> {
 
 ![3](https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png)
 
-![4](https://user-images.githubusercontent.com/75387392/184212834-d9576bf9-3872-4f23-8988-105603cc5d39.png)
-
-![5](https://user-images.githubusercontent.com/75387392/184212837-a9c9ce8e-bc60-4435-9319-6491351277ad.png)
+<p float="left">
+  <img src=![1](https://user-images.githubusercontent.com/75387392/184212839-57872c36-eeb9-40aa-ac3f-3b41b718c7a4.png) width="100" />
+  <img src=![2](https://user-images.githubusercontent.com/75387392/184212823-3f10015d-727a-4e6a-9adc-feeb4b3e76e3.png) width="100" /> 
+  <img src=![3](https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png) width="100" />
+</p>
 
 and much more.

@@ -17,3 +17,7 @@ Color Scheme improvement, title tap navigation route widget on tap on navigation
 ## 0.0.5
 
 Color Scheme improvement, title tap navigation route widget on tap on navigation rail title and Added badges.
+
+## 0.0.6
+
+Nautics sidebar a new widget for navigation, TabItem model improvement, for all widgets in package theme compatibility for light and dark theme.

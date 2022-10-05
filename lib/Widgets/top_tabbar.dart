@@ -2,15 +2,18 @@ import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:flutter/material.dart';
 
 class TopTabbar extends StatefulWidget {
-  /// List of Tab Items
   final List<TabItem> tabList;
-
-  /// index of first page
   final int initialIndex;
+  final Decoration? indicator;
+  final Color? labelColor;
+  final Color? backgroundColor;
   const TopTabbar({
     Key? key,
     required this.tabList,
     this.initialIndex = 0,
+    this.indicator,
+    this.labelColor,
+    this.backgroundColor,
   }) : super(key: key);
   @override
   _TopTabbarState createState() => _TopTabbarState();
@@ -20,7 +23,9 @@ class _TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMix
   List<String> getLabelList() {
     List<String> labelList = [];
     for (var element in widget.tabList) {
-      labelList.add(element.label);
+      Text? title = element.title as Text;
+      String? titleString = title.data;
+      labelList.add(titleString!);
     }
     return labelList;
   }
@@ -28,7 +33,7 @@ class _TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMix
   List<Widget> getTabWidgetList() {
     List<Widget> tabWidgetList = [];
     for (var element in widget.tabList) {
-      tabWidgetList.add(element.tabWidget);
+      tabWidgetList.add(element.tabWidget!);
     }
     return tabWidgetList;
   }
@@ -63,16 +68,18 @@ class _TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMix
     return list;
   }
 
-  AppBar customAppbarwithTabbar({TabController? controller, required BuildContext context, required List<Widget> tabs}) {
+  AppBar customAppbarwithTabbar(
+      {TabController? controller, required BuildContext context, required List<Widget> tabs}) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: widget.backgroundColor ?? Colors.transparent,
       elevation: 0,
       bottom: TabBar(
-        indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
-        ),
-        labelColor: Theme.of(context).primaryColor,
+        indicator: widget.indicator ??
+            BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Theme.of(context).primaryColor.withOpacity(0.2),
+            ),
+        labelColor: widget.labelColor ?? Theme.of(context).primaryColor,
         controller: controller,
         tabs: tabs,
         isScrollable: true,

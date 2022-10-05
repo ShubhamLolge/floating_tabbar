@@ -5,7 +5,7 @@ class BadgeWraper extends StatelessWidget {
   final Widget? child;
 
   /// This will tell if to show badge
-  final bool showBadge;
+  final bool? showBadge;
 
   /// This will show badge count
   final int? badgeCount;
@@ -22,10 +22,7 @@ class BadgeWraper extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        SizedBox(
-          width: 42,
-          child: child,
-        ),
+        SizedBox(width: 35, child: Row(children: [Expanded(child: child!)])),
         showBadge == true
             ? Positioned(
                 right: 0,
@@ -38,11 +35,7 @@ class BadgeWraper extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '$badgeCount',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: const TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ),
