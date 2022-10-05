@@ -116,10 +116,11 @@ MaterialApp(
 
 ![3](https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png)
 
-<p float="left">
-  <img src=![1](https://user-images.githubusercontent.com/75387392/184212839-57872c36-eeb9-40aa-ac3f-3b41b718c7a4.png) width="100" />
-  <img src=![2](https://user-images.githubusercontent.com/75387392/184212823-3f10015d-727a-4e6a-9adc-feeb4b3e76e3.png) width="100" /> 
-  <img src=![3](https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png) width="100" />
-</p>
-
+<table>
+  <tr>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212839-57872c36-eeb9-40aa-ac3f-3b41b718c7a4.png"/></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212823-3f10015d-727a-4e6a-9adc-feeb4b3e76e3.png"/></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png"/></td>
+  </tr>
+</table>
 and much more.
