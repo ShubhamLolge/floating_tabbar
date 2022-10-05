@@ -107,12 +107,13 @@ MaterialApp(
     );
 
 ```
-
+<table>
   <tr>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212839-57872c36-eeb9-40aa-ac3f-3b41b718c7a4.png"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212823-3f10015d-727a-4e6a-9adc-feeb4b3e76e3.png"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png"/></td>
   </tr>
+</table>
 
 ![CustomSidebar_collapsed](https://user-images.githubusercontent.com/75387392/194056688-8c01ad2c-37e3-4981-96c3-d39fd9d51e63.png)
 ![CustomSidebar_collapsed_light](https://user-images.githubusercontent.com/75387392/194056692-e708774b-e383-4dee-adf3-1f85109edec2.png)
@@ -257,7 +258,7 @@ Scaffold(
 );
 
 ```
-
+<table>
   <tr>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055846-69ba5e0f-6641-4cc3-9833-cedd130e677d.jpeg"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055856-b87c963d-8560-489e-8b1b-c7f0d82eeeb3.jpeg"/></td>
@@ -267,6 +268,6 @@ Scaffold(
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055866-dc7118bf-9ffd-46b7-a955-64d8f403dcc6.jpeg"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055868-3f6ed7d9-c1ce-4f57-b553-97655ea19eb3.jpeg"/></td>
   </tr>
-
+</table>
 
 and much more.
