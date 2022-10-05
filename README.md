@@ -115,14 +115,30 @@ MaterialApp(
   </tr>
 </table>
 
-![CustomSidebar_collapsed](https://user-images.githubusercontent.com/75387392/194056688-8c01ad2c-37e3-4981-96c3-d39fd9d51e63.png)
-![CustomSidebar_collapsed_light](https://user-images.githubusercontent.com/75387392/194056692-e708774b-e383-4dee-adf3-1f85109edec2.png)
-![CustomSidebar_expanded](https://user-images.githubusercontent.com/75387392/194056694-ab179ba6-9e2b-4a72-9122-a65255f6b876.png)
-![CustomSidebar_expanded_light](https://user-images.githubusercontent.com/75387392/194056696-9051ce2e-346b-46bf-bfca-31f413113cd1.png)
-![FloatingTabbar_collapsed](https://user-images.githubusercontent.com/75387392/194056698-252c932c-aa1f-431e-b1f3-82dd5fd29190.png)
-![FloatingTabbar_collapsed_light](https://user-images.githubusercontent.com/75387392/194056700-22d7fcb8-7888-40b3-9a9e-f50cdf6de552.png)
-![FloatingTabbar_expanded_dark](https://user-images.githubusercontent.com/75387392/194056703-0c39ec5e-ce1d-4be3-94ac-42d73539af85.png)
-![FloatingTabbar_expanded_light](https://user-images.githubusercontent.com/75387392/194056705-30b303d5-aff1-4884-a38e-6bb4a68a24b1.png)
+<table>
+  <tr>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056688-8c01ad2c-37e3-4981-96c3-d39fd9d51e63.png"/></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056692-e708774b-e383-4dee-adf3-1f85109edec2.png"/></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056694-ab179ba6-9e2b-4a72-9122-a65255f6b876.png"/></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056696-9051ce2e-346b-46bf-bfca-31f413113cd1.png"/></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056698-252c932c-aa1f-431e-b1f3-82dd5fd29190.png"/></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056700-22d7fcb8-7888-40b3-9a9e-f50cdf6de552.png"/></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056703-0c39ec5e-ce1d-4be3-94ac-42d73539af85.png"/></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056705-30b303d5-aff1-4884-a38e-6bb4a68a24b1.png"/></td>
+  </tr>
+</table>
 
 ## Nautics
 
@@ -260,12 +276,7 @@ Scaffold(
 ```
 <table>
   <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055846-69ba5e0f-6641-4cc3-9833-cedd130e677d.jpeg"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055856-b87c963d-8560-489e-8b1b-c7f0d82eeeb3.jpeg"/></td>
-  </tr>
-</table>
-<table>
-  <tr>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055861-14cc21d0-cf9e-44c3-8c37-52d60a864184.jpeg"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055864-49e74b43-7f33-4366-906c-2ff30cfa5eeb.jpeg"/></td>
   </tr>
