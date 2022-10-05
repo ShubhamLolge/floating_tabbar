@@ -10,9 +10,13 @@ class BadgeWraper extends StatelessWidget {
   /// This will show badge count
   final int? badgeCount;
 
+  /// badge color.
+  final Color? bageColor;
+
   const BadgeWraper({
     Key? key,
     this.child,
+    this.bageColor = Colors.red,
     this.showBadge = false,
     this.badgeCount,
   }) : super(key: key);
@@ -31,7 +35,7 @@ class BadgeWraper extends StatelessWidget {
                   height: 16,
                   width: 16,
                   padding: const EdgeInsets.all(3),
-                  decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: bageColor, shape: BoxShape.circle),
                   child: Center(
                     child: Text(
                       '$badgeCount',
