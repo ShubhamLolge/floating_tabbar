@@ -267,6 +267,7 @@ class FloatingTabBarState extends State<FloatingTabBar> {
         _onItemTap(index);
         setState(() => _selectedIndex = index);
       },
+      nauticsColor: widget.backgroundColor,
       selectedColor: widget.activeColor,
       unSelectedColor: widget.inactiveColor,
       initialIndex: _selectedIndex,
