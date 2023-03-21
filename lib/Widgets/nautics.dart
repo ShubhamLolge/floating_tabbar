@@ -1,11 +1,12 @@
 import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:floating_tabbar/Services/platform_check.dart';
 import 'package:floating_tabbar/Widgets/floater.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Nautics extends StatefulWidget {
   /// List of items that will show in Nautics sidebar
-  final List<TabItem> nauticsItems;
+  final List<TabItem> children;
 
   /// Default true, Nautics SideBar expands and collapses on click.
   final bool isConvertible;
@@ -23,10 +24,10 @@ class Nautics extends StatefulWidget {
   final bool isCollapsed;
 
   /// The widget that will be on starting of Nautics SideBar
-  final Widget? nauticHeaderWidget;
+  final Widget? header;
 
   /// The widget that will be on bottom of Nautics SideBar
-  final Widget? nauticFooterWidget;
+  final Widget? footer;
 
   /// Color for Nautics SideBar
   final Color? nauticsColor;
@@ -58,20 +59,32 @@ class Nautics extends StatefulWidget {
   /// On index change.
   final ValueChanged<int> onChange;
 
-  /// Selected index.
-  final int selectedIndex;
+  /// Initial index.
+  final int initialIndex;
+
+  /// Expanded Nautics Decoration.
+  final Decoration? expandedNauticsDecoration;
+
+  /// Collapsed Nautics Decoration.
+  final Decoration? collapsedNauticsDecoration;
+
+  /// Space from left for the children udner a TabItem
+  final double childIndentation;
 
   const Nautics({
     Key? key,
-    required this.nauticsItems,
+    required this.children,
     required this.onChange,
-    this.selectedIndex = 0,
-    this.nauticHeaderWidget = const Text("Header"),
-    this.nauticFooterWidget = const Text("Footer"),
+    this.initialIndex = 0,
+    this.header,
+    this.footer,
     this.nauticsColor,
     this.selectedColor,
     this.unSelectedColor,
+    this.collapsedNauticsDecoration,
+    this.expandedNauticsDecoration,
     this.collapsedWidth = 60,
+    this.childIndentation = 30,
     this.expandedWidth = 200,
     this.isCollapsed = true,
     this.isFloating = true,
@@ -80,8 +93,8 @@ class Nautics extends StatefulWidget {
     this.crossAxisAlignmentExpandedForm = CrossAxisAlignment.center,
     this.mainAxisAlignmentCollapsedForm = MainAxisAlignment.start,
     this.mainAxisAlignmentExpandedForm = MainAxisAlignment.start,
-    this.selectedTrailingIcon = const Icon(Icons.keyboard_arrow_up),
-    this.unSelectedTrailingIcon = const Icon(Icons.keyboard_arrow_down),
+    this.selectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 15),
+    this.unSelectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 15),
   }) : super(key: key);
 
   @override
@@ -89,254 +102,313 @@ class Nautics extends StatefulWidget {
 }
 
 class NauticsState extends State<Nautics> {
-  bool isExpanded = false;
+  ValueNotifier<int>? itemChildSelected;
+  bool isNauticsExpanded = false;
   bool isExpansionTileSelected = false;
-  int itemChildSelected = 0;
+
+  @override
+  void initState() {
+    itemChildSelected = ValueNotifier<int>(widget.initialIndex);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     Brightness brightness = MediaQuery.of(context).platformBrightness;
     Size size = MediaQuery.of(context).size;
     String platform = PlatformCheck().platformCheck(context: context);
-    return widget.isConvertible
-        ? (isExpanded
-            ? nauticsTiles(brightness: brightness)
-            : nauticsIcons(
-                size: size,
-                platform: platform,
-                brightness: brightness,
-              ))
-        : widget.isCollapsed
-            ? nauticsIcons(
-                size: size,
-                platform: platform,
-                brightness: brightness,
-              )
-            : nauticsTiles(brightness: brightness);
+
+    if (widget.isConvertible) {
+      if (isNauticsExpanded) {
+        return nauticsTiles(brightness: brightness);
+      } else {
+        return nauticsIcons(
+          size: size,
+          platform: platform,
+          brightness: brightness,
+        );
+      }
+    } else {
+      if (widget.isCollapsed) {
+        return nauticsIcons(
+          size: size,
+          platform: platform,
+          brightness: brightness,
+        );
+      } else {
+        return nauticsTiles(brightness: brightness);
+      }
+    }
   }
 
-  /// This show tiles when Nautics SideBar is in expanded form
   Widget nauticsTiles({required Brightness brightness}) {
     Container nauticsTiles = Container(
       width: widget.expandedWidth,
-      color: widget.isFloating == true
-          ? null
-          : widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
-      child: Column(
-        mainAxisAlignment: widget.mainAxisAlignmentExpandedForm,
-        crossAxisAlignment: widget.crossAxisAlignmentExpandedForm,
-        children: [
-          widget.nauticHeaderWidget == null ? Container() : headerTile(brightness: brightness),
-          Expanded(
-            child: ListTileTheme(
-              selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-              child: ListView.builder(
-                itemCount: widget.nauticsItems.length,
-                itemBuilder: (BuildContext context, int index) {
-                  TabItem tI = widget.nauticsItems[index];
-                  bool selected = widget.selectedIndex == index;
-                  return tI.tabItemChildren!.isEmpty
-                      ? ListTile(
-                          selected: selected ? true : false,
-                          iconColor: widget.unSelectedColor ??
-                              (brightness == Brightness.dark ? Colors.white : Colors.black),
-                          textColor: widget.unSelectedColor ??
-                              (brightness == Brightness.dark ? Colors.white : Colors.black),
-                          onTap: () {
-                            widget.onChange(index);
-                            tI.onTap!();
-                          },
-                          leading: tI.selectedIcon,
-                          trailing: tI.trailing,
-                          title: tI.title,
-                          subtitle: tI.subTitle,
-                        )
-                      : ExpansionTile(
-                          collapsedIconColor: widget.unSelectedColor ??
-                              (brightness == Brightness.dark ? Colors.white : Colors.black),
-                          collapsedTextColor: widget.unSelectedColor ??
-                              (brightness == Brightness.dark ? Colors.white : Colors.black),
-                          iconColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                          textColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                          onExpansionChanged: (isSelected) {
-                            widget.onChange(index);
-                            setState(() => isExpansionTileSelected = isSelected);
-                          },
-                          title: tI.title,
-                          maintainState: true,
-                          initiallyExpanded: isExpansionTileSelected ? true : false,
-                          subtitle: tI.subTitle,
-                          leading: tI.selectedIcon,
-                          trailing: isExpansionTileSelected
-                              ? widget.selectedTrailingIcon
-                              : widget.unSelectedTrailingIcon,
-                          children: List.generate(
-                            tI.tabItemChildren!.length,
-                            (index) {
-                              bool isItemChildSelected = itemChildSelected == index;
-                              return ListTileTheme(
-                                selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                                child: ListTile(
-                                  onTap: () => {
-                                    tI.tabItemChildren![index].onTap!(),
-                                    setState(() {
-                                      itemChildSelected = index;
-                                      isItemChildSelected = !isItemChildSelected;
-                                    }),
-                                  },
-                                  dense: true,
-                                  selected: isItemChildSelected ? true : false,
-                                  leading: tI.tabItemChildren![index].selectedIcon,
-                                  title: tI.tabItemChildren![index].title,
-                                  subtitle: tI.tabItemChildren![index].subTitle,
-                                  trailing: tI.tabItemChildren![index].trailing,
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                },
+      color: widget.isFloating == true ? null : widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      child: Container(
+        decoration: widget.expandedNauticsDecoration,
+        child: Column(
+          mainAxisAlignment: widget.mainAxisAlignmentExpandedForm,
+          crossAxisAlignment: widget.crossAxisAlignmentExpandedForm,
+          children: [
+            widget.header == null ? Container() : headerTile(),
+            Expanded(
+              child: ListTileTheme(
+                selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                child: ListView.builder(
+                  itemCount: widget.children.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    TabItem tI = widget.children[index];
+                    return tabTile(
+                      tabItem: tI,
+                      context: context,
+                      brightness: brightness,
+                      index: index,
+                      itemChildSelected: itemChildSelected!,
+                      isLevelOne: true,
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          widget.nauticFooterWidget == null ? Container() : footerTile(brightness: brightness),
-        ],
+            widget.footer == null ? Container() : footerTile(),
+          ],
+        ),
       ),
     );
     return GestureDetector(
       onTap: transformNautics,
       child: widget.isFloating == true
           ? Floater(
-              backgroundColor:
-                  widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+              backgroundColor: widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
               child: nauticsTiles,
             )
           : nauticsTiles,
     );
   }
 
-  /// This show icons when Nautics SideBar is in collapsed form
+  Widget tabTile({
+    required TabItem tabItem,
+    required BuildContext context,
+    required Brightness brightness,
+    required int index,
+    required ValueNotifier<int> itemChildSelected,
+    bool isLevelOne = false,
+  }) {
+    ValueNotifier<int> icSelected = ValueNotifier<int>(-1);
+    return ListTileTheme(
+      selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+      child: tabItem.children!.isEmpty
+          ? Container(
+              margin: isLevelOne == true ? null : EdgeInsets.only(left: widget.childIndentation),
+              child: ListTile(
+                onTap: () {
+                  tabItem.onTap!();
+                  setState(() {
+                    itemChildSelected.value = index;
+                    widget.onChange(itemChildSelected.value);
+                  });
+                },
+                selected: itemChildSelected.value == index,
+                dense: true,
+                iconColor: (brightness == Brightness.dark ? Colors.black : Colors.white),
+                textColor: (brightness == Brightness.dark ? Colors.black : Colors.white),
+                leading: tabItem.selectedLeadingIcon,
+                title: tabItem.title,
+                subtitle: tabItem.subTitle,
+                trailing: tabItem.trailingIcon,
+              ),
+            )
+          : Container(
+              margin: isLevelOne == true ? null : EdgeInsets.only(left: widget.childIndentation),
+              child: ExpansionTile(
+                onExpansionChanged: (isSelected) {
+                  setState(() {
+                    isExpansionTileSelected = isSelected;
+                    itemChildSelected.value = index;
+                    icSelected.value = index;
+                    widget.onChange(icSelected.value);
+                  });
+                },
+                iconColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                textColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                collapsedIconColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : (brightness == Brightness.dark ? Colors.black : Colors.white),
+                collapsedTextColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : (brightness == Brightness.dark ? Colors.black : Colors.white),
+                title: tabItem.title,
+                maintainState: true,
+                initiallyExpanded: isExpansionTileSelected ? true : false,
+                subtitle: tabItem.subTitle,
+                leading: tabItem.selectedLeadingIcon,
+                trailing: tabItem.trailingIcon != null
+                    ? SizedBox(
+                        width: 75,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              width: 50,
+                              child: ListView(
+                                reverse: true,
+                                scrollDirection: Axis.horizontal,
+                                children: [tabItem.trailingIcon ?? Container()],
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(child: isExpansionTileSelected ? widget.selectedTrailingIcon! : widget.unSelectedTrailingIcon!),
+                          ],
+                        ),
+                      )
+                    : isExpansionTileSelected
+                        ? widget.selectedTrailingIcon!
+                        : widget.unSelectedTrailingIcon!,
+                children: tabExpansionTile(
+                  tabItem: tabItem,
+                  context: context,
+                  brightness: brightness,
+                  itemChildSelected: icSelected,
+                ),
+              ),
+            ),
+    );
+  }
+
+  List<Widget> tabExpansionTile({
+    required TabItem tabItem,
+    required BuildContext context,
+    required Brightness brightness,
+    required ValueNotifier<int> itemChildSelected,
+  }) {
+    return List.generate(
+      tabItem.children!.length,
+      (index) {
+        TabItem childTI = tabItem.children![index];
+        return ListTileTheme(
+          selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+          child: tabTile(
+            tabItem: childTI,
+            context: context,
+            brightness: brightness,
+            index: index,
+            itemChildSelected: itemChildSelected,
+          ),
+        );
+      },
+    );
+  }
+
   Widget nauticsIcons({required Size size, required String platform, required Brightness brightness}) {
     AnimatedContainer animatedContainer = AnimatedContainer(
       duration: const Duration(seconds: 1),
       curve: Curves.easeInBack,
       width: widget.collapsedWidth,
-      color: widget.isFloating == true
-          ? null
-          : widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
-      child: Column(
-        mainAxisAlignment: widget.mainAxisAlignmentCollapsedForm,
-        crossAxisAlignment: widget.crossAxisAlignmentCollapsedForm,
-        children: [
-          widget.nauticHeaderWidget == null ? Container() : headerIcon(),
-          Expanded(
-            child: ListView.builder(
-              itemCount: widget.nauticsItems.length,
-              itemBuilder: (contex, index) {
-                bool selected = widget.selectedIndex == index;
-                TabItem tI = widget.nauticsItems[index];
-                return InkWell(
-                  onTap: () => {
-                    tI.tabItemChildren!.isEmpty
-                        ? isExpanded = false
-                        : {
-                            transformNautics(),
-                            setState(() {
-                              isExpansionTileSelected = true;
-                            }),
-                          },
-                    tI.onTap!(),
-                    widget.onChange(index),
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: selected
-                          ? (widget.selectedColor ?? Theme.of(context).primaryColor)
-                          : (widget.unSelectedColor),
+      color: widget.isFloating == true ? null : widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      child: Container(
+        decoration: widget.collapsedNauticsDecoration,
+        child: Column(
+          mainAxisAlignment: widget.mainAxisAlignmentCollapsedForm,
+          crossAxisAlignment: widget.crossAxisAlignmentCollapsedForm,
+          children: [
+            widget.header == null ? Container() : headerIcon(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: widget.children.length,
+                itemBuilder: (contex, index) {
+                  TabItem tI = widget.children[index];
+                  return InkWell(
+                    onTap: () => {
+                      setState(() {
+                        itemChildSelected!.value = index;
+                      }),
+                      tI.children!.isEmpty
+                          ? isNauticsExpanded = false
+                          : {
+                              transformNautics(),
+                              setState(() {
+                                isExpansionTileSelected = true;
+                              }),
+                            },
+                      tI.onTap!(),
+                      widget.onChange(itemChildSelected!.value),
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: itemChildSelected!.value == index ? (widget.selectedColor ?? Theme.of(context).primaryColor) : (widget.unSelectedColor),
+                      ),
+                      height: 45,
+                      width: 45,
+                      alignment: Alignment.center,
+                      child: tI.selectedLeadingIcon,
                     ),
-                    height: 40,
-                    width: 40,
-                    alignment: Alignment.center,
-                    child: tI.selectedIcon,
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-          widget.nauticFooterWidget == null ? Container() : footerIcon(),
-        ],
+            widget.footer == null ? Container() : footerIcon(),
+          ],
+        ),
       ),
     );
     return GestureDetector(
       onTap: transformNautics,
       child: widget.isFloating == true
           ? Floater(
-              backgroundColor:
-                  widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+              backgroundColor: widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
               child: animatedContainer,
             )
           : animatedContainer,
     );
   }
 
-  /// headerTile
-  Widget headerTile({required Brightness brightness}) {
+  Widget headerTile() {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: ListTile(
-        iconColor: (brightness == Brightness.dark ? Colors.white : Colors.black),
-        textColor: (brightness == Brightness.dark ? Colors.white : Colors.black),
-        title: Center(child: widget.nauticHeaderWidget),
+        title: Center(child: widget.header),
         onTap: transformNautics,
       ),
     );
   }
 
-  /// headerIcon
   Widget headerIcon() {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
+      margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: transformNautics,
         child: Container(
           height: 45,
           alignment: Alignment.center,
-          child: widget.nauticHeaderWidget,
+          child: widget.header,
         ),
       ),
     );
   }
 
-  /// footerTile
-  Widget footerTile({required Brightness brightness}) {
+  Widget footerTile() {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: ListTile(
-        iconColor: (brightness == Brightness.dark ? Colors.white : Colors.black),
-        textColor: (brightness == Brightness.dark ? Colors.white : Colors.black),
-        title: Center(child: widget.nauticFooterWidget),
+        title: Center(child: widget.footer),
         onTap: transformNautics,
       ),
     );
   }
 
-  /// footerIcon
   Widget footerIcon() {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
+      margin: const EdgeInsets.only(top: 8),
       child: InkWell(
         onTap: transformNautics,
         child: Container(
           height: 45,
           alignment: Alignment.center,
-          child: widget.nauticFooterWidget,
+          child: widget.footer,
         ),
       ),
     );
   }
 
-  /// this function changes the form of Nautics SideBar
-  void transformNautics() => setState(() => isExpanded = !isExpanded);
+  void transformNautics() => setState(() => isNauticsExpanded = !isNauticsExpanded);
 }

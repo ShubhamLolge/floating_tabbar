@@ -9,10 +9,13 @@ import 'package:flutter/material.dart';
 
 class FloatingTabBar extends StatefulWidget {
   /// List of "TabItem" which will be shown on naigation bar
-  final List<TabItem> tabItemList;
+  final List<TabItem> children;
 
-  /// Leading widget
+  /// Leading widget that will on top of sidebar
   final Widget? leading;
+
+  /// Footer widget for nautics sidebar widget, this will be shown when 'useNautics = true'
+  final Widget? nauticsFooter;
 
   /// A "AppBar?" widget that will be shown to all the platforms which has true boolean value as top appbar.
   final AppBar? parentAppbar;
@@ -49,11 +52,11 @@ class FloatingTabBar extends StatefulWidget {
 
   const FloatingTabBar({
     Key? key,
-    required this.tabItemList,
+    required this.children,
     this.parentAppbar,
     this.minExtendedWidth = 200,
     this.useIndicator,
-    this.leading = const Text("Leading"),
+    this.leading,
     this.indicatorColor,
     this.activeColor,
     this.inactiveColor,
@@ -62,46 +65,45 @@ class FloatingTabBar extends StatefulWidget {
     this.useNautics = false,
     this.showTabLabelsForNonFloating = false,
     this.showTabLabelsForFloating = false,
+    this.nauticsFooter,
   }) : super(key: key);
   @override
-  _FloatingTabBarState createState() => _FloatingTabBarState();
+  FloatingTabBarState createState() => FloatingTabBarState();
 }
 
-class _FloatingTabBarState extends State<FloatingTabBar> {
+class FloatingTabBarState extends State<FloatingTabBar> {
   PageController floatingTabBarPageViewController = PageController(initialPage: 0);
-  final ValueNotifier<double> playerExpandProgress = ValueNotifier(76);
+  final ValueNotifier<double> expandProgress = ValueNotifier(76);
   bool isExtended = false;
   int _selectedIndex = 0;
 
   List<BottomNavigationBarItem> getBottomNavigationBarItemIconWithBadge({required bool showTabLabels}) {
-    List<BottomNavigationBarItem> _bottomNavigationBarItemiconList = [];
-    for (var element in widget.tabItemList) {
+    List<BottomNavigationBarItem> bottomNavigationBarItemiconList = [];
+    for (var element in widget.children) {
       Text? title = element.title as Text;
       String? titleString = title.data;
-      _bottomNavigationBarItemiconList.add(
+      bottomNavigationBarItemiconList.add(
         BottomNavigationBarItem(
-          icon: BadgeWraper(
-              child: element.selectedIcon, showBadge: element.showBadge!, badgeCount: element.badgeCount),
-          activeIcon: BadgeWraper(
-              child: element.selectedIcon, showBadge: element.showBadge!, badgeCount: element.badgeCount),
+          icon: BadgeWraper(showBadge: element.showBadge!, badgeCount: element.badgeCount, child: element.selectedLeadingIcon),
+          activeIcon: BadgeWraper(showBadge: element.showBadge!, badgeCount: element.badgeCount, child: element.selectedLeadingIcon),
           label: showTabLabels ? titleString : null,
         ),
       );
     }
-    return _bottomNavigationBarItemiconList;
+    return bottomNavigationBarItemiconList;
   }
 
   List<NavigationRailDestination> getNavigationRailDestinationListWithBadge() {
-    List<NavigationRailDestination> _list = [];
-    for (var element in widget.tabItemList) {
-      _list.add(NavigationRailDestination(
+    List<NavigationRailDestination> list = [];
+    for (var element in widget.children) {
+      list.add(NavigationRailDestination(
         icon: BadgeWraper(
           showBadge: element.showBadge!,
           badgeCount: element.badgeCount,
           child: SizedBox(
             height: 40,
             width: 40,
-            child: element.selectedIcon,
+            child: element.selectedLeadingIcon,
           ),
         ),
         selectedIcon: BadgeWraper(
@@ -110,28 +112,27 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
           child: SizedBox(
             height: 40,
             width: 40,
-            child: element.selectedIcon,
+            child: element.selectedLeadingIcon,
           ),
         ),
         label: element.title,
       ));
     }
-    return _list;
+    return list;
   }
 
   List<Widget> getTabScreenList() {
-    List<Widget> _tabScreenList = [];
-    for (var element in widget.tabItemList) {
-      _tabScreenList.add(element.tabWidget!);
+    List<Widget> tabScreenList = [];
+    for (var element in widget.children) {
+      tabScreenList.add(element.tab!);
     }
-    return _tabScreenList;
+    return tabScreenList;
   }
 
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
-      floatingTabBarPageViewController.animateToPage(index,
-          duration: const Duration(milliseconds: 400), curve: Curves.ease);
+      floatingTabBarPageViewController.animateToPage(index, duration: const Duration(milliseconds: 400), curve: Curves.ease);
     });
   }
 
@@ -157,8 +158,7 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
                 ),
                 currentIndex: _selectedIndex,
                 iconSize: 35,
-                items:
-                    getBottomNavigationBarItemIconWithBadge(showTabLabels: widget.showTabLabelsForFloating!),
+                items: getBottomNavigationBarItemIconWithBadge(showTabLabels: widget.showTabLabelsForFloating!),
                 onTap: (index) => _onItemTap(index),
                 activeColor: Theme.of(context).primaryColor,
               ),
@@ -169,7 +169,7 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
     }
 
     return ValueListenableBuilder(
-      valueListenable: playerExpandProgress,
+      valueListenable: expandProgress,
       builder: (BuildContext context, double value, _) {
         return floatingBottomBar(value);
       },
@@ -191,8 +191,7 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
       },
       activeColor: widget.activeColor ?? Theme.of(context).primaryColor,
       inactiveColor: widget.inactiveColor ?? (brightness == Brightness.dark ? Colors.white : Colors.black),
-      backgroundColor:
-          widget.backgroundColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      backgroundColor: widget.backgroundColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
     );
   }
 
@@ -238,16 +237,14 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
     );
   }
 
-  Scaffold buildScaffoldForWeb(
-      {required String platform, bool? isFloating = true, required Brightness brightness}) {
+  Scaffold buildScaffoldForWeb({required String platform, bool? isFloating = true, required Brightness brightness}) {
     NavigationRail navigationRail = NavigationRail(
       selectedIndex: _selectedIndex,
       onDestinationSelected: (int index) {
         _onItemTap(index);
         setState(() => _selectedIndex = index);
       },
-      backgroundColor:
-          widget.backgroundColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      backgroundColor: widget.backgroundColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
       leading: widget.leading,
       extended: isExtended,
       selectedLabelTextStyle: TextStyle(color: widget.activeColor ?? Theme.of(context).primaryColor),
@@ -272,9 +269,11 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
       },
       selectedColor: widget.activeColor,
       unSelectedColor: widget.inactiveColor,
-      selectedIndex: _selectedIndex,
-      nauticsItems: widget.tabItemList,
+      initialIndex: _selectedIndex,
+      children: widget.children,
       isFloating: widget.isFloating,
+      footer: widget.nauticsFooter,
+      header: widget.leading,
     );
 
     return Scaffold(
@@ -295,8 +294,7 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
                         ),
                       ),
                     )
-                  : GestureDetector(
-                      onTap: () => setState(() => isExtended = !isExtended), child: navigationRail),
+                  : GestureDetector(onTap: () => setState(() => isExtended = !isExtended), child: navigationRail),
           Expanded(
             child: PageView(
               physics: const NeverScrollableScrollPhysics(),
@@ -320,8 +318,6 @@ class _FloatingTabBarState extends State<FloatingTabBar> {
 
     return platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows"
         ? buildScaffoldForWeb(platform: platform, isFloating: widget.isFloating, brightness: brightness)
-        : (widget.isFloating!
-            ? buildScafoldForFloatingTabBar(platform: platform, brightness: brightness)
-            : buildScafoldForBottomBar(platform: platform, brightness: brightness));
+        : (widget.isFloating! ? buildScafoldForFloatingTabBar(platform: platform, brightness: brightness) : buildScafoldForBottomBar(platform: platform, brightness: brightness));
   }
 }

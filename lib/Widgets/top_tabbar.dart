@@ -33,7 +33,7 @@ class _TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMix
   List<Widget> getTabWidgetList() {
     List<Widget> tabWidgetList = [];
     for (var element in widget.tabList) {
-      tabWidgetList.add(element.tabWidget!);
+      tabWidgetList.add(element.tab!);
     }
     return tabWidgetList;
   }
@@ -68,8 +68,7 @@ class _TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMix
     return list;
   }
 
-  AppBar customAppbarwithTabbar(
-      {TabController? controller, required BuildContext context, required List<Widget> tabs}) {
+  AppBar customAppbarwithTabbar({TabController? controller, required BuildContext context, required List<Widget> tabs}) {
     return AppBar(
       backgroundColor: widget.backgroundColor ?? Colors.transparent,
       elevation: 0,

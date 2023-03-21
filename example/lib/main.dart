@@ -1,9 +1,3 @@
-// import 'package:floating_tabbar/Models/tab_item.dart';
-// import 'package:floating_tabbar/Widgets/floater.dart';
-// import 'package:floating_tabbar/Widgets/top_tabbar.dart';
-// import 'package:floating_tabbar/floating_tabbar.dart';
-// import 'package:flutter/material.dart';
-
 import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:floating_tabbar/Widgets/nautics.dart';
 import 'package:floating_tabbar/Widgets/top_tabbar.dart';
@@ -57,12 +51,12 @@ class _HomeState extends State<Home> {
       TabItem(
         onTap: () {},
         title: const Text("Nautics SideBar"),
-        tabWidget: const Center(child: Text("Nautics SideBar", style: TextStyle(fontSize: 30))),
+        tab: const Center(child: Text("Nautics SideBar", style: TextStyle(fontSize: 30))),
       ),
       TabItem(
         onTap: () {},
         title: const Text("Public Events"),
-        tabWidget: const Center(child: Text("Public Events", style: TextStyle(fontSize: 30))),
+        tab: const Center(child: Text("Public Events", style: TextStyle(fontSize: 30))),
       ),
     ];
     return topTabbarTabItemlist;
@@ -73,44 +67,44 @@ class _HomeState extends State<Home> {
       List<TabItem> _list = [
         TabItem(
           onTap: () {},
-          selectedIcon: const Icon(Icons.dashboard),
+          selectedLeadingIcon: const Icon(Icons.dashboard),
           title: const Text("Dashboard"),
-          tabWidget: TopTabbar(tabList: topTabbarTabItemlist(brightness: brightness)),
+          tab: TopTabbar(tabList: topTabbarTabItemlist(brightness: brightness)),
           showBadge: true,
           badgeCount: 10,
         ),
         TabItem(
           onTap: () {},
-          selectedIcon: const Icon(Icons.library_books),
+          selectedLeadingIcon: const Icon(Icons.library_books),
           title: const Text("Report"),
-          tabWidget: const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
+          tab: const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
         ),
         TabItem(
           onTap: () {},
-          selectedIcon: const Icon(Icons.settings),
+          selectedLeadingIcon: const Icon(Icons.settings),
           title: const Text("Settings"),
-          tabWidget: const Center(child: Text("Settings", style: TextStyle(fontSize: 30))),
+          tab: const Center(child: Text("Settings", style: TextStyle(fontSize: 30))),
         ),
         TabItem(
           title: const Text("Work"),
           onTap: () {},
-          selectedIcon: const Icon(Icons.maps_home_work_sharp),
-          tabWidget: const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
+          selectedLeadingIcon: const Icon(Icons.maps_home_work_sharp),
+          tab: const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
         ),
         TabItem(
           title: const Text("ShowCase"),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ShowCase()));
           },
-          selectedIcon: const Icon(Icons.flight_rounded),
-          tabWidget: const Center(child: Text("ShowCase", style: TextStyle(fontSize: 30))),
+          selectedLeadingIcon: const Icon(Icons.flight_rounded),
+          tab: const Center(child: Text("ShowCase", style: TextStyle(fontSize: 30))),
         ),
       ];
       return _list;
     }
 
     return FloatingTabBar(
-      tabItemList: tabList(),
+      children: tabList(),
       useNautics: true,
     );
   }
@@ -135,8 +129,8 @@ class _ShowCaseState extends State<ShowCase> {
   List<TabItem> nauticsItems() {
     List<TabItem> nauticsItems = [
       TabItem(
-        selectedIcon: const Icon(Icons.account_circle_rounded, size: 25),
-        trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 15),
+        selectedLeadingIcon: const Icon(Icons.account_circle_rounded, size: 25),
+        trailingIcon: const Icon(Icons.arrow_forward_ios_rounded, size: 15),
         title: const Text("Jason Bourne"),
         subTitle: const Text("Associate"),
         onTap: () => setState(() {
@@ -144,57 +138,57 @@ class _ShowCaseState extends State<ShowCase> {
         }),
       ),
       TabItem(
-        selectedIcon: const Icon(Icons.toggle_on_outlined),
+        selectedLeadingIcon: const Icon(Icons.toggle_on_outlined),
         onTap: () => setState(() {
           text = "Status";
         }),
         title: const Text("Status"),
-        tabItemChildren: [
+        children: [
           TabItem(
             title: const Text("Appear offline"),
-            selectedIcon: const Icon(CupertinoIcons.multiply_circle, color: Colors.grey),
+            selectedLeadingIcon: const Icon(CupertinoIcons.multiply_circle, color: Colors.grey),
             onTap: () => setState(() {
               text = "Appear offline";
             }),
           ),
           TabItem(
             title: const Text("Available"),
-            selectedIcon: const Icon(Icons.done_rounded, color: Color.fromARGB(255, 0, 254, 8)),
+            selectedLeadingIcon: const Icon(Icons.done_rounded, color: Color.fromARGB(255, 0, 254, 8)),
             onTap: () => setState(() {
               text = "Available";
             }),
           ),
           TabItem(
             title: const Text("Busy"),
-            selectedIcon: const Icon(Icons.circle, color: Colors.red),
+            selectedLeadingIcon: const Icon(Icons.circle, color: Colors.red),
             onTap: () => setState(() {
               text = "Busy";
             }),
           ),
           TabItem(
             title: const Text("Do not disturb"),
-            selectedIcon: const Icon(Icons.remove_circle, color: Colors.red),
+            selectedLeadingIcon: const Icon(Icons.remove_circle, color: Colors.red),
             onTap: () => setState(() {
               text = "Do not disturb";
             }),
           ),
           TabItem(
             title: const Text("Be right back"),
-            selectedIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
+            selectedLeadingIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
             onTap: () => setState(() {
               text = "Be right back";
             }),
           ),
           TabItem(
             title: const Text("Away"),
-            selectedIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
+            selectedLeadingIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
             onTap: () => setState(() {
               text = "Away";
             }),
           ),
           TabItem(
             title: const Text("Reset status"),
-            selectedIcon: const Icon(CupertinoIcons.arrow_2_circlepath),
+            selectedLeadingIcon: const Icon(CupertinoIcons.arrow_2_circlepath),
             onTap: () => setState(() {
               text = "Reset status";
             }),
@@ -202,14 +196,14 @@ class _ShowCaseState extends State<ShowCase> {
         ],
       ),
       TabItem(
-        selectedIcon: const Icon(CupertinoIcons.pencil_outline),
+        selectedLeadingIcon: const Icon(CupertinoIcons.pencil_outline),
         onTap: () => setState(() {
           text = "Set status message";
         }),
         title: const Text("Set status message"),
       ),
       TabItem(
-        selectedIcon: const Icon(Icons.notifications),
+        selectedLeadingIcon: const Icon(Icons.notifications),
         title: const Text("Notifications"),
         subTitle: const Text("On"),
         onTap: () => setState(() {
@@ -217,21 +211,21 @@ class _ShowCaseState extends State<ShowCase> {
         }),
       ),
       TabItem(
-        selectedIcon: const Icon(Icons.settings),
+        selectedLeadingIcon: const Icon(Icons.settings),
         title: const Text("Setting"),
         onTap: () => setState(() {
           text = "Setting";
         }),
       ),
       TabItem(
-        selectedIcon: const Icon(Icons.lightbulb_outline_rounded),
+        selectedLeadingIcon: const Icon(Icons.lightbulb_outline_rounded),
         title: const Text("What's new"),
         onTap: () => setState(() {
           text = "What's new";
         }),
       ),
       TabItem(
-        selectedIcon: const Icon(Icons.add_rounded),
+        selectedLeadingIcon: const Icon(Icons.add_rounded),
         title: const Text("Add account"),
         onTap: () => setState(() {
           text = "Add account";
@@ -253,8 +247,8 @@ class _ShowCaseState extends State<ShowCase> {
         children: [
           Nautics(
             onChange: (index) => setState(() => selectedIndex = index),
-            selectedIndex: selectedIndex,
-            nauticsItems: nauticsItems(),
+            initialIndex: selectedIndex,
+            children: nauticsItems(),
           ),
           Expanded(child: Center(child: Text("$text on index $selectedIndex"))),
         ],
