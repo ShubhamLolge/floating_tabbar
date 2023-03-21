@@ -333,7 +333,6 @@ class NauticsState extends State<Nautics> {
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        // color: itemChildSelected!.value == index ? (widget.selectedColor ?? Theme.of(context).primaryColor) : (widget.unSelectedColor),
                         color: itemChildSelected!.value == index ? (widget.selectedColor ?? Theme.of(context).primaryColor) : Colors.transparent,
                       ),
                       height: 45,
