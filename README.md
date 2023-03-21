@@ -2,11 +2,6 @@
 
 The floating_tabbar package for Flutter allows you to use the responsive design for all platforms made from the Material Design System.
 
-# View package
-
-https://pub.dev/packages/floating_tabbar
-
-
 ## Getting started
 
 Import the package and use it in your Flutter App.
