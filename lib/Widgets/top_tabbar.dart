@@ -2,27 +2,37 @@ import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:flutter/material.dart';
 
 class TopTabbar extends StatefulWidget {
-  final List<TabItem> tabList;
+  /// List of items that will show in Top Tabbar
+  final List<TabItem> children;
+
+  /// The index you want to be selected
   final int initialIndex;
+
+  /// Indicator that Defines the appearance of the selected tab.
   final Decoration? indicator;
+
+  /// Color of the title of each tab.
   final Color? labelColor;
+
+  /// Background Color.
   final Color? backgroundColor;
+
   const TopTabbar({
     Key? key,
-    required this.tabList,
+    required this.children,
     this.initialIndex = 0,
     this.indicator,
     this.labelColor,
     this.backgroundColor,
   }) : super(key: key);
   @override
-  _TopTabbarState createState() => _TopTabbarState();
+  TopTabbarState createState() => TopTabbarState();
 }
 
-class _TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMixin {
+class TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMixin {
   List<String> getLabelList() {
     List<String> labelList = [];
-    for (var element in widget.tabList) {
+    for (var element in widget.children) {
       Text? title = element.title as Text;
       String? titleString = title.data;
       labelList.add(titleString!);
@@ -32,7 +42,7 @@ class _TopTabbarState extends State<TopTabbar> with SingleTickerProviderStateMix
 
   List<Widget> getTabWidgetList() {
     List<Widget> tabWidgetList = [];
-    for (var element in widget.tabList) {
+    for (var element in widget.children) {
       tabWidgetList.add(element.tab!);
     }
     return tabWidgetList;

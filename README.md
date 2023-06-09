@@ -15,30 +15,10 @@ import 'package:floating_tabbar/floating_tabbar.dart';
  * And with [isFloating = false] you'll get normal TabBar PageView
  * Support for all device sizes.
 
-## Add themes
-```dart
-// floating_tabbar is now light and dark theme compatible.
-// Add basic themes to your app, so that floating_tabbar could glow in both light and dark themes.
-MaterialApp(
-  themeMode: ThemeMode.system,
-  theme: ThemeData(
-    primaryColor: Colors.blue,
-    brightness: Brightness.light,
-    canvasColor: Colors.grey[50],
-  ),
-  darkTheme: ThemeData(
-    primaryColor: Colors.blue,
-    brightness: Brightness.dark,
-    canvasColor: const Color.fromARGB(255, 37, 37, 37),
-  ),
-),
-```
 
 ## Usage
 ```dart
-// HOW TO USE THIS WIDGET
-
-  List<TabItem> topTabbarTabItemlist({required Brightness brightness}) {
+  List<TabItem> topTabbarTabItemlist() {
     List<TabItem> topTabbarTabItemlist = [
       TabItem(
         onTap: () {},
@@ -54,14 +34,14 @@ MaterialApp(
     return topTabbarTabItemlist;
   }
 
-  Widget floatingTabBarPageView({required Brightness brightness}) {
+  Widget floatingTabBarPageView() {
     List<TabItem> tabList() {
       List<TabItem> _list = [
         TabItem(
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.dashboard),
           title: const Text("Dashboard"),
-          tab: TopTabbar(tabList: topTabbarTabItemlist(brightness: brightness)),
+          tab: TopTabbar(tabList: topTabbarTabItemlist()),
           showBadge: true,
           badgeCount: 10,
         ),
@@ -103,10 +83,8 @@ MaterialApp(
 
   @override
   Widget build(BuildContext context) {
-    Brightness brightness = MediaQuery.of(context).platformBrightness;
-    return floatingTabBarPageView(brightness: brightness);
+    return floatingTabBarPageView();
   }
-
 ```
 <table>
   <tr>
@@ -118,25 +96,13 @@ MaterialApp(
 
 <table>
   <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056688-8c01ad2c-37e3-4981-96c3-d39fd9d51e63.png"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056692-e708774b-e383-4dee-adf3-1f85109edec2.png"/></td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056694-ab179ba6-9e2b-4a72-9122-a65255f6b876.png"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056696-9051ce2e-346b-46bf-bfca-31f413113cd1.png"/></td>
   </tr>
 </table>
 <table>
   <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056698-252c932c-aa1f-431e-b1f3-82dd5fd29190.png"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056700-22d7fcb8-7888-40b3-9a9e-f50cdf6de552.png"/></td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056703-0c39ec5e-ce1d-4be3-94ac-42d73539af85.png"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056705-30b303d5-aff1-4884-a38e-6bb4a68a24b1.png"/></td>
   </tr>
 </table>
@@ -284,17 +250,10 @@ or navigation for your app, just list of TabItems and you are done.
 ```
 <table>
   <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055856-b87c963d-8560-489e-8b1b-c7f0d82eeeb3.jpeg"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055861-14cc21d0-cf9e-44c3-8c37-52d60a864184.jpeg"/></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055864-49e74b43-7f33-4366-906c-2ff30cfa5eeb.jpeg"/></td>
   </tr>
-</table>
-<table>
-  <tr>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055865-581d71ce-c9cc-4124-b481-8e204f5e0493.jpeg"/></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055866-dc7118bf-9ffd-46b7-a955-64d8f403dcc6.jpeg"/></td>
     <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055868-3f6ed7d9-c1ce-4f57-b553-97655ea19eb3.jpeg"/></td>
-  </tr>
 </table>
 
 and much more.

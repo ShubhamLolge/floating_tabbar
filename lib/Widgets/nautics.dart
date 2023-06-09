@@ -114,18 +114,16 @@ class NauticsState extends State<Nautics> {
 
   @override
   Widget build(BuildContext context) {
-    Brightness brightness = MediaQuery.of(context).platformBrightness;
     Size size = MediaQuery.of(context).size;
     String platform = PlatformCheck().platformCheck(context: context);
 
     if (widget.isConvertible) {
       if (isNauticsExpanded) {
-        return nauticsTiles(brightness: brightness);
+        return nauticsTiles();
       } else {
         return nauticsIcons(
           size: size,
           platform: platform,
-          brightness: brightness,
         );
       }
     } else {
@@ -133,18 +131,17 @@ class NauticsState extends State<Nautics> {
         return nauticsIcons(
           size: size,
           platform: platform,
-          brightness: brightness,
         );
       } else {
-        return nauticsTiles(brightness: brightness);
+        return nauticsTiles();
       }
     }
   }
 
-  Widget nauticsTiles({required Brightness brightness}) {
+  Widget nauticsTiles() {
     Container nauticsTiles = Container(
       width: widget.expandedWidth,
-      color: widget.isFloating == true ? null : widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      color: widget.isFloating == true ? null : widget.nauticsColor ?? Colors.white,
       child: Container(
         decoration: widget.expandedNauticsDecoration,
         child: Column(
@@ -162,7 +159,6 @@ class NauticsState extends State<Nautics> {
                     return tabTile(
                       tabItem: tI,
                       context: context,
-                      brightness: brightness,
                       index: index,
                       itemChildSelected: itemChildSelected!,
                       isLevelOne: true,
@@ -180,7 +176,7 @@ class NauticsState extends State<Nautics> {
       onTap: transformNautics,
       child: widget.isFloating == true
           ? Floater(
-              backgroundColor: widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+              backgroundColor: widget.nauticsColor ?? Colors.white,
               child: nauticsTiles,
             )
           : nauticsTiles,
@@ -190,7 +186,6 @@ class NauticsState extends State<Nautics> {
   Widget tabTile({
     required TabItem tabItem,
     required BuildContext context,
-    required Brightness brightness,
     required int index,
     required ValueNotifier<int> itemChildSelected,
     bool isLevelOne = false,
@@ -211,8 +206,8 @@ class NauticsState extends State<Nautics> {
                 },
                 selected: itemChildSelected.value == index,
                 dense: true,
-                iconColor: (brightness == Brightness.dark ? Colors.black : Colors.white),
-                textColor: (brightness == Brightness.dark ? Colors.black : Colors.white),
+                iconColor: widget.unSelectedColor ?? Colors.black,
+                textColor: widget.unSelectedColor ?? Colors.black,
                 leading: tabItem.selectedLeadingIcon,
                 title: tabItem.title,
                 subtitle: tabItem.subTitle,
@@ -232,8 +227,8 @@ class NauticsState extends State<Nautics> {
                 },
                 iconColor: widget.selectedColor ?? Theme.of(context).primaryColor,
                 textColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                collapsedIconColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : (brightness == Brightness.dark ? Colors.black : Colors.white),
-                collapsedTextColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : (brightness == Brightness.dark ? Colors.black : Colors.white),
+                collapsedIconColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.white,
+                collapsedTextColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.white,
                 title: tabItem.title,
                 maintainState: true,
                 initiallyExpanded: isExpansionTileSelected ? true : false,
@@ -264,7 +259,6 @@ class NauticsState extends State<Nautics> {
                 children: tabExpansionTile(
                   tabItem: tabItem,
                   context: context,
-                  brightness: brightness,
                   itemChildSelected: icSelected,
                 ),
               ),
@@ -275,7 +269,6 @@ class NauticsState extends State<Nautics> {
   List<Widget> tabExpansionTile({
     required TabItem tabItem,
     required BuildContext context,
-    required Brightness brightness,
     required ValueNotifier<int> itemChildSelected,
   }) {
     return List.generate(
@@ -287,7 +280,6 @@ class NauticsState extends State<Nautics> {
           child: tabTile(
             tabItem: childTI,
             context: context,
-            brightness: brightness,
             index: index,
             itemChildSelected: itemChildSelected,
           ),
@@ -296,12 +288,12 @@ class NauticsState extends State<Nautics> {
     );
   }
 
-  Widget nauticsIcons({required Size size, required String platform, required Brightness brightness}) {
+  Widget nauticsIcons({required Size size, required String platform}) {
     AnimatedContainer animatedContainer = AnimatedContainer(
       duration: const Duration(seconds: 1),
       curve: Curves.easeInBack,
       width: widget.collapsedWidth,
-      color: widget.isFloating == true ? null : widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      color: widget.isFloating == true ? null : widget.nauticsColor ?? Colors.white,
       child: Container(
         decoration: widget.collapsedNauticsDecoration,
         child: Column(
@@ -353,7 +345,7 @@ class NauticsState extends State<Nautics> {
       onTap: transformNautics,
       child: widget.isFloating == true
           ? Floater(
-              backgroundColor: widget.nauticsColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+              backgroundColor: widget.nauticsColor ?? Colors.white,
               child: animatedContainer,
             )
           : animatedContainer,

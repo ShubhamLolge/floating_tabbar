@@ -136,7 +136,7 @@ class FloatingTabBarState extends State<FloatingTabBar> {
     });
   }
 
-  Widget floatingActionButtonBar({required Brightness brightness}) {
+  Widget floatingActionButtonBar() {
     Widget floatingBottomBar(value) {
       return SizedBox(
         height: 60 * (MediaQuery.of(context).size.height - value) / (MediaQuery.of(context).size.height - 50),
@@ -145,11 +145,11 @@ class FloatingTabBarState extends State<FloatingTabBar> {
           child: Material(
             borderRadius: BorderRadius.circular(50),
             elevation: 35,
-            color: (brightness == Brightness.dark ? Colors.black : Colors.white),
+            color: widget.backgroundColor,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: CupertinoTabBar(
-                backgroundColor: (brightness == Brightness.dark ? Colors.black : Colors.white),
+                backgroundColor: widget.backgroundColor,
                 border: const Border(
                   bottom: BorderSide.none,
                   left: BorderSide.none,
@@ -176,7 +176,7 @@ class FloatingTabBarState extends State<FloatingTabBar> {
     );
   }
 
-  CupertinoTabBar nonFloatingBottomBar({required Brightness brightness}) {
+  CupertinoTabBar nonFloatingBottomBar() {
     return CupertinoTabBar(
       border: const Border(
         bottom: BorderSide.none,
@@ -190,12 +190,12 @@ class FloatingTabBarState extends State<FloatingTabBar> {
         _onItemTap(index);
       },
       activeColor: widget.activeColor ?? Theme.of(context).primaryColor,
-      inactiveColor: widget.inactiveColor ?? (brightness == Brightness.dark ? Colors.white : Colors.black),
-      backgroundColor: widget.backgroundColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      inactiveColor: widget.inactiveColor ?? Colors.black,
+      backgroundColor: widget.backgroundColor ?? Colors.white,
     );
   }
 
-  Scaffold buildScafoldForFloatingTabBar({required String platform, required Brightness brightness}) {
+  Scaffold buildScafoldForFloatingTabBar({required String platform}) {
     return Scaffold(
       appBar: widget.parentAppbar,
       body: SafeArea(
@@ -212,11 +212,11 @@ class FloatingTabBarState extends State<FloatingTabBar> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: floatingActionButtonBar(brightness: brightness),
+      floatingActionButton: floatingActionButtonBar(),
     );
   }
 
-  Scaffold buildScafoldForBottomBar({required String platform, required Brightness brightness}) {
+  Scaffold buildScafoldForBottomBar({required String platform}) {
     return Scaffold(
       appBar: widget.parentAppbar,
       body: SafeArea(
@@ -233,27 +233,27 @@ class FloatingTabBarState extends State<FloatingTabBar> {
           ],
         ),
       ),
-      bottomNavigationBar: nonFloatingBottomBar(brightness: brightness),
+      bottomNavigationBar: nonFloatingBottomBar(),
     );
   }
 
-  Scaffold buildScaffoldForWeb({required String platform, bool? isFloating = true, required Brightness brightness}) {
+  Scaffold buildScaffoldForWeb({required String platform, bool? isFloating = true}) {
     NavigationRail navigationRail = NavigationRail(
       selectedIndex: _selectedIndex,
       onDestinationSelected: (int index) {
         _onItemTap(index);
         setState(() => _selectedIndex = index);
       },
-      backgroundColor: widget.backgroundColor ?? (brightness == Brightness.dark ? Colors.black : Colors.white),
+      backgroundColor: widget.backgroundColor ?? Colors.white,
       leading: widget.leading,
       extended: isExtended,
       selectedLabelTextStyle: TextStyle(color: widget.activeColor ?? Theme.of(context).primaryColor),
       selectedIconTheme: IconThemeData(color: widget.activeColor ?? Theme.of(context).primaryColor),
       unselectedLabelTextStyle: TextStyle(
-        color: widget.inactiveColor ?? (brightness == Brightness.dark ? Colors.white : Colors.black),
+        color: widget.inactiveColor ?? Colors.black,
       ),
       unselectedIconTheme: IconThemeData(
-        color: widget.inactiveColor ?? (brightness == Brightness.dark ? Colors.white : Colors.black),
+        color: widget.inactiveColor ?? Colors.black,
       ),
       useIndicator: widget.useIndicator ?? false,
       indicatorColor: widget.indicatorColor ?? Theme.of(context).primaryColor.withOpacity(0.2),
@@ -314,11 +314,10 @@ class FloatingTabBarState extends State<FloatingTabBar> {
   Widget build(BuildContext context) {
     PlatformCheck platFormCheck = PlatformCheck();
     var platform = platFormCheck.platformCheck(context: context);
-    Brightness brightness = MediaQuery.of(context).platformBrightness;
     debugPrint("Platform: $platform");
 
     return platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows"
-        ? buildScaffoldForWeb(platform: platform, isFloating: widget.isFloating, brightness: brightness)
-        : (widget.isFloating! ? buildScafoldForFloatingTabBar(platform: platform, brightness: brightness) : buildScafoldForBottomBar(platform: platform, brightness: brightness));
+        ? buildScaffoldForWeb(platform: platform, isFloating: widget.isFloating)
+        : (widget.isFloating! ? buildScafoldForFloatingTabBar(platform: platform) : buildScafoldForBottomBar(platform: platform));
   }
 }

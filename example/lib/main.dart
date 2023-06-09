@@ -22,16 +22,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Floating Tabbar',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
       theme: ThemeData(
         primaryColor: Colors.blue,
-        brightness: Brightness.light,
         canvasColor: Colors.grey[50],
-      ),
-      darkTheme: ThemeData(
-        primaryColor: Colors.blue,
-        brightness: Brightness.dark,
-        canvasColor: const Color.fromARGB(255, 37, 37, 37),
       ),
       home: const Home(),
     );
@@ -46,7 +39,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<TabItem> topTabbarTabItemlist({required Brightness brightness}) {
+  List<TabItem> topTabbarTabItemlist() {
     List<TabItem> topTabbarTabItemlist = [
       TabItem(
         onTap: () {},
@@ -62,14 +55,14 @@ class _HomeState extends State<Home> {
     return topTabbarTabItemlist;
   }
 
-  Widget floatingTabBarPageView({required Brightness brightness}) {
+  Widget floatingTabBarPageView() {
     List<TabItem> tabList() {
       List<TabItem> _list = [
         TabItem(
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.dashboard),
           title: const Text("Dashboard"),
-          tab: TopTabbar(tabList: topTabbarTabItemlist(brightness: brightness)),
+          tab: TopTabbar(children: topTabbarTabItemlist()),
           showBadge: true,
           badgeCount: 10,
         ),
@@ -111,8 +104,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Brightness brightness = MediaQuery.of(context).platformBrightness;
-    return floatingTabBarPageView(brightness: brightness);
+    return floatingTabBarPageView();
   }
 }
 

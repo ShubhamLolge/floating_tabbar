@@ -25,3 +25,8 @@ Nautics sidebar a new widget for navigation, TabItem model improvement, for all 
 ## 0.0.7
 
 Naming convention refactoring.
+
+## 0.0.8
+
+Introducing new widget OpsShell, which will help in designing responsive designs.
+Also removed the theme compatibility as it was necessary to specify theme related colors even while in dev.
