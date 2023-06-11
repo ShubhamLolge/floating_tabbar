@@ -30,3 +30,7 @@ Naming convention refactoring.
 
 Introducing new widget OpsShell, which will help in designing responsive designs.
 Also removed the theme compatibility as it was necessary to specify theme related colors even while in dev.
+
+## 0.0.8+1
+
+Minor Changes
