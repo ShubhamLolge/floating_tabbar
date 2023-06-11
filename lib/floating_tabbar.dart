@@ -314,10 +314,21 @@ class FloatingTabBarState extends State<FloatingTabBar> {
   Widget build(BuildContext context) {
     PlatformCheck platFormCheck = PlatformCheck();
     var platform = platFormCheck.platformCheck(context: context);
-    debugPrint("Platform: $platform");
 
-    return platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows"
+    return platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows" || platform == "MacOS" || platform == "Linux" || platform == "Fuchsia"
         ? buildScaffoldForWeb(platform: platform, isFloating: widget.isFloating)
         : (widget.isFloating! ? buildScafoldForFloatingTabBar(platform: platform) : buildScafoldForBottomBar(platform: platform));
   }
 }
+
+/**
+ *         platform = 'Android';
+        platform = 'iOS';
+        platform = 'MacOS';
+        platform = 'Windows';
+        platform = 'Linux';
+        platform = 'Fuchsia';
+        platform = 'Web Desktop';
+        platform = 'Web Tablet';
+        platform = 'Web Mobile';
+ */

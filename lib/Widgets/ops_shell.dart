@@ -67,20 +67,33 @@ class _OpsShellState extends State<OpsShell> {
       alignment: widget.alignment ?? Alignment.center,
       decoration: widget.decoration,
       child: Container(
-        margin: EdgeInsets.all(platform == "Web Desktop" || platform == "Windows" || platform == "Web Tablet" ? 20 : 0),
+        margin: EdgeInsets.all(
+            platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows" || platform == "MacOS" || platform == "Linux" || platform == "Fuchsia"
+                ? 20
+                : 0),
         child: Material(
           elevation: widget.elevation,
           borderRadius: BorderRadius.circular(widget.radius),
           child: Container(
-            height: (platform == "Web Desktop" || platform == "Windows" || platform == "Web Tablet" ? widget.height : size.height),
-            width: (platform == "Web Desktop" || platform == "Windows" || platform == "Web Tablet" ? (widget.width ?? size.width * 0.35) : size.width),
+            height: (platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows" || platform == "MacOS" || platform == "Linux" || platform == "Fuchsia"
+                ? widget.height
+                : size.height),
+            width: (platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows" || platform == "MacOS" || platform == "Linux" || platform == "Fuchsia"
+                ? (widget.width ?? size.width * 0.35)
+                : size.width),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(platform == "Web Desktop" || platform == "Windows" || platform == "Web Tablet" ? widget.radius : 0),
+              borderRadius: BorderRadius.circular(
+                  platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows" || platform == "MacOS" || platform == "Linux" || platform == "Fuchsia"
+                      ? widget.radius
+                      : 0),
             ),
             child: Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(platform == "Web Desktop" || platform == "Windows" || platform == "Web Tablet" ? widget.radius : 0),
+                borderRadius: BorderRadius.circular(
+                    platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows" || platform == "MacOS" || platform == "Linux" || platform == "Fuchsia"
+                        ? widget.radius
+                        : 0),
                 child: widget.child,
               ),
             ),
