@@ -34,3 +34,7 @@ Also removed the theme compatibility as it was necessary to specify theme relate
 ## 0.0.9
 
 Minor Changes
+
+## 0.0.10
+
+TabItem class, TopTabBar, Badge, minor release.

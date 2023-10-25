@@ -2,8 +2,8 @@ library floating_tabbar;
 
 import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:floating_tabbar/Services/platform_check.dart';
-import 'package:floating_tabbar/Widgets/badge_wraper.dart';
 import 'package:floating_tabbar/Widgets/nautics.dart';
+import 'package:floating_tabbar/Widgets/notification_badge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -84,8 +84,8 @@ class FloatingTabBarState extends State<FloatingTabBar> {
       String? titleString = title.data;
       bottomNavigationBarItemiconList.add(
         BottomNavigationBarItem(
-          icon: BadgeWraper(showBadge: element.showBadge!, badgeCount: element.badgeCount, child: element.selectedLeadingIcon),
-          activeIcon: BadgeWraper(showBadge: element.showBadge!, badgeCount: element.badgeCount, child: element.selectedLeadingIcon),
+          icon: NotificationBadge(count: element.badgeCount!, child: element.selectedLeadingIcon),
+          activeIcon: NotificationBadge(count: element.badgeCount!, child: element.selectedLeadingIcon),
           label: showTabLabels ? titleString : null,
         ),
       );
@@ -97,18 +97,16 @@ class FloatingTabBarState extends State<FloatingTabBar> {
     List<NavigationRailDestination> list = [];
     for (var element in widget.children) {
       list.add(NavigationRailDestination(
-        icon: BadgeWraper(
-          showBadge: element.showBadge!,
-          badgeCount: element.badgeCount,
+        icon: NotificationBadge(
+          count: element.badgeCount!,
           child: SizedBox(
             height: 40,
             width: 40,
             child: element.selectedLeadingIcon,
           ),
         ),
-        selectedIcon: BadgeWraper(
-          showBadge: element.showBadge!,
-          badgeCount: element.badgeCount,
+        selectedIcon: NotificationBadge(
+          count: element.badgeCount!,
           child: SizedBox(
             height: 40,
             width: 40,
@@ -320,15 +318,3 @@ class FloatingTabBarState extends State<FloatingTabBar> {
         : (widget.isFloating! ? buildScafoldForFloatingTabBar(platform: platform) : buildScafoldForBottomBar(platform: platform));
   }
 }
-
-/**
- *         platform = 'Android';
-        platform = 'iOS';
-        platform = 'MacOS';
-        platform = 'Windows';
-        platform = 'Linux';
-        platform = 'Fuchsia';
-        platform = 'Web Desktop';
-        platform = 'Web Tablet';
-        platform = 'Web Mobile';
- */

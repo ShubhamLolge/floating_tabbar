@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@Deprecated("BadgeWraper widget is going to be removed from the package instead use 'NotificationBadge' it is more customizable.")
 class BadgeWraper extends StatelessWidget {
   /// This is the widget on which badge will be displayed
   final Widget? child;

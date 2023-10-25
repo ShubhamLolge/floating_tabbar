@@ -62,8 +62,7 @@ class _HomeState extends State<Home> {
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.dashboard),
           title: const Text("Dashboard"),
-          tab: TopTabbar(children: topTabbarTabItemlist()),
-          showBadge: true,
+          tab: TopTabBar(children: topTabbarTabItemlist()),
           badgeCount: 10,
         ),
         TabItem(

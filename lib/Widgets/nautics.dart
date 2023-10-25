@@ -1,6 +1,7 @@
 import 'package:floating_tabbar/Models/tab_item.dart';
 import 'package:floating_tabbar/Services/platform_check.dart';
 import 'package:floating_tabbar/Widgets/floater.dart';
+import 'package:floating_tabbar/Widgets/notification_badge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,9 @@ class Nautics extends StatefulWidget {
 
   /// The widget that will be on bottom of Nautics SideBar
   final Widget? footer;
+
+  /// Color for Notification badge
+  final Color? badgeColor;
 
   /// Color for Nautics SideBar
   final Color? nauticsColor;
@@ -81,11 +85,12 @@ class Nautics extends StatefulWidget {
     this.nauticsColor,
     this.selectedColor,
     this.unSelectedColor,
+    this.badgeColor,
     this.collapsedNauticsDecoration,
     this.expandedNauticsDecoration,
     this.collapsedWidth = 60,
-    this.childIndentation = 30,
-    this.expandedWidth = 200,
+    this.childIndentation = 5, // 30
+    this.expandedWidth = 250,
     this.isCollapsed = true,
     this.isFloating = true,
     this.isConvertible = true,
@@ -93,8 +98,8 @@ class Nautics extends StatefulWidget {
     this.crossAxisAlignmentExpandedForm = CrossAxisAlignment.center,
     this.mainAxisAlignmentCollapsedForm = MainAxisAlignment.start,
     this.mainAxisAlignmentExpandedForm = MainAxisAlignment.start,
-    this.selectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 15),
-    this.unSelectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 15),
+    this.selectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 14),
+    this.unSelectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 14),
   }) : super(key: key);
 
   @override
@@ -190,7 +195,10 @@ class NauticsState extends State<Nautics> {
     required ValueNotifier<int> itemChildSelected,
     bool isLevelOne = false,
   }) {
+    bool isETSelected = isExpansionTileSelected;
+
     ValueNotifier<int> icSelected = ValueNotifier<int>(-1);
+    debugPrint("tabItem: ${tabItem.badgeCount}");
     return ListTileTheme(
       selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
       child: tabItem.children!.isEmpty
@@ -204,62 +212,103 @@ class NauticsState extends State<Nautics> {
                     widget.onChange(itemChildSelected.value);
                   });
                 },
-                selected: itemChildSelected.value == index,
-                dense: true,
-                iconColor: widget.unSelectedColor ?? Colors.black,
-                textColor: widget.unSelectedColor ?? Colors.black,
                 leading: tabItem.selectedLeadingIcon,
-                title: tabItem.title,
-                subtitle: tabItem.subTitle,
-                trailing: tabItem.trailingIcon,
-              ),
-            )
-          : Container(
-              margin: isLevelOne == true ? null : EdgeInsets.only(left: widget.childIndentation),
-              child: ExpansionTile(
-                onExpansionChanged: (isSelected) {
-                  setState(() {
-                    isExpansionTileSelected = isSelected;
-                    itemChildSelected.value = index;
-                    icSelected.value = index;
-                    widget.onChange(icSelected.value);
-                  });
-                },
-                iconColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                textColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                collapsedIconColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.white,
-                collapsedTextColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.white,
-                title: tabItem.title,
-                maintainState: true,
-                initiallyExpanded: isExpansionTileSelected ? true : false,
-                subtitle: tabItem.subTitle,
-                leading: tabItem.selectedLeadingIcon,
-                trailing: tabItem.trailingIcon != null
+                trailing: tabItem.badgeCount != 0
                     ? SizedBox(
-                        width: 75,
+                        width: 50,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            SizedBox(
-                              width: 50,
+                            Container(
+                              margin: const EdgeInsets.only(right: 5),
+                              width: 22,
                               child: ListView(
                                 reverse: true,
                                 scrollDirection: Axis.horizontal,
                                 children: [tabItem.trailingIcon ?? Container()],
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(child: isExpansionTileSelected ? widget.selectedTrailingIcon! : widget.unSelectedTrailingIcon!),
+                            Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0)),
                           ],
                         ),
                       )
-                    : isExpansionTileSelected
-                        ? widget.selectedTrailingIcon!
-                        : widget.unSelectedTrailingIcon!,
-                children: tabExpansionTile(
-                  tabItem: tabItem,
-                  context: context,
-                  itemChildSelected: icSelected,
+                    : tabItem.trailingIcon,
+                title: tabItem.title,
+                subtitle: tabItem.subTitle,
+                selected: itemChildSelected.value == index,
+                dense: true,
+                iconColor: widget.unSelectedColor ?? Colors.black,
+                textColor: widget.unSelectedColor ?? Colors.black,
+              ),
+            )
+          : Container(
+              margin: isLevelOne == true ? null : EdgeInsets.only(left: widget.childIndentation),
+              child: ListTileTheme(
+                selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                child: ExpansionTile(
+                  onExpansionChanged: (isSelected) {
+                    setState(() {
+                      isETSelected = isSelected;
+                      isExpansionTileSelected = isSelected;
+                      itemChildSelected.value = index;
+                      icSelected.value = index;
+                      widget.onChange(icSelected.value);
+                    });
+                  },
+                  iconColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                  textColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                  collapsedIconColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.black,
+                  collapsedTextColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.black,
+                  title: tabItem.title,
+                  maintainState: true,
+                  initiallyExpanded: isETSelected ? true : false,
+                  subtitle: tabItem.subTitle,
+                  leading: tabItem.selectedLeadingIcon,
+                  trailing: tabItem.trailingIcon != null
+                      ? SizedBox(
+                          width: widget.expandedWidth * 0.2,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              tabItem.trailingIcon ?? Container(),
+                              Expanded(child: isETSelected ? widget.selectedTrailingIcon! : widget.unSelectedTrailingIcon!),
+                              tabItem.badgeCount != 0
+                                  ? Container(
+                                      margin: const EdgeInsets.only(left: 1), child: Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0, notifiAsDot: true)))
+                                  : Container(),
+                            ],
+                          ),
+                        )
+                      : isETSelected
+                          ? (tabItem.badgeCount != 0
+                              ? SizedBox(
+                                  width: 30,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      widget.selectedTrailingIcon ?? Container(),
+                                      Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0, notifiAsDot: true)),
+                                    ],
+                                  ),
+                                )
+                              : widget.selectedTrailingIcon!)
+                          : (tabItem.badgeCount != 0
+                              ? SizedBox(
+                                  width: 30,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      widget.unSelectedTrailingIcon ?? Container(),
+                                      Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0, notifiAsDot: true)),
+                                    ],
+                                  ),
+                                )
+                              : widget.unSelectedTrailingIcon!),
+                  children: tabExpansionTile(
+                    tabItem: tabItem,
+                    context: context,
+                    itemChildSelected: icSelected,
+                  ),
                 ),
               ),
             ),
@@ -322,15 +371,18 @@ class NauticsState extends State<Nautics> {
                       tI.onTap!(),
                       widget.onChange(itemChildSelected!.value),
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: itemChildSelected!.value == index ? (widget.selectedColor ?? Theme.of(context).primaryColor) : Colors.transparent,
+                    child: NotificationBadge(
+                      count: tI.badgeCount ?? 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: itemChildSelected!.value == index ? (widget.selectedColor ?? Theme.of(context).primaryColor) : Colors.transparent,
+                        ),
+                        height: 45,
+                        width: 45,
+                        alignment: Alignment.center,
+                        child: tI.selectedLeadingIcon,
                       ),
-                      height: 45,
-                      width: 45,
-                      alignment: Alignment.center,
-                      child: tI.selectedLeadingIcon,
                     ),
                   );
                 },
