@@ -38,7 +38,3 @@ Minor Changes
 ## 0.0.10
 
 TabItem class, TopTabBar, Badge, minor release.
-
-## 0.0.11
-
-Naming convention refactoring.
