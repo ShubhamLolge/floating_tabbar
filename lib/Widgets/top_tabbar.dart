@@ -357,7 +357,10 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin {
   List<Widget> getLabels() {
     List<Widget> labels = [];
     for (var child in widget.children) {
-      labels.add(Tab(icon: child.selectedLeadingIcon, child: NotificationBadge(count: child.badgeCount ?? 0, child: child.title)));
+      labels.add(Tab(
+          icon: child.selectedLeadingIcon,
+          child: NotificationBadge(
+              count: child.badgeCount ?? 0, child: child.title)));
     }
     return labels;
   }
@@ -373,7 +376,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin {
             initialIndex: widget.initialIndex,
             primaryTabBar: widget.primaryTabBar,
             animationDuration: widget.animationDuration,
-            automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+            automaticIndicatorColorAdjustment:
+                widget.automaticIndicatorColorAdjustment,
             dividerColor: widget.dividerColor,
             dragStartBehavior: widget.dragStartBehavior,
             enableFeedback: widget.enableFeedback,
@@ -404,7 +408,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin {
         tabs.add(
           child.tab ??
               const Center(
-                child: Text("No specified widget for this tab, please provide one in the list<TabItem> children."),
+                child: Text(
+                    "No specified widget for this tab, please provide one in the list<TabItem> children."),
               ),
         );
       }
@@ -439,7 +444,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin {
                   indicator: widget.indicator,
                   controller: _tabController,
                   tabs: getLabels(),
-                  automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                  automaticIndicatorColorAdjustment:
+                      widget.automaticIndicatorColorAdjustment,
                   dividerColor: widget.dividerColor,
                   dragStartBehavior: widget.dragStartBehavior,
                   enableFeedback: widget.enableFeedback,
@@ -466,7 +472,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin {
                   indicator: widget.indicator,
                   controller: _tabController,
                   tabs: getLabels(),
-                  automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                  automaticIndicatorColorAdjustment:
+                      widget.automaticIndicatorColorAdjustment,
                   dividerColor: widget.dividerColor,
                   dragStartBehavior: widget.dragStartBehavior,
                   enableFeedback: widget.enableFeedback,

@@ -167,14 +167,17 @@ class Airoll extends StatefulWidget {
 
 class _AirollState extends State<Airoll> {
   bool _isHovering = false;
-  final GlobalKey<PopupMenuButtonState> _menuKey = GlobalKey<PopupMenuButtonState>();
+  final GlobalKey<PopupMenuButtonState> _menuKey =
+      GlobalKey<PopupMenuButtonState>();
 
   @override
   Widget build(BuildContext context) {
     return widget.actOnHover
         ? MouseRegion(
             onHover: (_) => handleEnter(true),
-            child: widget.isFloating == true ? Floater(child: menuWidget()) : menuWidget(),
+            child: widget.isFloating == true
+                ? Floater(child: menuWidget())
+                : menuWidget(),
           )
         : widget.isFloating == true
             ? Floater(child: menuWidget())
@@ -202,7 +205,8 @@ class _AirollState extends State<Airoll> {
         shape: widget.shape,
         splashRadius: widget.splashRadius,
         surfaceTintColor: widget.surfaceTintColor,
-        tooltip: widget.tooltip ?? getStringFromTextWidget(widget.child.toString()),
+        tooltip:
+            widget.tooltip ?? getStringFromTextWidget(widget.child.toString()),
         key: _menuKey,
         onSelected: (TabItem result) {},
         offset: const Offset(0, kToolbarHeight),
@@ -221,7 +225,9 @@ class _AirollState extends State<Airoll> {
                           actOnHover: widget.actOnHover,
                           isFloating: false,
                         ),
-                        if (item.children!.isNotEmpty) item.trailingIcon ?? const Icon(Icons.arrow_right, size: 18),
+                        if (item.children!.isNotEmpty)
+                          item.trailingIcon ??
+                              const Icon(Icons.arrow_right, size: 18),
                       ],
                     )
                   : item.title,

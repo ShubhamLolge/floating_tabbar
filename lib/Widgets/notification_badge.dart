@@ -63,10 +63,16 @@ class _NotificationBadgeState extends State<NotificationBadge> {
     EdgeInsetsGeometry padding = widget.notifyAsDot == true
         ? const EdgeInsets.only(top: 1)
         : EdgeInsets.only(
-            top: widget.alignment == Alignment.topLeft || widget.alignment == Alignment.topRight ? 5 : 0, // 5
+            top: widget.alignment == Alignment.topLeft ||
+                    widget.alignment == Alignment.topRight
+                ? 5
+                : 0, // 5
             left: 5,
             right: 5,
-            bottom: widget.alignment == Alignment.bottomLeft || widget.alignment == Alignment.bottomRight ? 5 : 0,
+            bottom: widget.alignment == Alignment.bottomLeft ||
+                    widget.alignment == Alignment.bottomRight
+                ? 5
+                : 0,
           );
     return padding;
   }
@@ -75,10 +81,22 @@ class _NotificationBadgeState extends State<NotificationBadge> {
     EdgeInsetsGeometry margin = widget.notifyAsDot == true
         ? const EdgeInsets.only(top: 1)
         : EdgeInsets.only(
-            top: widget.alignment == Alignment.topLeft || widget.alignment == Alignment.topRight ? 5 : 0, // 5
-            bottom: widget.alignment == Alignment.bottomLeft || widget.alignment == Alignment.bottomRight ? 5 : 0,
-            left: widget.alignment == Alignment.topLeft || widget.alignment == Alignment.bottomLeft ? (displayCount.length > 2 ? 20 : 1) : 0,
-            right: widget.alignment == Alignment.topRight || widget.alignment == Alignment.bottomRight ? (displayCount.length > 2 ? 20 : 1) : 0,
+            top: widget.alignment == Alignment.topLeft ||
+                    widget.alignment == Alignment.topRight
+                ? 5
+                : 0, // 5
+            bottom: widget.alignment == Alignment.bottomLeft ||
+                    widget.alignment == Alignment.bottomRight
+                ? 5
+                : 0,
+            left: widget.alignment == Alignment.topLeft ||
+                    widget.alignment == Alignment.bottomLeft
+                ? (displayCount.length > 2 ? 20 : 1)
+                : 0,
+            right: widget.alignment == Alignment.topRight ||
+                    widget.alignment == Alignment.bottomRight
+                ? (displayCount.length > 2 ? 20 : 1)
+                : 0,
           );
     return margin;
   }
@@ -143,10 +161,13 @@ class _NotificationBadgeState extends State<NotificationBadge> {
                     bottom: _bottom,
                     child: Container(
                       margin: const EdgeInsets.all(1),
-                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 3),
                       height: 8,
                       width: 8,
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: widget.badgeColor ?? Colors.red),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: widget.badgeColor ?? Colors.red),
                     ),
                   )
                 : Positioned(
@@ -157,7 +178,11 @@ class _NotificationBadgeState extends State<NotificationBadge> {
                     child: BadgeContainer(
                       badgeColor: widget.badgeColor ?? Colors.red,
                       count: widget.count,
-                      countStyle: widget.countStyle ?? const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                      countStyle: widget.countStyle ??
+                          const TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold),
                     ),
                   ),
         ],
@@ -177,7 +202,8 @@ class BadgeContainer extends StatefulWidget {
     this.badgeColor = Colors.red,
     this.count = 0,
     this.notifiAsDot = false,
-    this.countStyle = const TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
+    this.countStyle = const TextStyle(
+        color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
   }) : super(key: key);
 
   @override
@@ -212,7 +238,8 @@ class _BadgeContainerState extends State<BadgeContainer> {
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
             height: 6,
             width: 6,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: widget.badgeColor),
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: widget.badgeColor),
           )
         : Container(
             margin: const EdgeInsets.all(1),
@@ -221,7 +248,8 @@ class _BadgeContainerState extends State<BadgeContainer> {
               color: widget.badgeColor,
               borderRadius: BorderRadius.circular(100),
             ),
-            constraints: BoxConstraints(minWidth: displayCount!.length < 999 ? 15 : 20, maxHeight: 20),
+            constraints: BoxConstraints(
+                minWidth: displayCount!.length < 999 ? 15 : 20, maxHeight: 20),
             child: Center(
               child: Text(
                 displayCount ?? "",

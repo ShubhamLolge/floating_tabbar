@@ -44,12 +44,14 @@ class _HomeState extends State<Home> {
       TabItem(
         onTap: () {},
         title: const Text("Nautics SideBar"),
-        tab: const Center(child: Text("Nautics SideBar", style: TextStyle(fontSize: 30))),
+        tab: const Center(
+            child: Text("Nautics SideBar", style: TextStyle(fontSize: 30))),
       ),
       TabItem(
         onTap: () {},
         title: const Text("Public Events"),
-        tab: const Center(child: Text("Public Events", style: TextStyle(fontSize: 30))),
+        tab: const Center(
+            child: Text("Public Events", style: TextStyle(fontSize: 30))),
       ),
     ];
     return topTabbarTabItemlist;
@@ -69,27 +71,32 @@ class _HomeState extends State<Home> {
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.library_books),
           title: const Text("Report"),
-          tab: const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
+          tab: const Center(
+              child: Text("Report", style: TextStyle(fontSize: 30))),
         ),
         TabItem(
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.settings),
           title: const Text("Settings"),
-          tab: const Center(child: Text("Settings", style: TextStyle(fontSize: 30))),
+          tab: const Center(
+              child: Text("Settings", style: TextStyle(fontSize: 30))),
         ),
         TabItem(
           title: const Text("Work"),
           onTap: () {},
           selectedLeadingIcon: const Icon(Icons.maps_home_work_sharp),
-          tab: const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
+          tab:
+              const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
         ),
         TabItem(
           title: const Text("ShowCase"),
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ShowCase()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const ShowCase()));
           },
           selectedLeadingIcon: const Icon(Icons.flight_rounded),
-          tab: const Center(child: Text("ShowCase", style: TextStyle(fontSize: 30))),
+          tab: const Center(
+              child: Text("ShowCase", style: TextStyle(fontSize: 30))),
         ),
       ];
       return _list;
@@ -137,14 +144,16 @@ class _ShowCaseState extends State<ShowCase> {
         children: [
           TabItem(
             title: const Text("Appear offline"),
-            selectedLeadingIcon: const Icon(CupertinoIcons.multiply_circle, color: Colors.grey),
+            selectedLeadingIcon:
+                const Icon(CupertinoIcons.multiply_circle, color: Colors.grey),
             onTap: () => setState(() {
               text = "Appear offline";
             }),
           ),
           TabItem(
             title: const Text("Available"),
-            selectedLeadingIcon: const Icon(Icons.done_rounded, color: Color.fromARGB(255, 0, 254, 8)),
+            selectedLeadingIcon: const Icon(Icons.done_rounded,
+                color: Color.fromARGB(255, 0, 254, 8)),
             onTap: () => setState(() {
               text = "Available";
             }),
@@ -158,21 +167,24 @@ class _ShowCaseState extends State<ShowCase> {
           ),
           TabItem(
             title: const Text("Do not disturb"),
-            selectedLeadingIcon: const Icon(Icons.remove_circle, color: Colors.red),
+            selectedLeadingIcon:
+                const Icon(Icons.remove_circle, color: Colors.red),
             onTap: () => setState(() {
               text = "Do not disturb";
             }),
           ),
           TabItem(
             title: const Text("Be right back"),
-            selectedLeadingIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
+            selectedLeadingIcon:
+                const Icon(Icons.watch_later_rounded, color: Colors.amber),
             onTap: () => setState(() {
               text = "Be right back";
             }),
           ),
           TabItem(
             title: const Text("Away"),
-            selectedLeadingIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
+            selectedLeadingIcon:
+                const Icon(Icons.watch_later_rounded, color: Colors.amber),
             onTap: () => setState(() {
               text = "Away";
             }),
