@@ -46,3 +46,7 @@ Minor Release.
 ## 0.0.12
 
 Airoll Minor update.
+
+## 0.0.13
+
+Code Refactor.

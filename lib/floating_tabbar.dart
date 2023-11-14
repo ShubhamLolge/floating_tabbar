@@ -68,20 +68,24 @@ class FloatingTabBar extends StatefulWidget {
 }
 
 class FloatingTabBarState extends State<FloatingTabBar> {
-  PageController floatingTabBarPageViewController = PageController(initialPage: 0);
+  PageController floatingTabBarPageViewController =
+      PageController(initialPage: 0);
   final ValueNotifier<double> expandProgress = ValueNotifier(76);
   bool isExtended = false;
   int _selectedIndex = 0;
 
-  List<BottomNavigationBarItem> getBottomNavigationBarItemIconWithBadge({required bool showTabLabels}) {
+  List<BottomNavigationBarItem> getBottomNavigationBarItemIconWithBadge(
+      {required bool showTabLabels}) {
     List<BottomNavigationBarItem> bottomNavigationBarItemiconList = [];
     for (var element in widget.children) {
       Text? title = element.title as Text;
       String? titleString = title.data;
       bottomNavigationBarItemiconList.add(
         BottomNavigationBarItem(
-          icon: NotificationBadge(count: element.badgeCount!, child: element.selectedLeadingIcon),
-          activeIcon: NotificationBadge(count: element.badgeCount!, child: element.selectedLeadingIcon),
+          icon: NotificationBadge(
+              count: element.badgeCount!, child: element.selectedLeadingIcon),
+          activeIcon: NotificationBadge(
+              count: element.badgeCount!, child: element.selectedLeadingIcon),
           label: showTabLabels ? titleString : null,
         ),
       );
@@ -126,14 +130,17 @@ class FloatingTabBarState extends State<FloatingTabBar> {
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
-      floatingTabBarPageViewController.animateToPage(index, duration: const Duration(milliseconds: 400), curve: Curves.ease);
+      floatingTabBarPageViewController.animateToPage(index,
+          duration: const Duration(milliseconds: 400), curve: Curves.ease);
     });
   }
 
   Widget floatingActionButtonBar() {
     Widget floatingBottomBar(value) {
       return SizedBox(
-        height: 60 * (MediaQuery.of(context).size.height - value) / (MediaQuery.of(context).size.height - 50),
+        height: 60 *
+            (MediaQuery.of(context).size.height - value) /
+            (MediaQuery.of(context).size.height - 50),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 50),
           child: Material(
@@ -152,7 +159,8 @@ class FloatingTabBarState extends State<FloatingTabBar> {
                 ),
                 currentIndex: _selectedIndex,
                 iconSize: 35,
-                items: getBottomNavigationBarItemIconWithBadge(showTabLabels: widget.showTabLabelsForFloating!),
+                items: getBottomNavigationBarItemIconWithBadge(
+                    showTabLabels: widget.showTabLabelsForFloating!),
                 onTap: (index) => _onItemTap(index),
                 activeColor: Theme.of(context).primaryColor,
               ),
@@ -179,7 +187,8 @@ class FloatingTabBarState extends State<FloatingTabBar> {
         top: BorderSide.none,
       ),
       currentIndex: _selectedIndex,
-      items: getBottomNavigationBarItemIconWithBadge(showTabLabels: widget.showTabLabelsForNonFloating!),
+      items: getBottomNavigationBarItemIconWithBadge(
+          showTabLabels: widget.showTabLabelsForNonFloating!),
       onTap: (index) {
         _onItemTap(index);
       },
@@ -231,7 +240,8 @@ class FloatingTabBarState extends State<FloatingTabBar> {
     );
   }
 
-  Scaffold buildScaffoldForWeb({required String platform, bool? isFloating = true}) {
+  Scaffold buildScaffoldForWeb(
+      {required String platform, bool? isFloating = true}) {
     NavigationRail navigationRail = NavigationRail(
       selectedIndex: _selectedIndex,
       onDestinationSelected: (int index) {
@@ -241,8 +251,10 @@ class FloatingTabBarState extends State<FloatingTabBar> {
       backgroundColor: widget.backgroundColor ?? Colors.white,
       leading: widget.leading,
       extended: isExtended,
-      selectedLabelTextStyle: TextStyle(color: widget.activeColor ?? Theme.of(context).primaryColor),
-      selectedIconTheme: IconThemeData(color: widget.activeColor ?? Theme.of(context).primaryColor),
+      selectedLabelTextStyle: TextStyle(
+          color: widget.activeColor ?? Theme.of(context).primaryColor),
+      selectedIconTheme: IconThemeData(
+          color: widget.activeColor ?? Theme.of(context).primaryColor),
       unselectedLabelTextStyle: TextStyle(
         color: widget.inactiveColor ?? Colors.black,
       ),
@@ -250,8 +262,10 @@ class FloatingTabBarState extends State<FloatingTabBar> {
         color: widget.inactiveColor ?? Colors.black,
       ),
       useIndicator: widget.useIndicator ?? false,
-      indicatorColor: widget.indicatorColor ?? Theme.of(context).primaryColor.withOpacity(0.2),
-      minExtendedWidth: widget.minExtendedWidth ?? MediaQuery.of(context).size.width * 0.14,
+      indicatorColor: widget.indicatorColor ??
+          Theme.of(context).primaryColor.withOpacity(0.2),
+      minExtendedWidth:
+          widget.minExtendedWidth ?? MediaQuery.of(context).size.width * 0.14,
       labelType: NavigationRailLabelType.none,
       destinations: getNavigationRailDestinationListWithBadge(),
     );
@@ -285,11 +299,15 @@ class FloatingTabBarState extends State<FloatingTabBar> {
                         child: Material(
                           elevation: 10,
                           borderRadius: BorderRadius.circular(10),
-                          child: ClipRRect(borderRadius: BorderRadius.circular(10), child: navigationRail),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: navigationRail),
                         ),
                       ),
                     )
-                  : GestureDetector(onTap: () => setState(() => isExtended = !isExtended), child: navigationRail),
+                  : GestureDetector(
+                      onTap: () => setState(() => isExtended = !isExtended),
+                      child: navigationRail),
           Expanded(
             child: PageView(
               physics: const NeverScrollableScrollPhysics(),
@@ -309,8 +327,15 @@ class FloatingTabBarState extends State<FloatingTabBar> {
     PlatformCheck platFormCheck = PlatformCheck();
     var platform = platFormCheck.platformCheck(context: context);
 
-    return platform == "Web Desktop" || platform == "Web Tablet" || platform == "Windows" || platform == "MacOS" || platform == "Linux" || platform == "Fuchsia"
+    return platform == "Web Desktop" ||
+            platform == "Web Tablet" ||
+            platform == "Windows" ||
+            platform == "MacOS" ||
+            platform == "Linux" ||
+            platform == "Fuchsia"
         ? buildScaffoldForWeb(platform: platform, isFloating: widget.isFloating)
-        : (widget.isFloating! ? buildScafoldForFloatingTabBar(platform: platform) : buildScafoldForBottomBar(platform: platform));
+        : (widget.isFloating!
+            ? buildScafoldForFloatingTabBar(platform: platform)
+            : buildScafoldForBottomBar(platform: platform));
   }
 }

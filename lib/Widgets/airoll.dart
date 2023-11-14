@@ -171,7 +171,8 @@ class Airoll extends StatefulWidget {
 
 class _AirollState extends State<Airoll> {
   bool _isHovering = false;
-  final GlobalKey<PopupMenuButtonState> _menuKey = GlobalKey<PopupMenuButtonState>();
+  final GlobalKey<PopupMenuButtonState> _menuKey =
+      GlobalKey<PopupMenuButtonState>();
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +203,8 @@ class _AirollState extends State<Airoll> {
       shape: widget.shape,
       splashRadius: widget.splashRadius,
       surfaceTintColor: widget.surfaceTintColor,
-      tooltip: widget.tooltip ?? getStringFromTextWidget(widget.child.toString()),
+      tooltip:
+          widget.tooltip ?? getStringFromTextWidget(widget.child.toString()),
       key: _menuKey,
       onSelected: (TabItem tabItem) {
         tabItem.onTap!();
@@ -239,7 +241,8 @@ class _AirollState extends State<Airoll> {
                 tooltip: widget.tooltip,
                 child: item.title,
               ),
-              if (item.children!.isNotEmpty) item.trailingIcon ?? const Icon(Icons.arrow_right, size: 18),
+              if (item.children!.isNotEmpty)
+                item.trailingIcon ?? const Icon(Icons.arrow_right, size: 18),
             ],
           );
           return PopupMenuItem<TabItem>(
