@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:flutter/material.dart';
+import 'package:floating_tabbar/lib.dart';
 
 /// When wrapped with [Vitrify] widget it converts the look of the widget to glass card look.
 ///

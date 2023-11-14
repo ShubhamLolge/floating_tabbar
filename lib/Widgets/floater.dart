@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:floating_tabbar/lib.dart';
 
 class Floater extends StatelessWidget {
   final Color? backgroundColor;

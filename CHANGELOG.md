@@ -42,3 +42,7 @@ TabItem class, TopTabBar, Badge, minor release.
 ## 0.0.11
 
 Minor Release.
+
+## 0.0.12
+
+Airoll Minor update.

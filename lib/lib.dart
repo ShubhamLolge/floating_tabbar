@@ -1,0 +1,11 @@
+export 'package:flutter/gestures.dart';
+export 'package:flutter/material.dart';
+export 'package:flutter/foundation.dart';
+export 'package:floating_tabbar/Models/tab_item.dart';
+export 'package:floating_tabbar/Widgets/floater.dart';
+export 'package:floating_tabbar/Widgets/nautics.dart';
+export 'package:floating_tabbar/Services/platform_check.dart';
+export 'package:floating_tabbar/Services/utils.dart';
+export 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
+export 'package:floating_tabbar/Widgets/notification_badge.dart';
+export 'dart:io';

@@ -1,18 +1,17 @@
-import 'package:floating_tabbar/Models/tab_item.dart';
-import 'package:floating_tabbar/Services/utils.dart';
-import 'package:floating_tabbar/Widgets/floater.dart';
-import 'package:flutter/material.dart';
+import 'package:floating_tabbar/lib.dart';
 
 /// [Airoll] is a customised [PopupMenuButton] that accepts its children in the list on [TabItem].
 class Airoll extends StatefulWidget {
-  /// [title] represents the widget on the [PopupMenuButton] may it be [Text] or [Icon]
+  /// [child] represents the widget on the [PopupMenuButton] may it be [Text] or [Icon]
   /// onclick of which [PopupMenuButton]'s children will be shown.
   final Widget child;
 
-  /// Deafult value true, different value used for internal working of the widget.
+  /// Deafult value **true**, different value used for internal working of the widget.
   ///
   /// This is needed for nesting items if any,
-  /// do not change the value to false as it may change the appearance of the [PopupMenuButton].
+  /// do not change the value to **false** as it may change the appearance of the [PopupMenuButton].
+  ///
+  /// For nested [Airoll] value will be **false** even this should not be changed for desired behavior.
   final bool isParent;
 
   /// Default value false, when false [PopupMenuButton] acts on click
@@ -115,6 +114,11 @@ class Airoll extends StatefulWidget {
   /// If provided, the shape used for the menu.
   ///
   /// If this property is null, then [PopupMenuThemeData.shape] is used. If [PopupMenuThemeData.shape] is also null, then the default shape for [MaterialType.card] is used. This default shape is a rectangle with rounded edges of BorderRadius.circular(2.0).
+  ///
+  /// Example
+  /// ```dart
+  /// const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+  /// ```
   final ShapeBorder? shape;
 
   /// The splash radius.
@@ -137,7 +141,7 @@ class Airoll extends StatefulWidget {
   const Airoll({
     Key? key,
     required this.child,
-    this.children = const [],
+    required this.children,
     this.isParent = true,
     this.actOnHover = false,
     this.isFloating = true,
@@ -167,76 +171,92 @@ class Airoll extends StatefulWidget {
 
 class _AirollState extends State<Airoll> {
   bool _isHovering = false;
-  final GlobalKey<PopupMenuButtonState> _menuKey =
-      GlobalKey<PopupMenuButtonState>();
+  final GlobalKey<PopupMenuButtonState> _menuKey = GlobalKey<PopupMenuButtonState>();
 
   @override
   Widget build(BuildContext context) {
     return widget.actOnHover
         ? MouseRegion(
             onHover: (_) => handleEnter(true),
-            child: widget.isFloating == true
-                ? Floater(child: menuWidget())
-                : menuWidget(),
+            child: menuWidget(),
           )
-        : widget.isFloating == true
-            ? Floater(child: menuWidget())
-            : menuWidget();
+        : menuWidget();
   }
 
   Widget menuWidget() {
-    return Container(
-      margin: widget.isParent == true ? const EdgeInsets.all(8.0) : null,
-      child: PopupMenuButton<TabItem>(
-        clipBehavior: widget.clipBehavior,
-        color: widget.color,
-        constraints: widget.constraints,
-        elevation: widget.elevation,
-        enableFeedback: widget.enableFeedback,
-        enabled: widget.enabled,
-        icon: widget.icon,
-        iconSize: widget.iconSize,
-        initialValue: widget.initialValue,
-        onCanceled: widget.onCanceled,
-        onOpened: widget.onOpened,
-        padding: widget.padding,
-        position: widget.position,
-        shadowColor: widget.shadowColor,
-        shape: widget.shape,
-        splashRadius: widget.splashRadius,
-        surfaceTintColor: widget.surfaceTintColor,
-        tooltip:
-            widget.tooltip ?? getStringFromTextWidget(widget.child.toString()),
-        key: _menuKey,
-        onSelected: (TabItem result) {},
-        offset: const Offset(0, kToolbarHeight),
-        itemBuilder: (BuildContext context) => widget.children!.map(
-          (item) {
-            return PopupMenuItem<TabItem>(
-              value: item,
-              child: item.children!.isNotEmpty
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Airoll(
-                          child: item.title,
-                          children: item.children,
-                          isParent: false,
-                          actOnHover: widget.actOnHover,
-                          isFloating: false,
-                        ),
-                        if (item.children!.isNotEmpty)
-                          item.trailingIcon ??
-                              const Icon(Icons.arrow_right, size: 18),
-                      ],
-                    )
-                  : item.title,
-            );
-          },
-        ).toList(),
-        child: widget.child,
-      ),
+    Widget popupMenuButton = PopupMenuButton<TabItem>(
+      clipBehavior: widget.clipBehavior,
+      color: widget.color,
+      constraints: widget.constraints,
+      elevation: widget.elevation,
+      enableFeedback: widget.enableFeedback,
+      enabled: widget.enabled,
+      icon: widget.icon,
+      iconSize: widget.iconSize,
+      initialValue: widget.initialValue,
+      onCanceled: widget.onCanceled,
+      onOpened: widget.onOpened,
+      padding: widget.padding,
+      position: widget.position,
+      shadowColor: widget.shadowColor,
+      shape: widget.shape,
+      splashRadius: widget.splashRadius,
+      surfaceTintColor: widget.surfaceTintColor,
+      tooltip: widget.tooltip ?? getStringFromTextWidget(widget.child.toString()),
+      key: _menuKey,
+      onSelected: (TabItem tabItem) {
+        tabItem.onTap!();
+      },
+      offset: const Offset(0, kToolbarHeight),
+      child: Container(padding: const EdgeInsets.all(8), child: widget.child),
+      itemBuilder: (BuildContext context) => widget.children!.map(
+        (item) {
+          Widget buttonChild = Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Airoll(
+                isFloating: false,
+                isParent: false,
+                children: item.children,
+                actOnHover: widget.actOnHover,
+                clipBehavior: widget.clipBehavior,
+                color: widget.color,
+                constraints: widget.constraints,
+                elevation: widget.elevation,
+                enableFeedback: widget.enableFeedback,
+                enabled: widget.enabled,
+                icon: widget.icon,
+                iconSize: widget.iconSize,
+                initialValue: widget.initialValue,
+                onCanceled: widget.onCanceled,
+                onOpened: widget.onOpened,
+                padding: widget.padding,
+                position: widget.position,
+                shadowColor: widget.shadowColor,
+                shape: widget.shape,
+                splashRadius: widget.splashRadius,
+                surfaceTintColor: widget.surfaceTintColor,
+                tooltip: widget.tooltip,
+                child: item.title,
+              ),
+              if (item.children!.isNotEmpty) item.trailingIcon ?? const Icon(Icons.arrow_right, size: 18),
+            ],
+          );
+          return PopupMenuItem<TabItem>(
+            onTap: () => item.onTap!(),
+            value: item,
+            child: item.children!.isNotEmpty ? buttonChild : item.title,
+          );
+        },
+      ).toList(),
     );
+    return widget.isFloating == true
+        ? Floater(
+            padding: const EdgeInsets.all(0),
+            margin: const EdgeInsets.all(0),
+            child: popupMenuButton,
+          )
+        : popupMenuButton;
   }
 
   void handleEnter(bool hovering) {

@@ -1,20 +1,13 @@
-import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
-import 'package:flutter/foundation.dart';
+import 'package:floating_tabbar/lib.dart';
 
 class PlatformCheck {
   String platformCheck({required BuildContext context}) {
     String platform = '';
 
     /* Used "adaptive_breakpoints: for defining Web for desktop tablet and mobile */
-    bool isDisplayDesktop(BuildContext context) =>
-        getWindowType(context) >= AdaptiveWindowType.medium;
-    bool isDisplaySmallDesktop(BuildContext context) =>
-        getWindowType(context) <= AdaptiveWindowType.medium &&
-        getWindowType(context) >= AdaptiveWindowType.small;
-    bool isDisplayMobile(BuildContext context) =>
-        getWindowType(context) <= AdaptiveWindowType.xsmall;
+    bool isDisplayDesktop(BuildContext context) => getWindowType(context) >= AdaptiveWindowType.medium;
+    bool isDisplaySmallDesktop(BuildContext context) => getWindowType(context) <= AdaptiveWindowType.medium && getWindowType(context) >= AdaptiveWindowType.small;
+    bool isDisplayMobile(BuildContext context) => getWindowType(context) <= AdaptiveWindowType.xsmall;
 
     final isDesktop = isDisplayDesktop(context);
     final isTablet = isDisplaySmallDesktop(context);

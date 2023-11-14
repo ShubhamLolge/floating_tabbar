@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:floating_tabbar/lib.dart';
 
 class TabItem {
   /// Title for the tabItem
