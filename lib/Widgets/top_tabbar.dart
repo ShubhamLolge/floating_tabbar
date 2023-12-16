@@ -467,7 +467,7 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
         child: child.badgeCount == 0 ? lebs : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
       );
 
-      labels.add(child.useTIOnTap == true ? tab : tab);
+      labels.add(child.useTIOnTap == true ? GestureDetector(onTap: child.onTap, child: tab) : tab);
     }
     return labels;
   }

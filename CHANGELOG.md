@@ -54,3 +54,7 @@ Code Refactor.
 ## 0.0.14
 
 Minor Release : Fix for "can't change children count of TopTabbar dynamically #7"
+
+## 0.0.15
+
+Minor Release : Fix for "no onTap for TopTabbar children #8"
