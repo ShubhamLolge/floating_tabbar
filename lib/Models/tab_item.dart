@@ -9,7 +9,7 @@ class TabItem {
 
   /// With true value the function provided for [onTap] will be called when clicked on the tab,
   /// if false then the default tab change function will be called.
-  final bool callTIOnTap;
+  final bool useTIOnTap;
 
   /// SubTitle for the tabItem
   final Widget? subTitle;
@@ -32,6 +32,7 @@ class TabItem {
   /// Sub children which will be seen when expanded
   final List<TabItem>? children;
 
+  /// Associated Color.
   final Color? color;
 
   const TabItem({
@@ -44,7 +45,7 @@ class TabItem {
     this.tab,
     this.badgeCount = 0,
     this.color,
-    this.callTIOnTap = false,
+    this.useTIOnTap = false,
     this.children = const [],
   });
 }

@@ -50,3 +50,7 @@ Airoll Minor update.
 ## 0.0.13
 
 Code Refactor.
+
+## 0.0.14
+
+Minor Release : Fix for "can't change children count of TopTabbar dynamically #7"
