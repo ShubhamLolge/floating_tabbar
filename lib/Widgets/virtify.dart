@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:floating_tabbar/lib.dart';
 
+/// ## Vitrify
 /// When wrapped with [Vitrify] widget it converts the look of the widget to glass card look.
 ///
 /// If the look is not as you expected then turn the color of your widget i.e. [child] to [Colors.transparent]

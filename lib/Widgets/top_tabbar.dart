@@ -45,11 +45,13 @@ class TopTabBar extends StatefulWidget {
     this.automaticIndicatorColorAdjustment = true,
     this.dragStartBehavior = DragStartBehavior.start,
     this.tabBarViewDragStartBehavior = DragStartBehavior.start,
+    this.tabAlignment,
   });
 
   /// [Key] for [TabBar].
   final Key? tabBarKey;
 
+  // Fix: can't change children count of TopTabbar dynamically #7
   /// [TabController] to customize [Tab]s.
   ///
   ///
@@ -156,7 +158,7 @@ class TopTabBar extends StatefulWidget {
   /// Indicator that Defines the appearance of the selected tab.
   final Decoration? indicator;
 
-  /// specifies if the topTabBar is primary or not, if false secondary is used.
+  /// specifies if the topTabBar is primary or not, if false topTabBar is secondary.
   final bool primaryTabBar;
 
   /// Default [TabBar] parameter
@@ -295,7 +297,7 @@ class TopTabBar extends StatefulWidget {
   /// The callback is applied to the index of the tab where the tap occurred.
   ///
   /// This callback has no effect on the default handling of taps. It's for applications that want to do a little extra work when a tab is tapped, even if the tap doesn't change the TabController's index. TabBar [onTap] callbacks should not make changes to the TabController since that would interfere with the default tap handler.
-  final Function(int)? onTap;
+  final void Function(int)? onTap;
 
   /// Default [TabBar] parameter
   ///
@@ -442,6 +444,9 @@ class TopTabBar extends StatefulWidget {
   /// The initialIndex must be valid given [length] and must not be null. If [length] is zero, then initialIndex must be 0 (the default).
   final Duration? animationDuration;
 
+  ///
+  final TabAlignment? tabAlignment;
+
   @override
   State<TopTabBar> createState() => _TopTabBarState();
 }
@@ -463,11 +468,11 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
         ),
       );
       Widget tab = Tab(
-        icon: child.selectedLeadingIcon,
+        icon: child.selectedLeading,
         child: child.badgeCount == 0 ? lebs : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
       );
 
-      labels.add(child.useTIOnTap == true ? GestureDetector(onTap: child.onTap, child: tab) : tab);
+      labels.add(child.tIOnTap == true ? Container(color: Colors.amber, child: InkWell(onTap: child.onTap, child: tab)) : tab);
     }
     return labels;
   }
@@ -495,7 +500,7 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
             isScrollable: widget.isScrollable,
             labelPadding: widget.labelPadding,
             mouseCursor: widget.mouseCursor,
-            onTap: widget.onTap,
+            onTap: (value) => widget.onTap!(value),
             overlayColor: widget.overlayColor,
             padding: widget.padding,
             physics: widget.physics,
@@ -509,13 +514,14 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
             labelStyle: widget.labelStyle,
             unselectedLabelColor: widget.unselectedLabelColor,
             unselectedLabelStyle: widget.unselectedLabelStyle,
+            tabAlignment: widget.tabAlignment,
           ),
         );
       } else {
         tabs.add(
           child.tab ??
               const Center(
-                child: Text("No specified widget for this tab, please provide one in the list<TabItem> children."),
+                child: Text("No specified widget for this tab in the TabItem, please provide one in the list<TabItem> children."),
               ),
         );
       }
@@ -548,6 +554,7 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
         children: [
           widget.primaryTabBar == true
               ? TabBar(
+                  tabAlignment: widget.tabAlignment,
                   indicator: widget.indicator,
                   controller: widget.tabController ?? _tabController,
                   tabs: getLabels(),
@@ -575,6 +582,7 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
                   unselectedLabelStyle: widget.unselectedLabelStyle,
                 )
               : TabBar.secondary(
+                  tabAlignment: widget.tabAlignment,
                   indicator: widget.indicator,
                   controller: widget.tabController ?? _tabController,
                   tabs: getLabels(),

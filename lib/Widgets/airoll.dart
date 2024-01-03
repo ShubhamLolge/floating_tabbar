@@ -1,4 +1,5 @@
 import 'package:floating_tabbar/lib.dart';
+import 'package:flutter/cupertino.dart';
 
 /// [Airoll] is a customised [PopupMenuButton] that accepts its children in the list on [TabItem].
 class Airoll extends StatefulWidget {
@@ -97,7 +98,7 @@ class Airoll extends StatefulWidget {
   final void Function()? onOpened;
 
   /// Matches IconButton's 8 dps padding by default. In some cases, notably where this button appears as the trailing element of a list item, it's useful to be able to set the padding to zero.
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   /// Whether the popup menu is positioned over or under the popup menu button.
   ///
@@ -138,15 +139,21 @@ class Airoll extends StatefulWidget {
   /// This text is displayed when the user long-presses on the button and is used for accessibility.
   final String? tooltip;
 
+  /// When true will use [TabItem]'s [selectedLeading] and [unSelectedLeading] to show the leading widget in the [Airoll] item.
+  final bool showLeading;
+
+  /// When true will use [TabItem]'s [trailing] to show the trailing widget in the [Airoll] item.
+  final bool showTrailing;
+
   const Airoll({
     Key? key,
     required this.child,
     required this.children,
     this.isParent = true,
-    this.actOnHover = false,
+    this.actOnHover = true,
     this.isFloating = true,
     this.clipBehavior = Clip.none,
-    this.padding = const EdgeInsets.all(8.0),
+    this.padding,
     this.color,
     this.constraints,
     this.elevation,
@@ -163,29 +170,31 @@ class Airoll extends StatefulWidget {
     this.splashRadius,
     this.surfaceTintColor,
     this.tooltip,
+    this.showLeading = false,
+    this.showTrailing = false,
   }) : super(key: key);
 
   @override
-  State<Airoll> createState() => _AirollState();
+  State<Airoll> createState() => AirollState();
 }
 
-class _AirollState extends State<Airoll> {
+class AirollState extends State<Airoll> {
   bool _isHovering = false;
-  final GlobalKey<PopupMenuButtonState> _menuKey =
-      GlobalKey<PopupMenuButtonState>();
+  final GlobalKey<PopupMenuButtonState> _menuKey = GlobalKey<PopupMenuButtonState>();
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return widget.actOnHover
         ? MouseRegion(
             onHover: (_) => handleEnter(true),
-            child: menuWidget(),
+            child: _menuWidget(size: size),
           )
-        : menuWidget();
+        : _menuWidget(size: size);
   }
 
-  Widget menuWidget() {
-    Widget popupMenuButton = PopupMenuButton<TabItem>(
+  Widget _menuWidget({required Size size}) {
+    Widget popupMenuButton = PopupMenuButton(
       clipBehavior: widget.clipBehavior,
       color: widget.color,
       constraints: widget.constraints,
@@ -197,62 +206,123 @@ class _AirollState extends State<Airoll> {
       initialValue: widget.initialValue,
       onCanceled: widget.onCanceled,
       onOpened: widget.onOpened,
-      padding: widget.padding,
+      padding: widget.padding ?? const EdgeInsets.all(0),
       position: widget.position,
       shadowColor: widget.shadowColor,
       shape: widget.shape,
       splashRadius: widget.splashRadius,
       surfaceTintColor: widget.surfaceTintColor,
-      tooltip:
-          widget.tooltip ?? getStringFromTextWidget(widget.child.toString()),
+      tooltip: widget.tooltip ?? (widget.child.runtimeType == Text ? getStringFromTextWidget(widget.child.toString()) : ""),
       key: _menuKey,
       onSelected: (TabItem tabItem) {
         tabItem.onTap!();
       },
       offset: const Offset(0, kToolbarHeight),
-      child: Container(padding: const EdgeInsets.all(8), child: widget.child),
+      child: Container(
+        decoration: BoxDecoration(
+          color: widget.color,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.all(widget.isParent == true ? 5 : 0),
+        child: widget.child,
+      ),
       itemBuilder: (BuildContext context) => widget.children!.map(
         (item) {
           Widget buttonChild = Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Airoll(
-                isFloating: false,
-                isParent: false,
-                children: item.children,
-                actOnHover: widget.actOnHover,
-                clipBehavior: widget.clipBehavior,
-                color: widget.color,
-                constraints: widget.constraints,
-                elevation: widget.elevation,
-                enableFeedback: widget.enableFeedback,
-                enabled: widget.enabled,
-                icon: widget.icon,
-                iconSize: widget.iconSize,
-                initialValue: widget.initialValue,
-                onCanceled: widget.onCanceled,
-                onOpened: widget.onOpened,
-                padding: widget.padding,
-                position: widget.position,
-                shadowColor: widget.shadowColor,
-                shape: widget.shape,
-                splashRadius: widget.splashRadius,
-                surfaceTintColor: widget.surfaceTintColor,
-                tooltip: widget.tooltip,
-                child: item.title,
+              Row(
+                children: [
+                  if (widget.showLeading == true) (item.selectedLeading ?? item.unSelectedLeading) ?? const Icon(Icons.abc, color: Colors.red),
+                  const SizedBox(width: 10),
+                  Airoll(
+                    isFloating: false,
+                    isParent: false,
+                    children: item.children,
+                    actOnHover: widget.actOnHover,
+                    clipBehavior: widget.clipBehavior,
+                    color: widget.color,
+                    constraints: widget.constraints,
+                    elevation: widget.elevation,
+                    enableFeedback: widget.enableFeedback,
+                    enabled: widget.enabled,
+                    icon: widget.icon,
+                    iconSize: widget.iconSize,
+                    initialValue: widget.initialValue,
+                    onCanceled: widget.onCanceled,
+                    onOpened: widget.onOpened,
+                    padding: widget.padding,
+                    position: widget.position,
+                    shadowColor: widget.shadowColor,
+                    shape: widget.shape,
+                    splashRadius: widget.splashRadius,
+                    surfaceTintColor: widget.surfaceTintColor,
+                    tooltip: widget.tooltip,
+                    showLeading: widget.showLeading,
+                    showTrailing: widget.showTrailing,
+                    child: item.title,
+                  ),
+                ],
               ),
-              if (item.children!.isNotEmpty)
-                item.trailingIcon ?? const Icon(Icons.arrow_right, size: 18),
+              if (widget.showTrailing == true)
+                item.children!.isNotEmpty
+                    ? SizedBox(
+                        width: item.badgeCount == 0 ? 50 : 75,
+                        height: 25,
+                        child: Row(
+                          children: [
+                            const Expanded(child: Icon(CupertinoIcons.arrow_up_arrow_down, size: 12)),
+                            item.badgeCount != 0 ? Expanded(child: BadgeContainer(count: item.badgeCount ?? 0)) : Container(),
+                            Expanded(child: item.trailing ?? Container()),
+                          ],
+                        ),
+                      )
+                    : item.trailing ?? Container()
+              else
+                const SizedBox(
+                  width: 30,
+                  height: 25,
+                  child: Row(children: [Expanded(child: Icon(CupertinoIcons.arrow_up_arrow_down, size: 12))]),
+                ),
             ],
           );
-          return PopupMenuItem<TabItem>(
+          return PopupMenuItem(
             onTap: () => item.onTap!(),
             value: item,
-            child: item.children!.isNotEmpty ? buttonChild : item.title,
+            enabled: item.enabled ?? true,
+            padding: const EdgeInsets.all(5),
+            child: item.children!.isNotEmpty
+                ? buttonChild
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          widget.showLeading == true ? (item.selectedLeading ?? item.unSelectedLeading) ?? const Icon(Icons.abc, color: Colors.transparent) : Container(),
+                          const SizedBox(width: 10),
+                          Tooltip(message: item.title.runtimeType == Text ? getStringFromTextWidget(item.title.toString()) : "", child: item.title),
+                        ],
+                      ),
+                      if (widget.showTrailing == true)
+                        SizedBox(
+                          width: item.badgeCount != 0 ? 50 : 30,
+                          height: 25,
+                          child: item.badgeCount != 0
+                              ? Row(
+                                  children: [
+                                    item.badgeCount != 0 ? Expanded(child: BadgeContainer(count: item.badgeCount ?? 0)) : Container(),
+                                    item.trailing ?? const Icon(Icons.abc, color: Colors.transparent),
+                                  ],
+                                )
+                              : (item.trailing ?? const Icon(Icons.abc, color: Colors.transparent)),
+                        ),
+                    ],
+                  ),
           );
         },
       ).toList(),
     );
+
     return widget.isFloating == true
         ? Floater(
             padding: const EdgeInsets.all(0),
@@ -262,6 +332,7 @@ class _AirollState extends State<Airoll> {
         : popupMenuButton;
   }
 
+  /// To handle act when mouse enter the [Airoll] region
   void handleEnter(bool hovering) {
     setState(() {
       _isHovering = hovering;
@@ -272,6 +343,7 @@ class _AirollState extends State<Airoll> {
     }
   }
 
+  /// To handle act when mouse exit the [Airoll] region
   void handleExit(bool hovering) {
     setState(() {
       _isHovering = hovering;
@@ -280,4 +352,9 @@ class _AirollState extends State<Airoll> {
       Navigator.pop(context);
     }
   }
+}
+
+enum AirollStates {
+  open,
+  closed,
 }

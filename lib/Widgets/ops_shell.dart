@@ -1,9 +1,11 @@
 import 'package:floating_tabbar/lib.dart';
 
-/// OpsShell which will help in designing responsive screens.
+/// ## OpsShell
+/// Widget that helps design responsive screens.
 ///
-/// For Small screens [child] of [OpsShell] will look normal like nothing has wrapped it
-/// but this widget will help you show respondive nature of your app while being creative on large screens.
+/// For Small screens [child] of [OpsShell] will look normal, like nothing has wrapped it,
+/// but this widget will show responsive similar look as small screen
+/// of your app while being creative on large screens.
 class OpsShell extends StatefulWidget {
   /// Child that will show as main content of the screen
   final Widget child;
@@ -24,7 +26,8 @@ class OpsShell extends StatefulWidget {
   /// Note: this value will only reflect in large screen
   final double elevation;
 
-  /// Add decoration to the background,
+  /// Add decoration to the background of screen area except [child],
+  ///
   /// Note: this value will only reflect in large screen
   ///
   /// like specify color, add image, shadows,...
@@ -37,7 +40,7 @@ class OpsShell extends StatefulWidget {
   ///   color: Colors.green,
   /// ),
   /// ```
-  final Decoration? decoration;
+  final Decoration? backgroundDecoration;
 
   /// Alignment of child
   /// Note: this value will only reflect in large screen
@@ -51,7 +54,7 @@ class OpsShell extends StatefulWidget {
     this.radius = 30,
     this.elevation = 20,
     this.alignment,
-    this.decoration,
+    this.backgroundDecoration,
   }) : super(key: key);
   @override
   State<OpsShell> createState() => _OpsShellState();
@@ -64,57 +67,25 @@ class _OpsShellState extends State<OpsShell> {
     Size size = MediaQuery.of(context).size;
     return Container(
       alignment: widget.alignment ?? Alignment.center,
-      decoration: widget.decoration,
+      decoration: widget.backgroundDecoration,
       child: Container(
-        margin: EdgeInsets.all(platform == "Web Desktop" ||
-                platform == "Web Tablet" ||
-                platform == "Windows" ||
-                platform == "MacOS" ||
-                platform == "Linux" ||
-                platform == "Fuchsia"
-            ? 20
-            : 0),
+        margin: EdgeInsets.all(platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? 20 : 0),
         child: Material(
           elevation: widget.elevation,
           borderRadius: BorderRadius.circular(widget.radius),
           child: Container(
-            height: (platform == "Web Desktop" ||
-                    platform == "Web Tablet" ||
-                    platform == "Windows" ||
-                    platform == "MacOS" ||
-                    platform == "Linux" ||
-                    platform == "Fuchsia"
-                ? widget.height
-                : size.height),
-            width: (platform == "Web Desktop" ||
-                    platform == "Web Tablet" ||
-                    platform == "Windows" ||
-                    platform == "MacOS" ||
-                    platform == "Linux" ||
-                    platform == "Fuchsia"
-                ? (widget.width ?? size.width * 0.35)
-                : size.width),
+            height: (platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? widget.height : size.height),
+            width:
+                (platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? (widget.width ?? size.width * 0.35) : size.width),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(platform == "Web Desktop" ||
-                      platform == "Web Tablet" ||
-                      platform == "Windows" ||
-                      platform == "MacOS" ||
-                      platform == "Linux" ||
-                      platform == "Fuchsia"
-                  ? widget.radius
-                  : 0),
+              borderRadius:
+                  BorderRadius.circular(platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? widget.radius : 0),
             ),
             child: Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(platform == "Web Desktop" ||
-                        platform == "Web Tablet" ||
-                        platform == "Windows" ||
-                        platform == "MacOS" ||
-                        platform == "Linux" ||
-                        platform == "Fuchsia"
-                    ? widget.radius
-                    : 0),
+                borderRadius:
+                    BorderRadius.circular(platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? widget.radius : 0),
                 child: widget.child,
               ),
             ),
