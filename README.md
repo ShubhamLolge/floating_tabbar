@@ -1,10 +1,17 @@
 # Floating TabBar
 
-The floating_tabbar package for Flutter allows you to use the responsive design for all platforms made from the Material Design System.
+The floating_tabbar package for Flutter allows you to use the responsive design for all platforms made from the Material Design System, floating_tabbar solves and eases the problem of complex navigation user interfaces by providing a responsive solution.
 
-## Getting started
+### Getting started
+Getting started 
+In the pubspec.yaml of your flutter project, add the following dependency:
 
-Import the package and use it in your Flutter App.
+```yaml
+dependencies:
+  floating_tabbar: <latest_version>
+```
+
+Import the package in your library and use floating_tabbar it in your Flutter App.
 ```dart
 import 'package:floating_tabbar/floating_tabbar.dart';
 ```
@@ -16,244 +23,80 @@ import 'package:floating_tabbar/floating_tabbar.dart';
  * Support for all device sizes.
 
 
-## Usage
-```dart
-  List<TabItem> topTabbarTabItemlist() {
-    List<TabItem> topTabbarTabItemlist = [
-      TabItem(
-        onTap: () {},
-        title: const Text("Nautics SideBar"),
-        tab: const Center(child: Text("Nautics SideBar", style: TextStyle(fontSize: 30))),
-      ),
-      TabItem(
-        onTap: () {},
-        title: const Text("Public Events"),
-        tab: const Center(child: Text("Public Events", style: TextStyle(fontSize: 30))),
-      ),
-    ];
-    return topTabbarTabItemlist;
-  }
+## Members
 
-  Widget floatingTabBarPageView() {
-    List<TabItem> tabList() {
-      List<TabItem> _list = [
-        TabItem(
-          onTap: () {},
-          selectedLeadingIcon: const Icon(Icons.dashboard),
-          title: const Text("Dashboard"),
-          tab: TopTabbar(tabList: topTabbarTabItemlist()),
-          showBadge: true,
-          badgeCount: 10,
-        ),
-        TabItem(
-          onTap: () {},
-          selectedLeadingIcon: const Icon(Icons.library_books),
-          title: const Text("Report"),
-          tab: const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
-        ),
-        TabItem(
-          onTap: () {},
-          selectedLeadingIcon: const Icon(Icons.settings),
-          title: const Text("Settings"),
-          tab: const Center(child: Text("Settings", style: TextStyle(fontSize: 30))),
-        ),
-        TabItem(
-          title: const Text("Work"),
-          onTap: () {},
-          selectedLeadingIcon: const Icon(Icons.maps_home_work_sharp),
-          tab: const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
-        ),
-        TabItem(
-          title: const Text("ShowCase"),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ShowCase()));
-          },
-          selectedLeadingIcon: const Icon(Icons.flight_rounded),
-          tab: const Center(child: Text("ShowCase", style: TextStyle(fontSize: 30))),
-        ),
-      ];
-      return _list;
-    }
+### FloatingTabBar
+***
 
-    return FloatingTabBar(
-      children: tabList(),
-      useNautics: true,
-    );
-  }
+floating_tabbar solves and eases the problem of complex navigation user interfaces by providing a responsive solution.
 
-  @override
-  Widget build(BuildContext context) {
-    return floatingTabBarPageView();
-  }
-```
-<table>
-  <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212839-57872c36-eeb9-40aa-ac3f-3b41b718c7a4.png"/></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212823-3f10015d-727a-4e6a-9adc-feeb4b3e76e3.png"/></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/184212829-be03551d-ea02-410b-80b7-1d681a161975.png"/></td>
-  </tr>
-</table>
+<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/bf6b885f-cd5d-4b63-bd74-33540bf2e1b9" width="80%"></video>
 
-<table>
-  <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056692-e708774b-e383-4dee-adf3-1f85109edec2.png"/></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056696-9051ce2e-346b-46bf-bfca-31f413113cd1.png"/></td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056700-22d7fcb8-7888-40b3-9a9e-f50cdf6de552.png"/></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194056705-30b303d5-aff1-4884-a38e-6bb4a68a24b1.png"/></td>
-  </tr>
-</table>
 
-## Nautics
+### TopTabBar
+***
+
+TopTabBar allows you to create the TabBar with built in space for nesting contingency, just provide the data to children parameter as list of TabItem and you're done.
+
+<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/7432fe49-8a2b-4ed1-8217-621465a4efff" width="80%"></video>
+
+
+### Floater
+***
+
+Floater, a widget when wrapped with other gives a floating visual effect to your widget.
+
+<img width="478" alt="FloaterTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/350e2306-c853-4d33-9db6-aec8d8244772">
+
+
+### Nautics
+***
 
 Nautics is the SideBar navigation widget that allows you to create sidebar with items of your choice which you provide
 using help of TabItem model class, use Nautics as drawer in its collapsed and expanded form, make settings UI using it,
 or navigation for your app, just list of TabItems and you are done.
 
-```dart
+<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/3ea6b9d6-4da8-435f-b7f3-bf617d1de341" width="80%"></video>
 
-  int selectedIndex = 0;
-  String text = "Text";
-  List<TabItem> nauticsItems() {
-    List<TabItem> nauticsItems = [
-      TabItem(
-        selectedLeadingIcon: const Icon(Icons.account_circle_rounded, size: 25),
-        trailingIcon: const Icon(Icons.arrow_forward_ios_rounded, size: 15),
-        title: const Text("Jason Bourne"),
-        subTitle: const Text("Associate"),
-        onTap: () => setState(() {
-          text = "Jason Bourne";
-        }),
-      ),
-      TabItem(
-        selectedLeadingIcon: const Icon(Icons.toggle_on_outlined),
-        onTap: () => setState(() {
-          text = "Status";
-        }),
-        title: const Text("Status"),
-        children: [
-          TabItem(
-            title: const Text("Appear offline"),
-            selectedLeadingIcon: const Icon(CupertinoIcons.multiply_circle, color: Colors.grey),
-            onTap: () => setState(() {
-              text = "Appear offline";
-            }),
-          ),
-          TabItem(
-            title: const Text("Available"),
-            selectedLeadingIcon: const Icon(Icons.done_rounded, color: Color.fromARGB(255, 0, 254, 8)),
-            onTap: () => setState(() {
-              text = "Available";
-            }),
-          ),
-          TabItem(
-            title: const Text("Busy"),
-            selectedLeadingIcon: const Icon(Icons.circle, color: Colors.red),
-            onTap: () => setState(() {
-              text = "Busy";
-            }),
-          ),
-          TabItem(
-            title: const Text("Do not disturb"),
-            selectedLeadingIcon: const Icon(Icons.remove_circle, color: Colors.red),
-            onTap: () => setState(() {
-              text = "Do not disturb";
-            }),
-          ),
-          TabItem(
-            title: const Text("Be right back"),
-            selectedLeadingIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
-            onTap: () => setState(() {
-              text = "Be right back";
-            }),
-          ),
-          TabItem(
-            title: const Text("Away"),
-            selectedLeadingIcon: const Icon(Icons.watch_later_rounded, color: Colors.amber),
-            onTap: () => setState(() {
-              text = "Away";
-            }),
-          ),
-          TabItem(
-            title: const Text("Reset status"),
-            selectedLeadingIcon: const Icon(CupertinoIcons.arrow_2_circlepath),
-            onTap: () => setState(() {
-              text = "Reset status";
-            }),
-          ),
-        ],
-      ),
-      TabItem(
-        selectedLeadingIcon: const Icon(CupertinoIcons.pencil_outline),
-        onTap: () => setState(() {
-          text = "Set status message";
-        }),
-        title: const Text("Set status message"),
-      ),
-      TabItem(
-        selectedLeadingIcon: const Icon(Icons.notifications),
-        title: const Text("Notifications"),
-        subTitle: const Text("On"),
-        onTap: () => setState(() {
-          text = "Notifications";
-        }),
-      ),
-      TabItem(
-        selectedLeadingIcon: const Icon(Icons.settings),
-        title: const Text("Setting"),
-        onTap: () => setState(() {
-          text = "Setting";
-        }),
-      ),
-      TabItem(
-        selectedLeadingIcon: const Icon(Icons.lightbulb_outline_rounded),
-        title: const Text("What's new"),
-        onTap: () => setState(() {
-          text = "What's new";
-        }),
-      ),
-      TabItem(
-        selectedLeadingIcon: const Icon(Icons.add_rounded),
-        title: const Text("Add account"),
-        onTap: () => setState(() {
-          text = "Add account";
-        }),
-      ),
-    ];
-    return nauticsItems;
-  }
+### OpsShell
+***
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Nautics Side Bar Example"),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Row(
-        children: [
-          Nautics(
-            onChange: (index) => setState(() => selectedIndex = index),
-            initialIndex: selectedIndex,
-            children: nauticsItems(),
-          ),
-          Expanded(child: Center(child: Text("$text on index $selectedIndex"))),
-        ],
-      ),
-    );
-  }
+OpsShell, a widget that helps design responsive screens, for Small screens, child of OpsShell will look normal, like nothing has wrapped it, but this widget will show responsive similar look as small screen of your app while being creative on large screens.
 
-```
-<table>
-  <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055861-14cc21d0-cf9e-44c3-8c37-52d60a864184.jpeg"/></td>
-  </tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055865-581d71ce-c9cc-4124-b481-8e204f5e0493.jpeg"/></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/75387392/194055868-3f6ed7d9-c1ce-4f57-b553-97655ea19eb3.jpeg"/></td>
-</table>
+<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/c860cc24-e0f4-4017-8661-dd79a6e8f0a4" width="80%"></video>
+
+### Airoll
+***
+
+Airoll is a customised PopupMenuButton that accepts its children as the list on TabItem.
+
+<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/286ba999-e033-4007-9ec6-a1b5c7287fd0" width="80%"></video>
+
+
+### NotificationBadge
+***
+
+NotificationBadge is the custom badge which wraps around your widget to create numeric as well as DOT notifier.
+
+<img width="629" alt="NotificationBadgeTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/f06f5b83-4bce-4875-a28f-32bc481d64ef">
+
+
+### Vitrify
+***
+
+Vitrify, a widget when wrapped around other, it converts the look of the widget to glass card look.
+
+<img width="731" alt="VitrifyTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/155dd4f6-ed0e-4d05-b819-abaad0984a47">
+
+
+### Niftile
+***
+
+Niftile is a multipurpose tile that accepst the data in the form of TabItem to create a tile.
+
+<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/3f1dfc0d-6fc8-47a6-91ab-657358ab56ae" width="80%"></video>
+
 
 and much more.
+
+Also check [landing_page](https://pub.dev/packages/landing_page), a package built on top of **floating_tabbar** for creating landing screens and welcome interface for your flutter project.
