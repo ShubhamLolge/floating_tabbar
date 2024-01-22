@@ -24,7 +24,7 @@ class Airoll extends StatefulWidget {
   /// and wrap the [Airoll] widget with [Floater] and customise as per your wish.
   final bool isFloating;
 
-  /// List of [TabItem] that will be children of [PopupMenuButton]
+  /// List of [TabItem] that will be children of [PopupMenuButton] current [Airoll].
   final List<TabItem>? children;
 
   /// The content will be clipped (or not) according to this option.
@@ -180,14 +180,24 @@ class Airoll extends StatefulWidget {
 
 class AirollState extends State<Airoll> {
   bool _isHovering = false;
-  final GlobalKey<PopupMenuButtonState> _menuKey = GlobalKey<PopupMenuButtonState>();
+  final GlobalKey<PopupMenuButtonState> _menuKey =
+      GlobalKey<PopupMenuButtonState>();
+
+  /// Shows Airoll menu.
+  void showAiroll() {
+    PopupMenuButtonState<dynamic>? state = _menuKey.currentState;
+    state!.showButtonMenu();
+  }
+
+  /// dismiss the current Airoll menu.
+  void closeAiroll() => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return widget.actOnHover
         ? MouseRegion(
-            onHover: (_) => handleEnter(true),
+            onHover: (_) => _handleEnter(true),
             child: _menuWidget(size: size),
           )
         : _menuWidget(size: size);
@@ -212,7 +222,10 @@ class AirollState extends State<Airoll> {
       shape: widget.shape,
       splashRadius: widget.splashRadius,
       surfaceTintColor: widget.surfaceTintColor,
-      tooltip: widget.tooltip ?? (widget.child.runtimeType == Text ? getStringFromTextWidget(widget.child.toString()) : ""),
+      tooltip: widget.tooltip ??
+          (widget.child.runtimeType == Text
+              ? getStringFromTextWidget(widget.child.toString())
+              : ""),
       key: _menuKey,
       onSelected: (TabItem tabItem) {
         tabItem.onTap!();
@@ -233,7 +246,9 @@ class AirollState extends State<Airoll> {
             children: [
               Row(
                 children: [
-                  if (widget.showLeading == true) (item.selectedLeading ?? item.unSelectedLeading) ?? const Icon(Icons.abc, color: Colors.red),
+                  if (widget.showLeading == true)
+                    (item.selectedLeading ?? item.unSelectedLeading) ??
+                        const Icon(Icons.abc, color: Colors.red),
                   const SizedBox(width: 10),
                   Airoll(
                     isFloating: false,
@@ -271,8 +286,14 @@ class AirollState extends State<Airoll> {
                         height: 25,
                         child: Row(
                           children: [
-                            const Expanded(child: Icon(CupertinoIcons.arrow_up_arrow_down, size: 12)),
-                            item.badgeCount != 0 ? Expanded(child: BadgeContainer(count: item.badgeCount ?? 0)) : Container(),
+                            const Expanded(
+                                child: Icon(CupertinoIcons.arrow_up_arrow_down,
+                                    size: 12)),
+                            item.badgeCount != 0
+                                ? Expanded(
+                                    child: BadgeContainer(
+                                        count: item.badgeCount ?? 0))
+                                : Container(),
                             Expanded(child: item.trailing ?? Container()),
                           ],
                         ),
@@ -282,7 +303,11 @@ class AirollState extends State<Airoll> {
                 const SizedBox(
                   width: 30,
                   height: 25,
-                  child: Row(children: [Expanded(child: Icon(CupertinoIcons.arrow_up_arrow_down, size: 12))]),
+                  child: Row(children: [
+                    Expanded(
+                        child:
+                            Icon(CupertinoIcons.arrow_up_arrow_down, size: 12))
+                  ]),
                 ),
             ],
           );
@@ -298,9 +323,19 @@ class AirollState extends State<Airoll> {
                     children: [
                       Row(
                         children: [
-                          widget.showLeading == true ? (item.selectedLeading ?? item.unSelectedLeading) ?? const Icon(Icons.abc, color: Colors.transparent) : Container(),
+                          widget.showLeading == true
+                              ? (item.selectedLeading ??
+                                      item.unSelectedLeading) ??
+                                  const Icon(Icons.abc,
+                                      color: Colors.transparent)
+                              : Container(),
                           const SizedBox(width: 10),
-                          Tooltip(message: item.title.runtimeType == Text ? getStringFromTextWidget(item.title.toString()) : "", child: item.title),
+                          Tooltip(
+                              message: item.title.runtimeType == Text
+                                  ? getStringFromTextWidget(
+                                      item.title.toString())
+                                  : "",
+                              child: item.title),
                         ],
                       ),
                       if (widget.showTrailing == true)
@@ -310,11 +345,19 @@ class AirollState extends State<Airoll> {
                           child: item.badgeCount != 0
                               ? Row(
                                   children: [
-                                    item.badgeCount != 0 ? Expanded(child: BadgeContainer(count: item.badgeCount ?? 0)) : Container(),
-                                    item.trailing ?? const Icon(Icons.abc, color: Colors.transparent),
+                                    item.badgeCount != 0
+                                        ? Expanded(
+                                            child: BadgeContainer(
+                                                count: item.badgeCount ?? 0))
+                                        : Container(),
+                                    item.trailing ??
+                                        const Icon(Icons.abc,
+                                            color: Colors.transparent),
                                   ],
                                 )
-                              : (item.trailing ?? const Icon(Icons.abc, color: Colors.transparent)),
+                              : (item.trailing ??
+                                  const Icon(Icons.abc,
+                                      color: Colors.transparent)),
                         ),
                     ],
                   ),
@@ -325,6 +368,7 @@ class AirollState extends State<Airoll> {
 
     return widget.isFloating == true
         ? Floater(
+            elevation: widget.elevation,
             padding: const EdgeInsets.all(0),
             margin: const EdgeInsets.all(0),
             child: popupMenuButton,
@@ -333,7 +377,7 @@ class AirollState extends State<Airoll> {
   }
 
   /// To handle act when mouse enter the [Airoll] region
-  void handleEnter(bool hovering) {
+  void _handleEnter(bool hovering) {
     setState(() {
       _isHovering = hovering;
     });
@@ -352,9 +396,4 @@ class AirollState extends State<Airoll> {
       Navigator.pop(context);
     }
   }
-}
-
-enum AirollStates {
-  open,
-  closed,
 }

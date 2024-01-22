@@ -30,15 +30,14 @@ import 'package:floating_tabbar/floating_tabbar.dart';
 
 floating_tabbar solves and eases the problem of complex navigation user interfaces by providing a responsive solution.
 
-<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/bf6b885f-cd5d-4b63-bd74-33540bf2e1b9" width="80%"></video>
-
+<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/709ab524-37ee-4a44-8f1f-ab0e9ef4956f" width="50%">
 
 ### TopTabBar
 ***
 
 TopTabBar allows you to create the TabBar with built in space for nesting contingency, just provide the data to children parameter as list of TabItem and you're done.
 
-<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/7432fe49-8a2b-4ed1-8217-621465a4efff" width="80%"></video>
+<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/92637e27-9ba0-408a-bd2a-46b50d61e5b8" width="50%">
 
 
 ### Floater
@@ -46,7 +45,7 @@ TopTabBar allows you to create the TabBar with built in space for nesting contin
 
 Floater, a widget when wrapped with other gives a floating visual effect to your widget.
 
-<img width="478" alt="FloaterTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/350e2306-c853-4d33-9db6-aec8d8244772">
+<img width="50%" alt="FloaterTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/350e2306-c853-4d33-9db6-aec8d8244772">
 
 
 ### Nautics
@@ -56,21 +55,21 @@ Nautics is the SideBar navigation widget that allows you to create sidebar with 
 using help of TabItem model class, use Nautics as drawer in its collapsed and expanded form, make settings UI using it,
 or navigation for your app, just list of TabItems and you are done.
 
-<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/3ea6b9d6-4da8-435f-b7f3-bf617d1de341" width="80%"></video>
+<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/aca0940e-968a-4ec9-8961-0a44571a14f5" width="50%">
 
 ### OpsShell
 ***
 
 OpsShell, a widget that helps design responsive screens, for Small screens, child of OpsShell will look normal, like nothing has wrapped it, but this widget will show responsive similar look as small screen of your app while being creative on large screens.
 
-<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/c860cc24-e0f4-4017-8661-dd79a6e8f0a4" width="80%"></video>
+<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/225b98ed-9c8c-4c28-964e-1abf28531086" width="50%">
 
 ### Airoll
 ***
 
 Airoll is a customised PopupMenuButton that accepts its children as the list on TabItem.
 
-<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/286ba999-e033-4007-9ec6-a1b5c7287fd0" width="80%"></video>
+<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/eecf82b6-c760-42a8-9a9b-8439e64638d9" width="50%">
 
 
 ### NotificationBadge
@@ -78,7 +77,7 @@ Airoll is a customised PopupMenuButton that accepts its children as the list on 
 
 NotificationBadge is the custom badge which wraps around your widget to create numeric as well as DOT notifier.
 
-<img width="629" alt="NotificationBadgeTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/f06f5b83-4bce-4875-a28f-32bc481d64ef">
+<img width="50%" alt="NotificationBadgeTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/f06f5b83-4bce-4875-a28f-32bc481d64ef">
 
 
 ### Vitrify
@@ -86,7 +85,7 @@ NotificationBadge is the custom badge which wraps around your widget to create n
 
 Vitrify, a widget when wrapped around other, it converts the look of the widget to glass card look.
 
-<img width="731" alt="VitrifyTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/155dd4f6-ed0e-4d05-b819-abaad0984a47">
+<img width="50%" alt="VitrifyTest" src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/155dd4f6-ed0e-4d05-b819-abaad0984a47">
 
 
 ### Niftile
@@ -94,9 +93,11 @@ Vitrify, a widget when wrapped around other, it converts the look of the widget 
 
 Niftile is a multipurpose tile that accepst the data in the form of TabItem to create a tile.
 
-<video src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/3f1dfc0d-6fc8-47a6-91ab-657358ab56ae" width="80%"></video>
+<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/429454b4-320a-4884-b2ad-5134bbe47540" width="50%">
 
 
 and much more.
 
 Also check [landing_page](https://pub.dev/packages/landing_page), a package built on top of **floating_tabbar** for creating landing screens and welcome interface for your flutter project.
+
+

@@ -24,57 +24,75 @@ class SmokeTest extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const FloatingTabbarST()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const FloatingTabbarST()));
               },
-              child: const Text("FloatingTabBar", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("FloatingTabBar",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TopTabBarST()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const TopTabBarST()));
               },
-              child: const Text("TopTabBar", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("TopTabBar",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NauticsST()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const NauticsST()));
               },
-              child: const Text("Nautics", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("Nautics",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const FloaterST()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const FloaterST()));
               },
-              child: const Text("Floater", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("Floater",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OpsShellST()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const OpsShellST()));
               },
-              child: const Text("OpsShell", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("OpsShell",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AirollST()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const AirollST()));
               },
-              child: const Text("Airoll", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("Airoll",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NotificationBadgeST()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const NotificationBadgeST()));
               },
-              child: const Text("Notification Badge", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("Notification Badge",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const VitrifyST()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const VitrifyST()));
               },
-              child: const Text("Vitrify", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("Vitrify",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NiftileST()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const NiftileST()));
               },
-              child: const Text("Niftile", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              child: const Text("Niftile",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             const SizedBox(height: 10),
           ],

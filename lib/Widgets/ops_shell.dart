@@ -3,7 +3,7 @@ import 'package:floating_tabbar/lib.dart';
 /// ## OpsShell
 /// Widget that helps design responsive screens.
 ///
-/// For Small screens [child] of [OpsShell] will look normal, like nothing has wrapped it,
+/// For Small screen [child] of [OpsShell] will look normal, like nothing has wrapped it,
 /// but this widget will show responsive similar look as small screen
 /// of your app while being creative on large screens.
 class OpsShell extends StatefulWidget {
@@ -48,7 +48,7 @@ class OpsShell extends StatefulWidget {
 
   const OpsShell({
     Key? key,
-    this.child = const Center(child: Text("OpsShell")),
+    required this.child,
     this.height,
     this.width,
     this.radius = 30,
@@ -69,23 +69,42 @@ class _OpsShellState extends State<OpsShell> {
       alignment: widget.alignment ?? Alignment.center,
       decoration: widget.backgroundDecoration,
       child: Container(
-        margin: EdgeInsets.all(platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? 20 : 0),
+        margin: EdgeInsets.all(platform == Platforms.webDesktop ||
+                platform == Platforms.windows ||
+                platform == Platforms.webTablet
+            ? 20
+            : 0),
         child: Material(
           elevation: widget.elevation,
           borderRadius: BorderRadius.circular(widget.radius),
           child: Container(
-            height: (platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? widget.height : size.height),
-            width:
-                (platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? (widget.width ?? size.width * 0.35) : size.width),
+            height: (platform == Platforms.webDesktop ||
+                    platform == Platforms.windows ||
+                    platform == Platforms.webTablet
+                ? widget.height
+                : size.height),
+            width: (platform == Platforms.webDesktop ||
+                    platform == Platforms.windows ||
+                    platform == Platforms.webTablet
+                ? (widget.width ?? size.width * 0.35)
+                : size.width),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius:
-                  BorderRadius.circular(platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? widget.radius : 0),
+              borderRadius: BorderRadius.circular(
+                  platform == Platforms.webDesktop ||
+                          platform == Platforms.windows ||
+                          platform == Platforms.webTablet
+                      ? widget.radius
+                      : 0),
             ),
             child: Center(
               child: ClipRRect(
-                borderRadius:
-                    BorderRadius.circular(platform == Platforms.webDesktop || platform == Platforms.windows || platform == Platforms.webTablet ? widget.radius : 0),
+                borderRadius: BorderRadius.circular(
+                    platform == Platforms.webDesktop ||
+                            platform == Platforms.windows ||
+                            platform == Platforms.webTablet
+                        ? widget.radius
+                        : 0),
                 child: widget.child,
               ),
             ),

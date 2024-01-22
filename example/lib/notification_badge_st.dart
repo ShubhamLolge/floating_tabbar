@@ -18,11 +18,14 @@ class _NotificationBadgeSTState extends State<NotificationBadgeST> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Floater(
-              child: TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.code_outlined),
-                label: const Text("Cool", style: TextStyle(fontSize: 20)),
+            NotificationBadge(
+              count: 0,
+              child: Floater(
+                child: TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.code_outlined),
+                  label: const Text("Cool", style: TextStyle(fontSize: 20)),
+                ),
               ),
             ),
             const SizedBox(width: 15),
@@ -32,7 +35,8 @@ class _NotificationBadgeSTState extends State<NotificationBadgeST> {
                 child: TextButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.badge_rounded),
-                  label: const Text("Cool badge", style: TextStyle(fontSize: 20)),
+                  label:
+                      const Text("Cool badge", style: TextStyle(fontSize: 20)),
                 ),
               ),
             ),

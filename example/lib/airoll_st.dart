@@ -1,4 +1,5 @@
 import 'package:floating_tabbar/lib.dart';
+import 'package:flutter/cupertino.dart';
 
 class AirollST extends StatefulWidget {
   const AirollST({Key? key}) : super(key: key);
@@ -9,9 +10,16 @@ class AirollST extends StatefulWidget {
 
 class _AirollSTState extends State<AirollST> {
   List<TabItem> nonClassifiedTabs = [
-    TabItem(title: const Text("Wind"), onTap: () {}, selectedLeading: const Icon(Icons.air_rounded)),
-    TabItem(title: const Text("Water"), onTap: () {}),
-    TabItem(title: const Text("Land"), onTap: () {}, enabled: false),
+    TabItem(
+        title: const Text("Wind"),
+        onTap: () {},
+        selectedLeading: const Icon(Icons.air_rounded)),
+    TabItem(title: const Text("Water"), onTap: () {}, color: Colors.amber),
+    TabItem(
+        title: const Text("Land"),
+        onTap: () {},
+        enabled: false,
+        color: Colors.green),
   ];
 
   @override
@@ -23,6 +31,95 @@ class _AirollSTState extends State<AirollST> {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
+            testAirollUI(
+              airoll: Airoll(
+                color: Colors.pink.shade50,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                key: const Key("Airoll-Example-One"),
+                children: [
+                  TabItem(
+                    color: Colors.amber,
+                    title: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 8),
+                            child: InkWell(
+                              onTap: () => debugPrint("Like"),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.redAccent),
+                                    child: const Center(
+                                        child: Icon(CupertinoIcons.heart_fill)),
+                                  ),
+                                  const Text("Like",
+                                      style: TextStyle(
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 8),
+                            child: InkWell(
+                              onTap: () => debugPrint("Share"),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.blue),
+                                    child:
+                                        const Center(child: Icon(Icons.share)),
+                                  ),
+                                  const Text("Share",
+                                      style: TextStyle(
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () => debugPrint("Comment"),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.amber),
+                                  child: const Center(
+                                      child: Icon(Icons.mode_comment_rounded)),
+                                ),
+                                const Text("Comment",
+                                    style: TextStyle(
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                ],
+                child: const Icon(Icons.now_widgets_rounded),
+              ),
+              description: "One TabItem",
+            ),
             testAirollUI(
               airoll: Airoll(
                 key: const Key("Airoll-Example-One"),
@@ -75,7 +172,8 @@ class _AirollSTState extends State<AirollST> {
                 showTrailing: true,
                 child: const Icon(Icons.table_rows_rounded),
               ),
-              description: "Leading + SubTabs + Trailing + Notification count Tab",
+              description:
+                  "Leading + SubTabs + Trailing + Notification count Tab",
             ),
           ],
         ),
@@ -110,7 +208,11 @@ List<TabItem> classifiedNTabs() {
       unSelectedLeading: const Icon(Icons.forest_outlined),
       trailing: const Icon(Icons.workspace_premium_rounded, color: Colors.blue),
     ),
-    TabItem(title: const Text("Desert"), onTap: () {}, unSelectedLeading: const Icon(Icons.landscape_outlined), badgeCount: 3),
+    TabItem(
+        title: const Text("Desert"),
+        onTap: () {},
+        unSelectedLeading: const Icon(Icons.landscape_outlined),
+        badgeCount: 3),
   ];
   List<TabItem> tabs = [
     TabItem(
@@ -140,12 +242,24 @@ List<TabItem> classifiedNTabs() {
 
 List<TabItem> classifiedTabs() {
   List<TabItem> subTabs = [
-    TabItem(title: const Text("Forest"), onTap: () {}, unSelectedLeading: const Icon(Icons.forest_outlined)),
-    TabItem(title: const Text("Desert"), onTap: () {}, unSelectedLeading: const Icon(Icons.landscape_outlined)),
+    TabItem(
+        title: const Text("Forest"),
+        onTap: () {},
+        unSelectedLeading: const Icon(Icons.forest_outlined)),
+    TabItem(
+        title: const Text("Desert"),
+        onTap: () {},
+        unSelectedLeading: const Icon(Icons.landscape_outlined)),
   ];
   List<TabItem> tabs = [
-    TabItem(title: const Text("Wind"), onTap: () {}, selectedLeading: const Icon(Icons.air)),
-    TabItem(title: const Text("Water"), onTap: () {}, selectedLeading: const Icon(Icons.water)),
+    TabItem(
+        title: const Text("Wind"),
+        onTap: () {},
+        selectedLeading: const Icon(Icons.air)),
+    TabItem(
+        title: const Text("Water"),
+        onTap: () {},
+        selectedLeading: const Icon(Icons.water)),
     TabItem(
       selectedLeading: const Icon(Icons.landscape),
       title: const Text("Land"),
@@ -164,7 +278,10 @@ List<TabItem> classifiedTTabs() {
       unSelectedLeading: const Icon(Icons.forest_outlined),
       trailing: const Icon(Icons.workspace_premium_rounded, color: Colors.blue),
     ),
-    TabItem(title: const Text("Desert"), onTap: () {}, unSelectedLeading: const Icon(Icons.landscape_outlined)),
+    TabItem(
+        title: const Text("Desert"),
+        onTap: () {},
+        unSelectedLeading: const Icon(Icons.landscape_outlined)),
   ];
   List<TabItem> tabs = [
     TabItem(

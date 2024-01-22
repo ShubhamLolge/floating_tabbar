@@ -16,17 +16,20 @@ class _FloaterSTState extends State<FloaterST> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.flight_rounded),
-              label: const Text("Text"),
+            Floater(
+              elevation: 0,
+              child: TextButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.flight_rounded),
+                label: const Text("Test"),
+              ),
             ),
             const SizedBox(width: 10),
             Floater(
               child: TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.flight_rounded),
-                label: const Text("Floater Text"),
+                label: const Text("Floater Test"),
               ),
             ),
             const SizedBox(width: 10),
@@ -35,7 +38,7 @@ class _FloaterSTState extends State<FloaterST> {
               child: TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.flight_rounded),
-                label: const Text("Floater Text"),
+                label: const Text("Floater Test"),
               ),
             ),
           ],

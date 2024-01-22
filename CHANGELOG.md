@@ -1,3 +1,7 @@
+## 1.0.1
+
+Minor Release: Solved readme media issue, Niftile callback issueand code refactoring.
+
 ## 1.0.0
 
 Major Release: Introducing new widget Niftile, smoke test improvement, and code refactoring.

@@ -1,6 +1,6 @@
 name: floating_tabbar
 description: The floating_tabbar package for Flutter allows you to use the responsive design for all platforms made from the Material Design System.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/ShubhamLolge/floating_tabbar
 
 environment:
@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  adaptive_breakpoints: ^0.1.6
-  intl: ^0.18.1
+  adaptive_breakpoints: ^0.1.7
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

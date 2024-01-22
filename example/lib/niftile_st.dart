@@ -14,14 +14,19 @@ class _NiftileSTState extends State<NiftileST> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Niftile Test")),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Center(
-          child: SingleChildScrollView(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 10),
+                const Text("Default Niftile",
+                    style:
+                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 Niftile(
+                  onTap: () => debugPrint("TiUi ST Niftile"),
                   item: TabItem(
                     title: const Text("TiUi ST"),
                     subTitle: const Text("TiUi-Sub ST"),
@@ -29,6 +34,7 @@ class _NiftileSTState extends State<NiftileST> {
                     unSelectedLeading: const Icon(Icons.done_outline_rounded),
                     trailing: const Icon(Icons.fire_extinguisher_rounded),
                     tIOnTap: true,
+                    // onTap: () {},
                     onTap: () => debugPrint("TiUi ST"),
                     badgeCount: 10,
                     isSelected: (p0) => debugPrint("isSelected: $p0"),
@@ -46,23 +52,6 @@ class _NiftileSTState extends State<NiftileST> {
                           TabItem(title: const Text("Sub-Two"), onTap: () {}),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Niftile(
-                  item: TabItem(
-                    title: const Text("TiUi ST"),
-                    subTitle: const Text("TiUi-Sub ST"),
-                    selectedLeading: const Icon(Icons.donut_large),
-                    unSelectedLeading: const Icon(Icons.done_outline_rounded),
-                    trailing: const Icon(Icons.fire_extinguisher_rounded),
-                    tIOnTap: true,
-                    onTap: () => debugPrint("TiUi ST"),
-                    isSelected: (p0) => debugPrint("isSelected: $p0"),
-                    children: [
-                      TabItem(title: const Text("Sub-One"), onTap: () {}),
-                      TabItem(title: const Text("Sub-Two"), onTap: () {}),
                     ],
                   ),
                 ),
@@ -101,20 +90,6 @@ class _NiftileSTState extends State<NiftileST> {
                 ),
                 const SizedBox(height: 10),
                 Niftile(
-                  item: TabItem(
-                    title: const Text("TiUi ST"),
-                    selectedLeading: const Icon(Icons.donut_large),
-                    unSelectedLeading: const Icon(Icons.done_outline_rounded),
-                    trailing: const Icon(Icons.fire_extinguisher_rounded),
-                    tIOnTap: true,
-                    onTap: () => debugPrint("TiUi ST"),
-                    badgeCount: 9,
-                    isSelected: (p0) => debugPrint("isSelected: $p0"),
-                    color: Colors.cyan,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Niftile(
                   selectedColor: Colors.red,
                   unSelectedColor: Colors.green,
                   item: TabItem(
@@ -129,6 +104,149 @@ class _NiftileSTState extends State<NiftileST> {
                     color: Colors.lightGreenAccent,
                   ),
                 ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 300,
+                      child: Niftile(
+                        isFloating: false,
+                        showTrailing: false,
+                        item: TabItem(
+                          title: const Text("TiUi ST"),
+                          selectedLeading: const Icon(Icons.donut_large),
+                          unSelectedLeading:
+                              const Icon(Icons.done_outline_rounded),
+                          trailing: const Icon(Icons.fire_extinguisher_rounded),
+                          tIOnTap: true,
+                          onTap: () => debugPrint("TiUi ST"),
+                          badgeCount: 9,
+                          isSelected: (p0) => debugPrint("isSelected: $p0"),
+                          color: Colors.amber,
+                          children: [
+                            TabItem(title: const Text("One"), onTap: () {}),
+                            TabItem(title: const Text("Two"), onTap: () {}),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Niftile(
+                      width: 260,
+                      showLeading: false,
+                      item: TabItem(
+                        title: const Text("TiUi ST"),
+                        selectedLeading: const Icon(Icons.donut_large),
+                        unSelectedLeading:
+                            const Icon(Icons.done_outline_rounded),
+                        trailing: const Icon(Icons.fire_extinguisher_rounded),
+                        tIOnTap: true,
+                        onTap: () => debugPrint("TiUi ST"),
+                        badgeCount: 9,
+                        isSelected: (p0) => debugPrint("isSelected: $p0"),
+                        color: Colors.indigo.shade100,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Niftile(
+                      width: 260,
+                      item: TabItem(
+                        title: const Text("TiUi ST"),
+                        selectedLeading: const Icon(Icons.donut_large),
+                        unSelectedLeading:
+                            const Icon(Icons.done_outline_rounded),
+                        trailing: const Icon(Icons.fire_extinguisher_rounded),
+                        tIOnTap: true,
+                        onTap: () => debugPrint("TiUi ST"),
+                        badgeCount: 9,
+                        isSelected: (p0) => debugPrint("isSelected: $p0"),
+                        color: Colors.pink.shade100,
+                        children: [
+                          TabItem(title: const Text("One"), onTap: () {}),
+                          TabItem(title: const Text("Two"), onTap: () {}),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const Text("Icon Mode",
+                    style:
+                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Niftile(
+                      iconMode: true,
+                      selectedColor: Colors.orange,
+                      unSelectedColor: Colors.cyan,
+                      onTap: () => debugPrint("IconMode Test"),
+                      item: TabItem(
+                        title: const Text("IconMode"),
+                        subTitle: const Text("IconMode-Sub ST"),
+                        selectedLeading: const Icon(Icons.cabin),
+                        trailing: const Icon(Icons.fire_extinguisher_rounded),
+                        tIOnTap: true,
+                        onTap: () => debugPrint("IconMode"),
+                        badgeCount: 10,
+                        isSelected: (p0) => debugPrint("isSelected: $p0"),
+                        enabled: true,
+                        color: Colors.amber.shade100,
+                        children: [
+                          TabItem(title: const Text("Sub-One"), onTap: () {}),
+                          TabItem(
+                            selectedLeading: const Icon(Icons.label),
+                            trailing: const Icon(Icons.grain_outlined),
+                            title: const Text("Sub-Two"),
+                            onTap: () {},
+                            children: [
+                              TabItem(
+                                  title: const Text("Sub-One"), onTap: () {}),
+                              TabItem(
+                                  title: const Text("Sub-Two"), onTap: () {}),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Niftile(
+                      iconMode: true,
+                      onTap: () => debugPrint("IconMode Test"),
+                      item: TabItem(
+                        title: const Text("IconMode"),
+                        subTitle: const Text("IconMode-Sub ST"),
+                        selectedLeading: const Text("IM Mode"),
+                        trailing: const Icon(Icons.fire_extinguisher_rounded),
+                        tIOnTap: true,
+                        onTap: () {},
+                        badgeCount: 10,
+                        isSelected: (p0) => debugPrint("isSelected: $p0"),
+                        enabled: true,
+                        color: Colors.greenAccent,
+                        children: [
+                          TabItem(title: const Text("Sub-One"), onTap: () {}),
+                          TabItem(
+                            selectedLeading: const Icon(Icons.label),
+                            trailing: const Icon(Icons.grain_outlined),
+                            title: const Text("Sub-Two"),
+                            onTap: () {},
+                            children: [
+                              TabItem(
+                                  title: const Text("Sub-One"), onTap: () {}),
+                              TabItem(
+                                  title: const Text("Sub-Two"), onTap: () {}),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const Text("Button Mode",
+                    style:
+                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,8 +285,10 @@ class _NiftileSTState extends State<NiftileST> {
                             title: const Text("Sub-Two"),
                             onTap: () {},
                             children: [
-                              TabItem(title: const Text("Sub-One"), onTap: () {}),
-                              TabItem(title: const Text("Sub-Two"), onTap: () {}),
+                              TabItem(
+                                  title: const Text("Sub-One"), onTap: () {}),
+                              TabItem(
+                                  title: const Text("Sub-Two"), onTap: () {}),
                             ],
                           ),
                         ],
@@ -221,7 +341,7 @@ class _NiftileSTState extends State<NiftileST> {
                       width: 100,
                       borderRadius: BorderRadius.circular(60),
                       item: TabItem(
-                        title: const Text("TIUI", textAlign: TextAlign.center),
+                        title: const Text("TIUI-l"),
                         onTap: () {},
                         children: [
                           TabItem(title: const Text("One"), onTap: () {}),
@@ -231,69 +351,7 @@ class _NiftileSTState extends State<NiftileST> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      child: Niftile(
-                        isFloating: false,
-                        showTrailing: false,
-                        item: TabItem(
-                          title: const Text("TiUi ST"),
-                          selectedLeading: const Icon(Icons.donut_large),
-                          unSelectedLeading: const Icon(Icons.done_outline_rounded),
-                          trailing: const Icon(Icons.fire_extinguisher_rounded),
-                          tIOnTap: true,
-                          onTap: () => debugPrint("TiUi ST"),
-                          badgeCount: 9,
-                          isSelected: (p0) => debugPrint("isSelected: $p0"),
-                          color: Colors.amber,
-                          children: [
-                            TabItem(title: const Text("One"), onTap: () {}),
-                            TabItem(title: const Text("Two"), onTap: () {}),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Niftile(
-                      width: 260,
-                      showLeading: false,
-                      item: TabItem(
-                        title: const Text("TiUi ST"),
-                        selectedLeading: const Icon(Icons.donut_large),
-                        unSelectedLeading: const Icon(Icons.done_outline_rounded),
-                        trailing: const Icon(Icons.fire_extinguisher_rounded),
-                        tIOnTap: true,
-                        onTap: () => debugPrint("TiUi ST"),
-                        badgeCount: 9,
-                        isSelected: (p0) => debugPrint("isSelected: $p0"),
-                        color: Colors.indigo.shade100,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Niftile(
-                      width: 260,
-                      item: TabItem(
-                        title: const Text("TiUi ST"),
-                        selectedLeading: const Icon(Icons.donut_large),
-                        unSelectedLeading: const Icon(Icons.done_outline_rounded),
-                        trailing: const Icon(Icons.fire_extinguisher_rounded),
-                        tIOnTap: true,
-                        onTap: () => debugPrint("TiUi ST"),
-                        badgeCount: 9,
-                        isSelected: (p0) => debugPrint("isSelected: $p0"),
-                        color: Colors.pink.shade100,
-                        children: [
-                          TabItem(title: const Text("One"), onTap: () {}),
-                          TabItem(title: const Text("Two"), onTap: () {}),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                const SizedBox(height: 100),
               ],
             ),
           ),

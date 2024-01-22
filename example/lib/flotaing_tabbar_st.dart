@@ -37,7 +37,8 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
   @override
   void initState() {
     super.initState();
-    floatingTabbarST = const OpsShell(child: FloatingTabbarST(smallScreenMode: true));
+    floatingTabbarST =
+        const OpsShell(child: FloatingTabbarST(smallScreenMode: true));
   }
 
   List<TabItem> tabListOne() {
@@ -55,14 +56,16 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
         selectedLeading: const Icon(Icons.library_books),
         unSelectedLeading: const Icon(Icons.library_books_outlined),
         title: const Text("Report"),
-        tab: const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
+        tab:
+            const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
       ),
       TabItem(
         onTap: () {},
         selectedLeading: const Icon(Icons.settings),
         unSelectedLeading: const Icon(Icons.settings_outlined),
         title: const Text("Settings"),
-        tab: const Center(child: Text("Settings", style: TextStyle(fontSize: 30))),
+        tab: const Center(
+            child: Text("Settings", style: TextStyle(fontSize: 30))),
       ),
     ];
     return list;
@@ -72,7 +75,9 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
     return SizedBox(
       height: size.height * 0.6,
       width: size.width * 0.3,
-      child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: children3(context, size)),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: children3(context, size)),
     );
   }
 
@@ -84,21 +89,27 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
         selectedLeading: const Icon(Icons.home),
         badgeCount: 1,
         unSelectedLeading: const Icon(Icons.home_outlined),
-        tab: widget.smallScreenMode == true ? showCMenu(size: size) : const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
+        tab: widget.smallScreenMode == true
+            ? showCMenu(size: size)
+            : const Center(child: Text("Work", style: TextStyle(fontSize: 30))),
       ),
       TabItem(
         onTap: () {},
         selectedLeading: const Icon(Icons.library_books),
         unSelectedLeading: const Icon(Icons.library_books_outlined),
         title: const Text("Report"),
-        tab: const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
+        tab:
+            const Center(child: Text("Report", style: TextStyle(fontSize: 30))),
       ),
       TabItem(
         onTap: () {},
         selectedLeading: const Icon(Icons.settings),
         unSelectedLeading: const Icon(Icons.settings_outlined),
         title: const Text("Settings"),
-        tab: widget.smallScreenMode == true ? const Center(child: Text("Settings", style: TextStyle(fontSize: 30))) : floatingTabbarST,
+        tab: widget.smallScreenMode == true
+            ? const Center(
+                child: Text("Settings", style: TextStyle(fontSize: 30)))
+            : floatingTabbarST,
       ),
     ];
     return list;
@@ -108,7 +119,9 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: widget.smallScreenMode == true ? null : AppBar(title: const Text("FloatingTabBar Test")),
+      appBar: widget.smallScreenMode == true
+          ? null
+          : AppBar(title: const Text("FloatingTabBar Test")),
       body: Row(
         children: [
           Expanded(
@@ -118,8 +131,10 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
               inactiveColor: inactiveColor,
               indicatorColor: indicatorColor,
               leading: leading ? const Icon(Icons.home_work_rounded) : null,
-              nauticsFooter: nauticsFooter ? const Icon(Icons.more_horiz) : null,
-              parentAppbar: parentAppbar ? AppBar(title: const Text("pAppBar")) : null,
+              nauticsFooter:
+                  nauticsFooter ? const Icon(Icons.more_horiz) : null,
+              parentAppbar:
+                  parentAppbar ? AppBar(title: const Text("pAppBar")) : null,
               minExtendedWidth: minExtendedWidth.toDouble(),
               isFloating: isFloating,
               useNautics: useNautics,
@@ -151,19 +166,28 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
       const SizedBox(height: 10),
       ElevatedButton(
         onPressed: () {
-          chooseColor(context: context, size: size, selectedColor: (v) => setState(() => backgroundColor = v));
+          chooseColor(
+              context: context,
+              size: size,
+              selectedColor: (v) => setState(() => backgroundColor = v));
         },
         child: const Text("Background Color"),
       ),
       ElevatedButton(
         onPressed: () {
-          chooseColor(context: context, size: size, selectedColor: (v) => setState(() => activeColor = v));
+          chooseColor(
+              context: context,
+              size: size,
+              selectedColor: (v) => setState(() => activeColor = v));
         },
         child: const Text("Active Color"),
       ),
       ElevatedButton(
         onPressed: () {
-          chooseColor(context: context, size: size, selectedColor: (v) => setState(() => inactiveColor = v));
+          chooseColor(
+              context: context,
+              size: size,
+              selectedColor: (v) => setState(() => inactiveColor = v));
         },
         child: const Text("Inactive Color"),
       ),
@@ -177,7 +201,10 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
       ),
       ElevatedButton(
         onPressed: () {
-          chooseColor(context: context, size: size, selectedColor: (v) => setState(() => indicatorColor = v));
+          chooseColor(
+              context: context,
+              size: size,
+              selectedColor: (v) => setState(() => indicatorColor = v));
         },
         child: const Text("Indicator Color"),
       ),
@@ -250,19 +277,28 @@ class _FloatingTabbarSTState extends State<FloatingTabbarST> {
       const SizedBox(height: 10),
       ElevatedButton(
         onPressed: () {
-          chooseColor(context: context, size: size, selectedColor: (v) => setState(() => backgroundColor = v));
+          chooseColor(
+              context: context,
+              size: size,
+              selectedColor: (v) => setState(() => backgroundColor = v));
         },
         child: const Text("Background Color"),
       ),
       ElevatedButton(
         onPressed: () {
-          chooseColor(context: context, size: size, selectedColor: (v) => setState(() => activeColor = v));
+          chooseColor(
+              context: context,
+              size: size,
+              selectedColor: (v) => setState(() => activeColor = v));
         },
         child: const Text("Active Color"),
       ),
       ElevatedButton(
         onPressed: () {
-          chooseColor(context: context, size: size, selectedColor: (v) => setState(() => inactiveColor = v));
+          chooseColor(
+              context: context,
+              size: size,
+              selectedColor: (v) => setState(() => inactiveColor = v));
         },
         child: const Text("Inactive Color"),
       ),

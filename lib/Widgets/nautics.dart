@@ -2,58 +2,59 @@ import 'package:floating_tabbar/lib.dart';
 import 'package:flutter/cupertino.dart';
 
 class Nautics extends StatefulWidget {
-  /// List of items that will show in Nautics sidebar
+  /// List of items that will show in [Nautics].
   final List<TabItem> children;
 
-  /// Default true, Nautics SideBar expands and collapses on click.
+  /// Based on the value of [isCollapsed], [isConvertible] forces the [Nautics] to be in the specific state (expanded or collapsed),
+  /// when false it allows the [Nautics] to behave as default.
   final bool isConvertible;
 
-  /// Width for collapsed form of Nautics SideBar, default = 60.
+  /// Width for collapsed form of [Nautics], default = 60.
   final double collapsedWidth;
 
-  /// Width for expanded form of Nautics SideBar, default = 200.
+  /// Width for expanded form of [Nautics], default = 200.
   final double expandedWidth;
 
-  /// The default value "true" will show floating Nautics SideBar.
+  /// The default value "true" will show floating [Nautics] SideBar.
   final bool? isFloating;
 
-  /// Form of Nautics SideBar, default true, and works only for false value of isConvertible
+  /// Form or state of [Nautics] (expanded or collapsed), default true, and works only with false value of [isConvertible]
   final bool isCollapsed;
 
-  /// The widget that will be on starting of Nautics SideBar
+  /// Header for [Nautics] SideBar.
   final Widget? header;
 
-  /// The widget that will be on bottom of Nautics SideBar
+  /// Footer for [Nautics] SideBar.
   final Widget? footer;
 
-  /// Color for Nautics SideBar
+  /// Color for [Nautics].
   final Color? nauticsColor;
 
-  /// Color for selected item
+  /// Color for selected item.
   final Color? selectedColor;
 
-  /// Color for un-selected item
+  /// Color for un-selected item.
   final Color? unSelectedColor;
 
-  /// CrossAxisAlignment for expanded form
+  /// CrossAxisAlignment for expanded form.
   final CrossAxisAlignment crossAxisAlignmentExpandedForm;
 
-  /// MainAxisAlignment for expanded form
+  /// MainAxisAlignment for expanded form.
   final MainAxisAlignment mainAxisAlignmentExpandedForm;
 
-  /// CrossAxisAlignment for collapsed form
+  /// CrossAxisAlignment for collapsed form.
   final CrossAxisAlignment crossAxisAlignmentCollapsedForm;
 
-  /// MainAxisAlignment for collapsed form
+  /// MainAxisAlignment for collapsed form.
   final MainAxisAlignment mainAxisAlignmentCollapsedForm;
 
-  /// Selected icon for trailing on NauticsItemChildren tile.
+  /// Selected icon for trailing for nested [children] tile.
   final Widget? selectedTrailingIcon;
 
-  /// Un-selected icon for trailing on NauticsItemChildren tile.
+  /// Un-selected icon for trailing for nested [children] tile.
   final Widget? unSelectedTrailingIcon;
 
-  /// On index change.
+  /// Called whenever item is changed.
   final ValueChanged<int> onChange;
 
   /// Initial index.
@@ -65,7 +66,7 @@ class Nautics extends StatefulWidget {
   /// Collapsed Nautics Decoration.
   final Decoration? collapsedNauticsDecoration;
 
-  /// Space from left for the children udner a TabItem
+  /// Space from left for the nested children under a TabItem.
   final double childIndentation;
 
   const Nautics({
@@ -90,8 +91,10 @@ class Nautics extends StatefulWidget {
     this.crossAxisAlignmentExpandedForm = CrossAxisAlignment.center,
     this.mainAxisAlignmentCollapsedForm = MainAxisAlignment.start,
     this.mainAxisAlignmentExpandedForm = MainAxisAlignment.start,
-    this.selectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 12),
-    this.unSelectedTrailingIcon = const Icon(CupertinoIcons.arrow_up_arrow_down, size: 12),
+    this.selectedTrailingIcon =
+        const Icon(CupertinoIcons.arrow_up_arrow_down, size: 12),
+    this.unSelectedTrailingIcon =
+        const Icon(CupertinoIcons.arrow_up_arrow_down, size: 12),
   }) : super(key: key);
 
   @override
@@ -139,7 +142,9 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
   Widget nauticsTiles() {
     Container nauticsTiles = Container(
       width: widget.expandedWidth,
-      color: widget.isFloating == true ? null : widget.nauticsColor ?? Colors.white,
+      color: widget.isFloating == true
+          ? null
+          : widget.nauticsColor ?? Colors.white,
       child: Container(
         decoration: widget.expandedNauticsDecoration,
         child: Column(
@@ -149,7 +154,8 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
             widget.header == null ? Container() : headerTile(),
             Expanded(
               child: ListTileTheme(
-                selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                selectedColor:
+                    widget.selectedColor ?? Theme.of(context).primaryColor,
                 child: ListView.builder(
                   itemCount: widget.children.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -196,7 +202,9 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
       selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
       child: tabItem.children!.isEmpty
           ? Container(
-              margin: isLevelOne == true ? null : EdgeInsets.only(left: widget.childIndentation),
+              margin: isLevelOne == true
+                  ? null
+                  : EdgeInsets.only(left: widget.childIndentation),
               child: ListTile(
                 onTap: () {
                   tabItem.onTap!();
@@ -212,16 +220,19 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0)),
-                            Container(
-                              margin: const EdgeInsets.only(right: 5),
-                              width: 22,
-                              child: ListView(
-                                reverse: true,
-                                scrollDirection: Axis.horizontal,
-                                children: [tabItem.trailing ?? Container()],
-                              ),
-                            ),
+                            BadgeContainer(count: tabItem.badgeCount ?? 0),
+                            tabItem.trailing == null
+                                ? Container()
+                                : SizedBox(
+                                    width: 22,
+                                    child: ListView(
+                                      reverse: true,
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        tabItem.trailing ?? Container()
+                                      ],
+                                    ),
+                                  ),
                           ],
                         ),
                       )
@@ -235,9 +246,12 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
               ),
             )
           : Container(
-              margin: isLevelOne == true ? null : EdgeInsets.only(left: widget.childIndentation),
+              margin: isLevelOne == true
+                  ? null
+                  : EdgeInsets.only(left: widget.childIndentation),
               child: ListTileTheme(
-                selectedColor: widget.selectedColor ?? Theme.of(context).primaryColor,
+                selectedColor:
+                    widget.selectedColor ?? Theme.of(context).primaryColor,
                 child: ExpansionTile(
                   onExpansionChanged: (isSelected) {
                     setState(() {
@@ -248,10 +262,16 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
                       widget.onChange(icSelected.value);
                     });
                   },
-                  iconColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                  textColor: widget.selectedColor ?? Theme.of(context).primaryColor,
-                  collapsedIconColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.black,
-                  collapsedTextColor: icSelected.value == index ? widget.selectedColor ?? Theme.of(context).primaryColor : Colors.black,
+                  iconColor:
+                      widget.selectedColor ?? Theme.of(context).primaryColor,
+                  textColor:
+                      widget.selectedColor ?? Theme.of(context).primaryColor,
+                  collapsedIconColor: icSelected.value == index
+                      ? widget.selectedColor ?? Theme.of(context).primaryColor
+                      : Colors.black,
+                  collapsedTextColor: icSelected.value == index
+                      ? widget.selectedColor ?? Theme.of(context).primaryColor
+                      : Colors.black,
                   title: tabItem.title,
                   maintainState: true,
                   initiallyExpanded: isETSelected ? true : false,
@@ -263,10 +283,17 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Expanded(child: isETSelected ? widget.selectedTrailingIcon! : widget.unSelectedTrailingIcon!),
+                              Expanded(
+                                  child: isETSelected
+                                      ? widget.selectedTrailingIcon!
+                                      : widget.unSelectedTrailingIcon!),
                               tabItem.badgeCount != 0
                                   ? Container(
-                                      margin: const EdgeInsets.only(left: 1), child: Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0, notifiAsDot: true)))
+                                      margin: const EdgeInsets.only(left: 1),
+                                      child: Expanded(
+                                          child: BadgeContainer(
+                                              count: tabItem.badgeCount ?? 0,
+                                              notifiAsDot: true)))
                                   : Container(),
                               tabItem.trailing ?? Container(),
                             ],
@@ -279,8 +306,12 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      widget.selectedTrailingIcon ?? Container(),
-                                      Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0, notifiAsDot: true)),
+                                      widget.selectedTrailingIcon ??
+                                          Container(),
+                                      Expanded(
+                                          child: BadgeContainer(
+                                              count: tabItem.badgeCount ?? 0,
+                                              notifiAsDot: true)),
                                     ],
                                   ),
                                 )
@@ -291,8 +322,12 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      widget.unSelectedTrailingIcon ?? Container(),
-                                      Expanded(child: BadgeContainer(count: tabItem.badgeCount ?? 0, notifiAsDot: true)),
+                                      widget.unSelectedTrailingIcon ??
+                                          Container(),
+                                      Expanded(
+                                          child: BadgeContainer(
+                                              count: tabItem.badgeCount ?? 0,
+                                              notifiAsDot: true)),
                                     ],
                                   ),
                                 )
@@ -335,7 +370,9 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
       duration: const Duration(seconds: 1),
       curve: Curves.easeInBack,
       width: widget.collapsedWidth,
-      color: widget.isFloating == true ? null : widget.nauticsColor ?? Colors.white,
+      color: widget.isFloating == true
+          ? null
+          : widget.nauticsColor ?? Colors.white,
       child: Container(
         decoration: widget.collapsedNauticsDecoration,
         child: Column(
@@ -367,12 +404,16 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: itemChildSelected!.value == index ? (widget.selectedColor ?? Theme.of(context).primaryColor.withOpacity(0.5)) : Colors.transparent,
+                        color: itemChildSelected!.value == index
+                            ? (widget.selectedColor ??
+                                Theme.of(context).primaryColor.withOpacity(0.5))
+                            : Colors.transparent,
                       ),
                       height: 45,
                       width: 45,
                       alignment: Alignment.center,
-                      child: NotificationBadge(count: tI.badgeCount ?? 0, child: tI.selectedLeading),
+                      child: NotificationBadge(
+                          count: tI.badgeCount ?? 0, child: tI.selectedLeading),
                     ),
                   );
                 },
@@ -444,7 +485,8 @@ class NauticsState extends State<Nautics> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  void transformNautics() => setState(() => isNauticsExpanded = !isNauticsExpanded);
+  void transformNautics() =>
+      setState(() => isNauticsExpanded = !isNauticsExpanded);
 
   @override
   bool get wantKeepAlive => true;

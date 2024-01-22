@@ -1,7 +1,7 @@
 import 'package:floating_tabbar/lib.dart';
 
 /// ## TopTabBar
-/// Widget to create the [TabBar] with built in space for nesting contingency, just provide the data to [children] parameter
+/// Widget to create the top [TabBar] with built in space for nesting contingency, just provide the data to [children] parameter
 /// and you're done your Top [TabBar] is created like that.
 /// Customize the widget as per your liking, also specify if you need the [TabBar] to be primary or secondary,
 ///
@@ -10,8 +10,8 @@ import 'package:floating_tabbar/lib.dart';
 /// #### Remember all the customization that applies to parent, applies to nested [TopTabBar] as well.
 ///
 class TopTabBar extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
   const TopTabBar({
+    Key? key,
     this.tabBarKey,
     this.tabBarViewKey,
     required this.children,
@@ -46,7 +46,7 @@ class TopTabBar extends StatefulWidget {
     this.dragStartBehavior = DragStartBehavior.start,
     this.tabBarViewDragStartBehavior = DragStartBehavior.start,
     this.tabAlignment,
-  });
+  }) : super(key: key);
 
   /// [Key] for [TabBar].
   final Key? tabBarKey;
@@ -451,7 +451,8 @@ class TopTabBar extends StatefulWidget {
   State<TopTabBar> createState() => _TopTabBarState();
 }
 
-class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _TopTabBarState extends State<TopTabBar>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final TabController _tabController;
 
   List<Widget> getLabels() {
@@ -469,10 +470,16 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
       );
       Widget tab = Tab(
         icon: child.selectedLeading,
-        child: child.badgeCount == 0 ? lebs : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
+        child: child.badgeCount == 0
+            ? lebs
+            : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
       );
 
-      labels.add(child.tIOnTap == true ? Container(color: Colors.amber, child: InkWell(onTap: child.onTap, child: tab)) : tab);
+      labels.add(child.tIOnTap == true
+          ? Container(
+              color: Colors.amber,
+              child: InkWell(onTap: child.onTap, child: tab))
+          : tab);
     }
     return labels;
   }
@@ -489,7 +496,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
             initialIndex: widget.initialIndex,
             primaryTabBar: widget.primaryTabBar,
             animationDuration: widget.animationDuration,
-            automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+            automaticIndicatorColorAdjustment:
+                widget.automaticIndicatorColorAdjustment,
             dividerColor: widget.dividerColor,
             dragStartBehavior: widget.dragStartBehavior,
             enableFeedback: widget.enableFeedback,
@@ -521,7 +529,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
         tabs.add(
           child.tab ??
               const Center(
-                child: Text("No specified widget for this tab in the TabItem, please provide one in the list<TabItem> children."),
+                child: Text(
+                    "No specified widget for this tab in the TabItem, please provide one in the list<TabItem> children."),
               ),
         );
       }
@@ -558,7 +567,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
                   indicator: widget.indicator,
                   controller: widget.tabController ?? _tabController,
                   tabs: getLabels(),
-                  automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                  automaticIndicatorColorAdjustment:
+                      widget.automaticIndicatorColorAdjustment,
                   dividerColor: widget.dividerColor,
                   dragStartBehavior: widget.dragStartBehavior,
                   enableFeedback: widget.enableFeedback,
@@ -576,7 +586,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
                   physics: widget.physics,
                   splashBorderRadius: widget.splashBorderRadius,
                   splashFactory: widget.splashFactory,
-                  labelColor: widget.labelColor ?? Theme.of(context).primaryColor,
+                  labelColor:
+                      widget.labelColor ?? Theme.of(context).primaryColor,
                   labelStyle: widget.labelStyle,
                   unselectedLabelColor: widget.unselectedLabelColor,
                   unselectedLabelStyle: widget.unselectedLabelStyle,
@@ -586,7 +597,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
                   indicator: widget.indicator,
                   controller: widget.tabController ?? _tabController,
                   tabs: getLabels(),
-                  automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                  automaticIndicatorColorAdjustment:
+                      widget.automaticIndicatorColorAdjustment,
                   dividerColor: widget.dividerColor,
                   dragStartBehavior: widget.dragStartBehavior,
                   enableFeedback: widget.enableFeedback,
@@ -604,7 +616,8 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
                   physics: widget.physics,
                   splashBorderRadius: widget.splashBorderRadius,
                   splashFactory: widget.splashFactory,
-                  labelColor: widget.labelColor ?? Theme.of(context).primaryColor,
+                  labelColor:
+                      widget.labelColor ?? Theme.of(context).primaryColor,
                   labelStyle: widget.labelStyle,
                   unselectedLabelColor: widget.unselectedLabelColor,
                   unselectedLabelStyle: widget.unselectedLabelStyle,

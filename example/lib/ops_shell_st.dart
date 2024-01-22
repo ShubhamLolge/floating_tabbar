@@ -36,7 +36,8 @@ class _OpsShellSTState extends State<OpsShellST> {
             child: OpsShell(
               alignment: Alignment.bottomRight,
               backgroundDecoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: NetworkImage(url), fit: BoxFit.cover),
               ),
               height: size.height * 0.6,
               width: size.width * 0.2,
@@ -51,7 +52,8 @@ class _OpsShellSTState extends State<OpsShellST> {
   Widget scaffold({required String type}) {
     return Scaffold(
       appBar: AppBar(title: Text(type)),
-      floatingActionButton: FloatingActionButton(onPressed: () {}, child: const Icon(Icons.icecream_rounded)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {}, child: const Icon(Icons.icecream_rounded)),
       body: SizedBox(
         child: ListView(
           children: List.generate(

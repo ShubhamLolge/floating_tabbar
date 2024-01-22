@@ -272,7 +272,9 @@ class ColorPickerPaletteState extends State<ColorPickerPalette> {
     return InkWell(
       borderRadius: BorderRadius.circular(120),
       onTap: () => _onColorSelected(color),
-      child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: color)),
+      child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100), color: color)),
     );
   }
 
@@ -288,10 +290,13 @@ class IncrementDecrementNumber extends StatefulWidget {
 
   /// default count = 1
   final int count;
-  const IncrementDecrementNumber({Key? key, required this.onCountChange, this.count = 1}) : super(key: key);
+  const IncrementDecrementNumber(
+      {Key? key, required this.onCountChange, this.count = 1})
+      : super(key: key);
 
   @override
-  State<IncrementDecrementNumber> createState() => _IncrementDecrementNumberState();
+  State<IncrementDecrementNumber> createState() =>
+      _IncrementDecrementNumberState();
 }
 
 class _IncrementDecrementNumberState extends State<IncrementDecrementNumber> {

@@ -33,6 +33,7 @@ class _NauticsSTState extends State<NauticsST> {
         trailing: const Icon(Icons.person_rounded, size: 15),
         title: const Text("Jason Bourne"),
         subTitle: const Text("Associate"),
+        badgeCount: 4,
         onTap: () => setState(() {
           text = "Jason Bourne";
         }),
@@ -50,14 +51,16 @@ class _NauticsSTState extends State<NauticsST> {
             badgeCount: 1,
             trailing: const Icon(Icons.star_rate),
             title: const Text("Appear offline"),
-            selectedLeading: const Icon(CupertinoIcons.multiply_circle, color: Colors.grey),
+            selectedLeading:
+                const Icon(CupertinoIcons.multiply_circle, color: Colors.grey),
             onTap: () => setState(() {
               text = "Appear offline";
             }),
           ),
           TabItem(
             title: const Text("Available"),
-            selectedLeading: const Icon(Icons.done_rounded, color: Color.fromARGB(255, 0, 254, 8)),
+            selectedLeading: const Icon(Icons.done_rounded,
+                color: Color.fromARGB(255, 0, 254, 8)),
             onTap: () => setState(() {
               text = "Available";
             }),
@@ -106,8 +109,14 @@ class _NauticsSTState extends State<NauticsST> {
             nauticsColor: nauticsColor,
             selectedColor: selectedColor,
             unSelectedColor: unSelectedColor,
-            header: header == true ? const Text("Header", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)) : null,
-            footer: footer == true ? const Text("Footer", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)) : null,
+            header: header == true
+                ? const Text("Header",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))
+                : null,
+            footer: footer == true
+                ? const Text("Footer",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))
+                : null,
             isCollapsed: isCollapsed,
             isConvertible: isConvertible,
             collapsedWidth: collapsedWidth.toDouble(),
@@ -130,19 +139,31 @@ class _NauticsSTState extends State<NauticsST> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => nauticsColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) =>
+                              setState(() => nauticsColor = v));
                     },
                     child: const Text("Nautics Color"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => selectedColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) =>
+                              setState(() => selectedColor = v));
                     },
                     child: const Text("Selected Color"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => unSelectedColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) =>
+                              setState(() => unSelectedColor = v));
                     },
                     child: const Text("Unselected Color"),
                   ),

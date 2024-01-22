@@ -9,7 +9,8 @@ class VitrifyST extends StatefulWidget {
   State<VitrifyST> createState() => _VitrifySTState();
 }
 
-String url = "https://cdn.pixabay.com/photo/2023/12/08/09/13/vine-8437282_1280.jpg";
+String url =
+    "https://cdn.pixabay.com/photo/2023/12/08/09/13/vine-8437282_1280.jpg";
 
 class _VitrifySTState extends State<VitrifyST> {
   @override
@@ -35,7 +36,8 @@ class _VitrifySTState extends State<VitrifyST> {
                   child: TextButton.icon(
                     onPressed: () {},
                     icon: const Icon(Icons.free_breakfast_rounded),
-                    label: const Text("Vitrify Test", style: TextStyle(fontSize: 20)),
+                    label: const Text("Vitrify Test",
+                        style: TextStyle(fontSize: 20)),
                   ),
                 ),
               ),

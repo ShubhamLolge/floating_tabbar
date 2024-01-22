@@ -1,6 +1,6 @@
+/// Data from the Text Widget
 String getStringFromTextWidget(String string) {
   String? resultString;
-  // Extract text inside double quotes using RegExp match
   RegExp regex = RegExp(r'"([^"]*)"');
   Match? match = regex.firstMatch(string);
 
@@ -9,4 +9,15 @@ String getStringFromTextWidget(String string) {
     resultString = result;
   }
   return resultString!;
+}
+
+/// Converts the string title to route path.
+String toRoutePath({required String title}) {
+  String routePath;
+  String string = getStringFromTextWidget(title);
+  string = string.replaceAll(RegExp(r'[^\w\s]+'), '').toLowerCase();
+  string.contains(' ')
+      ? routePath = string.replaceAll(" ", "-")
+      : routePath = string;
+  return "/$routePath";
 }
