@@ -1,4 +1,8 @@
-import 'package:floating_tabbar/lib.dart';
+import 'dart:io';
+
+import 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 /// [PlatformCheck] provides us with current platform uaing current [BuildContext].
 ///

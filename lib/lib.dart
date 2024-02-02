@@ -1,8 +1,3 @@
-export 'dart:io';
-export 'package:flutter/gestures.dart';
-export 'package:flutter/material.dart';
-export 'package:flutter/foundation.dart';
-export 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
 export 'package:floating_tabbar/Models/tab_item.dart';
 export 'package:floating_tabbar/Services/platform_check.dart';
 export 'package:floating_tabbar/Services/utils.dart';
@@ -16,3 +11,4 @@ export 'package:floating_tabbar/Widgets/ops_shell.dart';
 export 'package:floating_tabbar/Widgets/top_tabbar.dart';
 export 'package:floating_tabbar/Widgets/virtify.dart';
 export 'package:floating_tabbar/Widgets/widgets.dart';
+export 'package:floating_tabbar/floating_tabbar.dart';

@@ -1,7 +1,4 @@
-import 'package:floating_tabbar/Models/tab_item.dart';
-import 'package:floating_tabbar/Widgets/floater.dart';
-import 'package:floating_tabbar/Widgets/nautics.dart';
-import 'package:floating_tabbar/Widgets/widgets.dart';
+import 'package:floating_tabbar/lib.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

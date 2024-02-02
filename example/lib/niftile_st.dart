@@ -1,5 +1,4 @@
-import 'package:floating_tabbar/Models/tab_item.dart';
-import 'package:floating_tabbar/Widgets/niftile.dart';
+import 'package:floating_tabbar/lib.dart';
 import 'package:flutter/material.dart';
 
 class NiftileST extends StatefulWidget {

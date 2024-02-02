@@ -1,3 +1,7 @@
+## 1.0.2
+
+Code refactoring for Niftile & OpsShell.
+
 ## 1.0.1
 
 Minor Release: Solved readme media issue, Niftile callback issueand code refactoring.

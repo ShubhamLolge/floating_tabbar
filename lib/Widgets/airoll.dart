@@ -1,5 +1,7 @@
 import 'package:floating_tabbar/lib.dart';
 import 'package:flutter/cupertino.dart';
+export 'dart:io';
+export 'package:flutter/material.dart';
 
 /// [Airoll] is a customised [PopupMenuButton] that accepts its children in the list on [TabItem].
 class Airoll extends StatefulWidget {

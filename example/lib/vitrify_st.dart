@@ -1,5 +1,4 @@
-import 'package:floating_tabbar/Widgets/floater.dart';
-import 'package:floating_tabbar/Widgets/virtify.dart';
+import 'package:floating_tabbar/lib.dart';
 import 'package:flutter/material.dart';
 
 class VitrifyST extends StatefulWidget {

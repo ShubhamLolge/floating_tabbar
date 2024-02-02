@@ -1,4 +1,4 @@
-import 'package:floating_tabbar/lib.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NotificationBadge extends StatefulWidget {

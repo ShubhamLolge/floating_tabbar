@@ -1,9 +1,4 @@
-import 'package:floating_tabbar/Models/tab_item.dart';
-import 'package:floating_tabbar/Widgets/floater.dart';
-import 'package:floating_tabbar/Widgets/ops_shell.dart';
-import 'package:floating_tabbar/Widgets/widgets.dart';
-import 'package:floating_tabbar/floating_tabbar.dart';
-import 'package:flutter/material.dart';
+import 'package:floating_tabbar/lib.dart';
 
 class FloatingTabbarST extends StatefulWidget {
   /// Force the widget to be in small screen mode

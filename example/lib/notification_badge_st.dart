@@ -1,5 +1,4 @@
-import 'package:floating_tabbar/Widgets/floater.dart';
-import 'package:floating_tabbar/Widgets/notification_badge.dart';
+import 'package:floating_tabbar/lib.dart';
 import 'package:flutter/material.dart';
 
 class NotificationBadgeST extends StatefulWidget {

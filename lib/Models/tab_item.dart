@@ -1,4 +1,4 @@
-import 'package:floating_tabbar/lib.dart';
+import 'package:flutter/material.dart';
 import 'package:floating_tabbar/floating_tabbar.dart';
 
 class TabItem {

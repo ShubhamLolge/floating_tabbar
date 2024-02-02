@@ -1,5 +1,4 @@
-import 'package:floating_tabbar/Widgets/ops_shell.dart';
-import 'package:flutter/material.dart';
+import 'package:floating_tabbar/lib.dart';
 
 import 'vitrify_st.dart';
 

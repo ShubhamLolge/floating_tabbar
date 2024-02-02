@@ -30,7 +30,7 @@ import 'package:floating_tabbar/floating_tabbar.dart';
 
 floating_tabbar solves and eases the problem of complex navigation user interfaces by providing a responsive solution.
 
-<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/709ab524-37ee-4a44-8f1f-ab0e9ef4956f" width="50%">
+[<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/709ab524-37ee-4a44-8f1f-ab0e9ef4956f" width="50%">](https://youtu.be/wRqD_2NY2ds)
 
 ### TopTabBar
 ***

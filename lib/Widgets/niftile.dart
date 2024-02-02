@@ -1,6 +1,8 @@
 import 'package:floating_tabbar/lib.dart';
 import 'package:flutter/cupertino.dart';
 
+/// ## Niftile
+///
 /// [Niftile] is derived from the words "Nifty" and "Tile" as it acts Nifty for all your usecases.
 ///
 /// It utilizes all the data in [TabItem] object to create a multipurpose tile.

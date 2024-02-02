@@ -1,4 +1,5 @@
 import 'package:floating_tabbar/lib.dart';
+export 'package:flutter/gestures.dart';
 
 /// ## TopTabBar
 /// Widget to create the top [TabBar] with built in space for nesting contingency, just provide the data to [children] parameter
