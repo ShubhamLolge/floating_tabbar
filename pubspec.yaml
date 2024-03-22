@@ -1,6 +1,6 @@
 name: floating_tabbar
-description: The floating_tabbar package for Flutter allows you to use the responsive design for all platforms made from the Material Design System.
-version: 1.0.2
+description: The floating_tabbar solves and eases the problem of complex navigation user interfaces by providing a responsive solution, package allows you to use the responsive design for all platforms made from the Material Design System.
+version: 1.0.3-beta.1
 homepage: https://github.com/ShubhamLolge/floating_tabbar
 
 environment:

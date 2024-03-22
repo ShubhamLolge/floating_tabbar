@@ -1,3 +1,7 @@
+## 1.0.3-beta.1
+
+Minor patch release (beta).
+
 ## 1.0.2
 
 Code refactoring for Niftile & OpsShell.
@@ -69,4 +73,3 @@ Updated Color scheme within the Widget.
 ## 0.0.1
 
 Added floating and normal bottom tabbar pageview and top bar pageview
-

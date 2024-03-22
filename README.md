@@ -37,7 +37,7 @@ floating_tabbar solves and eases the problem of complex navigation user interfac
 
 TopTabBar allows you to create the TabBar with built in space for nesting contingency, just provide the data to children parameter as list of TabItem and you're done.
 
-<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/92637e27-9ba0-408a-bd2a-46b50d61e5b8" width="50%">
+[<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/92637e27-9ba0-408a-bd2a-46b50d61e5b8" width="50%">](https://www.youtube.com/watch?v=RSlWpJYL0ic)
 
 
 ### Floater
@@ -55,21 +55,21 @@ Nautics is the SideBar navigation widget that allows you to create sidebar with 
 using help of TabItem model class, use Nautics as drawer in its collapsed and expanded form, make settings UI using it,
 or navigation for your app, just list of TabItems and you are done.
 
-<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/aca0940e-968a-4ec9-8961-0a44571a14f5" width="50%">
+[<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/aca0940e-968a-4ec9-8961-0a44571a14f5" width="50%">](https://www.youtube.com/watch?v=eokpgkhl3gw)
 
 ### OpsShell
 ***
 
 OpsShell, a widget that helps design responsive screens, for Small screens, child of OpsShell will look normal, like nothing has wrapped it, but this widget will show responsive similar look as small screen of your app while being creative on large screens.
 
-<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/225b98ed-9c8c-4c28-964e-1abf28531086" width="50%">
+[<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/225b98ed-9c8c-4c28-964e-1abf28531086" width="50%">](https://youtu.be/z2v-naxbWxM)
 
 ### Airoll
 ***
 
 Airoll is a customised PopupMenuButton that accepts its children as the list on TabItem.
 
-<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/eecf82b6-c760-42a8-9a9b-8439e64638d9" width="50%">
+[<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/eecf82b6-c760-42a8-9a9b-8439e64638d9" width="50%">](https://youtu.be/VBkeMav6uhU)
 
 
 ### NotificationBadge
@@ -91,9 +91,9 @@ Vitrify, a widget when wrapped around other, it converts the look of the widget 
 ### Niftile
 ***
 
-Niftile is a multipurpose tile that accepst the data in the form of TabItem to create a tile.
+Niftile is a multipurpose tile that accepts the data in the form of TabItem to create a tile.
 
-<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/429454b4-320a-4884-b2ad-5134bbe47540" width="50%">
+[<img src="https://github.com/ShubhamLolge/floating_tabbar/assets/75387392/429454b4-320a-4884-b2ad-5134bbe47540" width="50%">](https://youtu.be/jsHV_c_iuDo)
 
 
 and much more.

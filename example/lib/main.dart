@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.blue,
         canvasColor: Colors.grey[50],
       ),
+      /* Check whole example folder in the package which has smoke test for each widget */
       home: const SmokeTest(),
     );
   }

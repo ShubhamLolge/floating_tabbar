@@ -452,8 +452,7 @@ class TopTabBar extends StatefulWidget {
   State<TopTabBar> createState() => _TopTabBarState();
 }
 
-class _TopTabBarState extends State<TopTabBar>
-    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final TabController _tabController;
 
   List<Widget> getLabels() {
@@ -471,15 +470,14 @@ class _TopTabBarState extends State<TopTabBar>
       );
       Widget tab = Tab(
         icon: child.selectedLeading,
-        child: child.badgeCount == 0
-            ? lebs
-            : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
+        child: child.badgeCount == 0 ? lebs : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
       );
 
       labels.add(child.tIOnTap == true
-          ? Container(
-              color: Colors.amber,
-              child: InkWell(onTap: child.onTap, child: tab))
+          ? InkWell(
+              onTap: child.onTap,
+              child: tab,
+            )
           : tab);
     }
     return labels;
@@ -497,8 +495,7 @@ class _TopTabBarState extends State<TopTabBar>
             initialIndex: widget.initialIndex,
             primaryTabBar: widget.primaryTabBar,
             animationDuration: widget.animationDuration,
-            automaticIndicatorColorAdjustment:
-                widget.automaticIndicatorColorAdjustment,
+            automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
             dividerColor: widget.dividerColor,
             dragStartBehavior: widget.dragStartBehavior,
             enableFeedback: widget.enableFeedback,
@@ -530,8 +527,7 @@ class _TopTabBarState extends State<TopTabBar>
         tabs.add(
           child.tab ??
               const Center(
-                child: Text(
-                    "No specified widget for this tab in the TabItem, please provide one in the list<TabItem> children."),
+                child: Text("No specified widget for this tab in the TabItem, please provide one in the list<TabItem> children."),
               ),
         );
       }
@@ -559,83 +555,77 @@ class _TopTabBarState extends State<TopTabBar>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Material(
-      child: Column(
-        children: [
-          widget.primaryTabBar == true
-              ? TabBar(
-                  tabAlignment: widget.tabAlignment,
-                  indicator: widget.indicator,
-                  controller: widget.tabController ?? _tabController,
-                  tabs: getLabels(),
-                  automaticIndicatorColorAdjustment:
-                      widget.automaticIndicatorColorAdjustment,
-                  dividerColor: widget.dividerColor,
-                  dragStartBehavior: widget.dragStartBehavior,
-                  enableFeedback: widget.enableFeedback,
-                  indicatorColor: widget.indicatorColor,
-                  indicatorPadding: widget.indicatorPadding,
-                  indicatorSize: widget.indicatorSize,
-                  indicatorWeight: widget.indicatorWeight,
-                  isScrollable: widget.isScrollable,
-                  key: widget.tabBarKey,
-                  labelPadding: widget.labelPadding,
-                  mouseCursor: widget.mouseCursor,
-                  onTap: (value) => widget.onTap!(value),
-                  overlayColor: widget.overlayColor,
-                  padding: widget.padding,
-                  physics: widget.physics,
-                  splashBorderRadius: widget.splashBorderRadius,
-                  splashFactory: widget.splashFactory,
-                  labelColor:
-                      widget.labelColor ?? Theme.of(context).primaryColor,
-                  labelStyle: widget.labelStyle,
-                  unselectedLabelColor: widget.unselectedLabelColor,
-                  unselectedLabelStyle: widget.unselectedLabelStyle,
-                )
-              : TabBar.secondary(
-                  tabAlignment: widget.tabAlignment,
-                  indicator: widget.indicator,
-                  controller: widget.tabController ?? _tabController,
-                  tabs: getLabels(),
-                  automaticIndicatorColorAdjustment:
-                      widget.automaticIndicatorColorAdjustment,
-                  dividerColor: widget.dividerColor,
-                  dragStartBehavior: widget.dragStartBehavior,
-                  enableFeedback: widget.enableFeedback,
-                  indicatorColor: widget.indicatorColor,
-                  indicatorPadding: widget.indicatorPadding,
-                  indicatorSize: widget.indicatorSize,
-                  indicatorWeight: widget.indicatorWeight,
-                  isScrollable: widget.isScrollable,
-                  key: widget.tabBarKey,
-                  labelPadding: widget.labelPadding,
-                  mouseCursor: widget.mouseCursor,
-                  onTap: (value) => widget.onTap!(value),
-                  overlayColor: widget.overlayColor,
-                  padding: widget.padding,
-                  physics: widget.physics,
-                  splashBorderRadius: widget.splashBorderRadius,
-                  splashFactory: widget.splashFactory,
-                  labelColor:
-                      widget.labelColor ?? Theme.of(context).primaryColor,
-                  labelStyle: widget.labelStyle,
-                  unselectedLabelColor: widget.unselectedLabelColor,
-                  unselectedLabelStyle: widget.unselectedLabelStyle,
-                ),
-          Expanded(
-            child: TabBarView(
-              key: widget.tabBarViewKey,
-              clipBehavior: widget.tabBarViewClipBehavior,
-              dragStartBehavior: widget.tabBarViewDragStartBehavior,
-              physics: widget.tabBarViewPhysics,
-              viewportFraction: widget.tabBarViewViewportFraction,
-              controller: widget.tabController ?? _tabController,
-              children: getTabs(),
-            ),
+    return Column(
+      children: [
+        widget.primaryTabBar == true
+            ? TabBar(
+                tabAlignment: widget.tabAlignment,
+                indicator: widget.indicator,
+                controller: widget.tabController ?? _tabController,
+                tabs: getLabels(),
+                automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                dividerColor: widget.dividerColor,
+                dragStartBehavior: widget.dragStartBehavior,
+                enableFeedback: widget.enableFeedback,
+                indicatorColor: widget.indicatorColor,
+                indicatorPadding: widget.indicatorPadding,
+                indicatorSize: widget.indicatorSize,
+                indicatorWeight: widget.indicatorWeight,
+                isScrollable: widget.isScrollable,
+                key: widget.tabBarKey,
+                labelPadding: widget.labelPadding,
+                mouseCursor: widget.mouseCursor,
+                onTap: (value) => widget.onTap!(value),
+                overlayColor: widget.overlayColor,
+                padding: widget.padding,
+                physics: widget.physics,
+                splashBorderRadius: widget.splashBorderRadius,
+                splashFactory: widget.splashFactory,
+                labelColor: widget.labelColor ?? Theme.of(context).primaryColor,
+                labelStyle: widget.labelStyle,
+                unselectedLabelColor: widget.unselectedLabelColor,
+                unselectedLabelStyle: widget.unselectedLabelStyle,
+              )
+            : TabBar.secondary(
+                tabAlignment: widget.tabAlignment,
+                indicator: widget.indicator,
+                controller: widget.tabController ?? _tabController,
+                tabs: getLabels(),
+                automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                dividerColor: widget.dividerColor,
+                dragStartBehavior: widget.dragStartBehavior,
+                enableFeedback: widget.enableFeedback,
+                indicatorColor: widget.indicatorColor,
+                indicatorPadding: widget.indicatorPadding,
+                indicatorSize: widget.indicatorSize,
+                indicatorWeight: widget.indicatorWeight,
+                isScrollable: widget.isScrollable,
+                key: widget.tabBarKey,
+                labelPadding: widget.labelPadding,
+                mouseCursor: widget.mouseCursor,
+                onTap: (value) => widget.onTap!(value),
+                overlayColor: widget.overlayColor,
+                padding: widget.padding,
+                physics: widget.physics,
+                splashBorderRadius: widget.splashBorderRadius,
+                splashFactory: widget.splashFactory,
+                labelColor: widget.labelColor ?? Theme.of(context).primaryColor,
+                labelStyle: widget.labelStyle,
+                unselectedLabelColor: widget.unselectedLabelColor,
+                unselectedLabelStyle: widget.unselectedLabelStyle,
+              ),
+        Expanded(
+          child: TabBarView(
+            key: widget.tabBarViewKey,
+            clipBehavior: widget.tabBarViewClipBehavior,
+            dragStartBehavior: widget.tabBarViewDragStartBehavior,
+            physics: widget.tabBarViewPhysics,
+            viewportFraction: widget.tabBarViewViewportFraction,
+            controller: widget.tabController ?? _tabController,
+            children: getTabs(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
