@@ -1,4 +1,4 @@
-## 1.0.4
+## 1.1.3
 
 Minor release: beta to stable.
 
