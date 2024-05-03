@@ -1,6 +1,6 @@
 name: floating_tabbar
 description: Easily navigate complex UIs across platforms with floating_tabbar. Built on Material Design, it's responsive and intuitive.
-version: 1.1.3
+version: 1.0.3
 homepage: https://github.com/ShubhamLolge/floating_tabbar
 
 environment:
