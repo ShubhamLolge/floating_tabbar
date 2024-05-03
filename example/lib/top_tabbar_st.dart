@@ -42,7 +42,8 @@ class _TopTabBarSTState extends State<TopTabBarST> {
         tab: const Center(child: Text("Two", style: TextStyle(fontSize: 30))),
       ),
       TabItem(
-        title: const Text("Three", style: TextStyle(fontWeight: FontWeight.bold)),
+        title:
+            const Text("Three", style: TextStyle(fontWeight: FontWeight.bold)),
         onTap: () {},
         tab: const Center(child: Text("Three", style: TextStyle(fontSize: 30))),
         children: list1,
@@ -63,7 +64,9 @@ class _TopTabBarSTState extends State<TopTabBarST> {
             child: TopTabBar(
               onTap: (p0) {},
               indicator: customIndicator == true
-                  ? BoxDecoration(borderRadius: BorderRadius.circular(30), color: Theme.of(context).primaryColor.withOpacity(0.3))
+                  ? BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Theme.of(context).primaryColor.withOpacity(0.3))
                   : null,
               primaryTabBar: primaryTabBar,
               indicatorColor: indicatorColor,
@@ -84,31 +87,50 @@ class _TopTabBarSTState extends State<TopTabBarST> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => indicatorColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) =>
+                              setState(() => indicatorColor = v));
                     },
                     child: const Text("Indicator Color"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => labelColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) => setState(() => labelColor = v));
                     },
                     child: const Text("Label Color"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => unselectedLabelColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) =>
+                              setState(() => unselectedLabelColor = v));
                     },
                     child: const Text("Unselected Label Color"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => overlayColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) =>
+                              setState(() => overlayColor = v));
                     },
                     child: const Text("Overlay Color"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      chooseColor(context: context, size: size, selectedColor: (v) => setState(() => dividerColor = v));
+                      chooseColor(
+                          context: context,
+                          size: size,
+                          selectedColor: (v) =>
+                              setState(() => dividerColor = v));
                     },
                     child: const Text("Divider Color"),
                   ),

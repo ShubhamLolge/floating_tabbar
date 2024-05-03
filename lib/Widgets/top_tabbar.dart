@@ -16,7 +16,6 @@ class TopTabBar extends StatefulWidget {
     this.tabBarKey,
     this.tabBarViewKey,
     required this.children,
-    this.tabController,
     this.indicator,
     this.dividerColor,
     this.enableFeedback,
@@ -51,98 +50,6 @@ class TopTabBar extends StatefulWidget {
 
   /// [Key] for [TabBar].
   final Key? tabBarKey;
-
-  // Fix: can't change children count of TopTabbar dynamically #7
-  /// [TabController] to customize [Tab]s.
-  ///
-  ///
-  /// There's a default tabController that works perfectly fine in the absence of the explicitly provided (this) tabController
-  ///
-  ///
-  /// ------------
-  ///
-  ///
-  /// Coordinates tab selection between a [TabBar] and a [TabBarView].
-  ///
-  /// The [index] property is the index of the selected tab and the [animation]
-  /// represents the current scroll positions of the tab bar and the tab bar view.
-  /// The selected tab's index can be changed with [animateTo].
-  ///
-  /// A stateful widget that builds a [TabBar] or a [TabBarView] can create
-  /// a [TabController] and share it directly.
-  ///
-  /// When the [TabBar] and [TabBarView] don't have a convenient stateful
-  /// ancestor, a [TabController] can be shared by providing a
-  /// [DefaultTabController] inherited widget.
-  ///
-  /// {@animation 700 540 https://flutter.github.io/assets-for-api-docs/assets/material/tabs.mp4}
-  ///
-  /// {@tool snippet}
-  ///
-  /// This widget introduces a [Scaffold] with an [AppBar] and a [TabBar].
-  ///
-  /// ```dart
-  /// class MyTabbedPage extends StatefulWidget {
-  ///   const MyTabbedPage({ super.key });
-  ///   @override
-  ///   State<MyTabbedPage> createState() => _MyTabbedPageState();
-  /// }
-  ///
-  /// class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
-  ///   static const List<Tab> myTabs = <Tab>[
-  ///     Tab(text: 'LEFT'),
-  ///     Tab(text: 'RIGHT'),
-  ///   ];
-  ///
-  ///   late TabController _tabController;
-  ///
-  ///   @override
-  ///   void initState() {
-  ///     super.initState();
-  ///     _tabController = TabController(vsync: this, length: myTabs.length);
-  ///   }
-  ///
-  ///  @override
-  ///  void dispose() {
-  ///    _tabController.dispose();
-  ///    super.dispose();
-  ///  }
-  ///
-  ///   @override
-  ///   Widget build(BuildContext context) {
-  ///     return Scaffold(
-  ///       appBar: AppBar(
-  ///         bottom: TabBar(
-  ///           controller: _tabController,
-  ///           tabs: myTabs,
-  ///         ),
-  ///       ),
-  ///       body: TabBarView(
-  ///         controller: _tabController,
-  ///         children: myTabs.map((Tab tab) {
-  ///           final String label = tab.text!.toLowerCase();
-  ///           return Center(
-  ///             child: Text(
-  ///               'This is the $label tab',
-  ///               style: const TextStyle(fontSize: 36),
-  ///             ),
-  ///           );
-  ///         }).toList(),
-  ///       ),
-  ///     );
-  ///   }
-  /// }
-  /// ```
-  /// {@end-tool}
-  ///
-  /// {@tool dartpad}
-  /// This example shows how to listen to page updates in [TabBar] and [TabBarView]
-  /// when using [DefaultTabController].
-  ///
-  /// ** See code in examples/api/lib/material/tab_controller/tab_controller.1.dart **
-  /// {@end-tool}
-  ///
-  final TabController? tabController;
 
   /// [Key] for [TabBarView].
   final Key? tabBarViewKey;
@@ -449,11 +356,23 @@ class TopTabBar extends StatefulWidget {
   final TabAlignment? tabAlignment;
 
   @override
-  State<TopTabBar> createState() => _TopTabBarState();
+  State<TopTabBar> createState() => TopTabBarState();
 }
 
-class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  late final TabController _tabController;
+class TopTabBarState extends State<TopTabBar>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: widget.children.length,
+      vsync: this,
+      initialIndex: widget.initialIndex,
+      animationDuration: widget.animationDuration,
+    );
+  }
 
   List<Widget> getLabels() {
     List<Widget> labels = [];
@@ -470,15 +389,19 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
       );
       Widget tab = Tab(
         icon: child.selectedLeading,
-        child: child.badgeCount == 0 ? lebs : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
+        child: child.badgeCount == 0
+            ? lebs
+            : NotificationBadge(count: child.badgeCount ?? 0, child: lebs),
       );
 
-      labels.add(child.tIOnTap == true
-          ? InkWell(
-              onTap: child.onTap,
-              child: tab,
-            )
-          : tab);
+      labels.add(
+        child.tIOnTap == true
+            ? InkWell(
+                onTap: child.onTap,
+                child: tab,
+              )
+            : tab,
+      );
     }
     return labels;
   }
@@ -489,13 +412,13 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
       if (child.children!.isNotEmpty && child.children != null) {
         tabs.add(
           TopTabBar(
-            tabController: widget.tabController,
             children: child.children!,
             indicator: widget.indicator,
             initialIndex: widget.initialIndex,
             primaryTabBar: widget.primaryTabBar,
             animationDuration: widget.animationDuration,
-            automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+            automaticIndicatorColorAdjustment:
+                widget.automaticIndicatorColorAdjustment,
             dividerColor: widget.dividerColor,
             dragStartBehavior: widget.dragStartBehavior,
             enableFeedback: widget.enableFeedback,
@@ -527,23 +450,13 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
         tabs.add(
           child.tab ??
               const Center(
-                child: Text("No specified widget for this tab in the TabItem, please provide one in the list<TabItem> children."),
+                child: Text(
+                    "No specified widget for this tab in the TabItem, please provide one in the list<TabItem> children."),
               ),
         );
       }
     }
     return tabs;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(
-      length: widget.children.length,
-      vsync: this,
-      initialIndex: widget.initialIndex,
-      animationDuration: widget.animationDuration,
-    );
   }
 
   @override
@@ -561,9 +474,10 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
             ? TabBar(
                 tabAlignment: widget.tabAlignment,
                 indicator: widget.indicator,
-                controller: widget.tabController ?? _tabController,
+                controller: _tabController,
                 tabs: getLabels(),
-                automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                automaticIndicatorColorAdjustment:
+                    widget.automaticIndicatorColorAdjustment,
                 dividerColor: widget.dividerColor,
                 dragStartBehavior: widget.dragStartBehavior,
                 enableFeedback: widget.enableFeedback,
@@ -589,9 +503,10 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
             : TabBar.secondary(
                 tabAlignment: widget.tabAlignment,
                 indicator: widget.indicator,
-                controller: widget.tabController ?? _tabController,
+                controller: _tabController,
                 tabs: getLabels(),
-                automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+                automaticIndicatorColorAdjustment:
+                    widget.automaticIndicatorColorAdjustment,
                 dividerColor: widget.dividerColor,
                 dragStartBehavior: widget.dragStartBehavior,
                 enableFeedback: widget.enableFeedback,
@@ -621,7 +536,7 @@ class _TopTabBarState extends State<TopTabBar> with TickerProviderStateMixin, Au
             dragStartBehavior: widget.tabBarViewDragStartBehavior,
             physics: widget.tabBarViewPhysics,
             viewportFraction: widget.tabBarViewViewportFraction,
-            controller: widget.tabController ?? _tabController,
+            controller: _tabController,
             children: getTabs(),
           ),
         ),

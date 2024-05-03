@@ -1,5 +1,4 @@
 import 'package:floating_tabbar/lib.dart';
-import 'package:flutter/material.dart';
 
 class NiftileST extends StatefulWidget {
   const NiftileST({Key? key}) : super(key: key);

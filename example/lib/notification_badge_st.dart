@@ -1,5 +1,4 @@
 import 'package:floating_tabbar/lib.dart';
-import 'package:flutter/material.dart';
 
 class NotificationBadgeST extends StatefulWidget {
   const NotificationBadgeST({Key? key}) : super(key: key);

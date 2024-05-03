@@ -1,5 +1,4 @@
 import 'package:floating_tabbar/lib.dart';
-import 'package:flutter/material.dart';
 
 class FloaterST extends StatefulWidget {
   const FloaterST({Key? key}) : super(key: key);

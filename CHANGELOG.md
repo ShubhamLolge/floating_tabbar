@@ -1,3 +1,11 @@
+## 1.0.4
+
+Minor release: beta to stable.
+
+## 1.0.3-beta.2
+
+Minor patch release (beta): TopTabBar widget no longer accepts TabController as a parameter.
+
 ## 1.0.3-beta.1
 
 Minor patch release (beta).
